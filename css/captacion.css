@@ -1,8 +1,8 @@
 /* =======================================
-   CAPTACIÓN CSS — Portal33 GOLD
-   Usa variables de styles.css (Gold)
+   CAPTACIÓN CSS — Portal33 BOLD RED
+   Usa variables de styles.css (Redesign)
    Tipografía: Cormorant Garamond + DM Sans
-   Paleta: Marfil · Tinta · Dorado
+   Paleta: Marfil · Tinta · Crimson Red (#D10000)
    ======================================= */
 
 /* ── Página contenedora ── */
@@ -23,13 +23,13 @@
   display: inline-block;
   font-family: var(--font-body);
   font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.2em;
+  font-weight: 700;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--color-gray);
+  color: var(--color-gold); /* Rojo Primario #D10000 */
   margin-bottom: 18px;
-  padding: 6px 16px;
-  border: 1px solid var(--color-border);
+  padding: 8px 20px;
+  border: 1px solid rgba(209, 0, 0, 0.15);
   border-radius: 0;
   background: var(--color-white);
 }
@@ -67,16 +67,17 @@
 .paso-item {
   background: var(--color-white);
   border: 1px solid var(--color-border);
-  border-top: 2px solid var(--color-gold);
+  border-top: 3px solid var(--color-gold); /* Rojo Primario */
   border-radius: 0;
-  padding: 20px 16px;
+  padding: 24px 16px;
   text-align: center;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .paso-item:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(209, 0, 0, 0.1);
+  transform: translateY(-5px);
+  border-color: var(--color-gold);
 }
 
 .paso-num {
@@ -103,7 +104,7 @@
   margin: 0 auto;
   background: var(--color-white);
   border: 1px solid var(--color-border);
-  border-top: 3px solid var(--color-gold);
+  border-top: 4px solid var(--color-gold);
   border-radius: 0;
   padding: 48px 52px;
   box-shadow: var(--shadow-lg);
@@ -143,9 +144,9 @@
 .form-field label {
   font-family: var(--font-body);
   font-size: 0.75rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--color-ink-mid);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -159,7 +160,7 @@
   border-radius: 0;
   padding: 13px 16px;
   outline: none;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  transition: all 0.3s ease;
   width: 100%;
   font-weight: 300;
 }
@@ -174,12 +175,12 @@
 .form-field textarea:focus {
   border-color: var(--color-gold);
   background: var(--color-white);
-  box-shadow: 0 0 0 3px rgba(184,151,90,0.08);
+  box-shadow: 0 0 0 3px rgba(209, 0, 0, 0.08);
 }
 
 .form-field input::placeholder,
 .form-field textarea::placeholder {
-  color: var(--color-text-light);
+  color: #bbb;
   font-weight: 300;
 }
 
@@ -211,15 +212,15 @@
   font-weight: 400;
   color: var(--color-gray);
   background: var(--color-ivory);
-  transition: all 0.25s ease;
+  transition: all 0.3s ease;
   letter-spacing: 0.04em;
 }
 
 .radio-option input[type="radio"]:checked + label {
-  background: var(--color-ink);
+  background: var(--color-gold);
   color: var(--color-white);
-  border-color: var(--color-ink);
-  font-weight: 500;
+  border-color: var(--color-gold);
+  font-weight: 600;
 }
 
 .radio-option label:hover {
@@ -238,7 +239,7 @@
 .form-section-label {
   font-family: var(--font-body);
   font-size: 0.72rem;
-  font-weight: 500;
+  font-weight: 700;
   color: var(--color-gold);
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -248,47 +249,38 @@
 /* ── Botón submit ── */
 .btn-submit {
   width: 100%;
-  padding: 15px;
+  padding: 18px;
   background: var(--color-ink);
   color: var(--color-white);
   border: 1px solid var(--color-ink);
   border-radius: 0;
   font-family: var(--font-body);
   font-size: 0.82rem;
-  font-weight: 500;
+  font-weight: 700;
   cursor: pointer;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   margin-top: 32px;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .btn-submit:hover {
   background: var(--color-gold);
   border-color: var(--color-gold);
-  color: var(--color-ink);
-  transform: none;
-  box-shadow: var(--shadow-md);
-}
-
-.btn-submit:disabled {
-  background: var(--color-gray);
-  border-color: var(--color-gray);
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
+  color: var(--color-white);
+  box-shadow: 0 10px 30px rgba(209, 0, 0, 0.3);
 }
 
 .btn-arrow {
-  transition: transform 0.2s ease;
+  transition: transform 0.3s ease;
 }
 
 .btn-submit:hover .btn-arrow {
-  transform: translateX(4px);
+  transform: translateX(6px);
 }
 
 /* ── Confirmación ── */
@@ -296,7 +288,7 @@
   display: none;
   text-align: center;
   padding: 48px 20px;
-  animation: fadeInUp 0.5s ease;
+  animation: fadeInUp 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .form-success.visible {
@@ -304,17 +296,17 @@
 }
 
 .success-icon {
-  width: 64px;
-  height: 64px;
-  background: var(--color-ink);
+  width: 72px;
+  height: 72px;
+  background: var(--color-gold);
   border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 24px;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   color: var(--color-white);
-  border: 2px solid var(--color-gold);
+  box-shadow: 0 10px 20px rgba(209, 0, 0, 0.2);
 }
 
 .form-success h2 {
@@ -327,113 +319,44 @@
   letter-spacing: 0.01em;
 }
 
-.form-success p {
-  font-family: var(--font-body);
-  font-size: 0.97rem;
-  color: var(--color-gray);
-  line-height: 1.7;
-  max-width: 400px;
-  margin: 0 auto 28px;
-  font-weight: 300;
-}
-
 .btn-volver-inicio {
   display: inline-block;
-  padding: 12px 32px;
+  padding: 14px 36px;
   background: transparent;
   color: var(--color-ink);
   border: 1px solid var(--color-gold);
   font-family: var(--font-body);
   font-size: 0.78rem;
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
 }
 
 .btn-volver-inicio:hover {
   background: var(--color-gold);
-  color: var(--color-ink);
-  border-color: var(--color-gold);
+  color: var(--color-white);
 }
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(16px); }
+  from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ── Disclaimer ── */
-.form-disclaimer {
-  font-family: var(--font-body);
-  font-size: 0.78rem;
-  color: var(--color-text-light);
-  text-align: center;
-  margin-top: 16px;
-  line-height: 1.5;
-  font-weight: 300;
-}
-
-/* ── Notificaciones — hero ── */
-.notificaciones-page {
-  min-height: calc(100vh - var(--header-height));
-  background: var(--color-ivory);
-  padding: 60px 20px 80px;
-}
-
-.notif-hero {
-  max-width: 700px;
-  margin: 0 auto 56px;
-  text-align: center;
-}
-
-.notif-eyebrow {
-  display: inline-block;
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--color-gray);
-  margin-bottom: 18px;
-  padding: 6px 16px;
-  border: 1px solid var(--color-border);
-  border-radius: 0;
-  background: var(--color-white);
-}
-
-.notif-hero h1 {
-  font-family: var(--font-display);
-  font-size: clamp(2.2rem, 5vw, 3.4rem);
-  font-weight: 400;
-  font-style: italic;
-  color: var(--color-ink);
-  line-height: 1.15;
-  margin-bottom: 18px;
-  letter-spacing: 0.01em;
-}
-
-.notif-hero p {
-  font-family: var(--font-body);
-  font-size: 1rem;
-  color: var(--color-gray);
-  line-height: 1.7;
-  max-width: 520px;
-  margin: 0 auto;
-  font-weight: 300;
 }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
   .captacion-page,
   .notificaciones-page { padding: 40px 16px 60px; }
-  .pasos-grid { grid-template-columns: repeat(2, 1fr); }
+  .pasos-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   .form-card { padding: 32px 24px; }
   .form-row { grid-template-columns: 1fr; gap: 16px; }
+  .captacion-hero h1 { font-size: 2.4rem; }
 }
 
 @media (max-width: 480px) {
   .pasos-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
   .paso-item { padding: 16px 10px; }
   .form-card { padding: 24px 16px; }
+  .form-card-title { font-size: 1.5rem; text-align: center; }
 }
