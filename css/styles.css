@@ -35,7 +35,7 @@
 
   /* Layout */
   --header-height: 80px;
-  --section-padding: 120px;
+  --section-padding: 80px;
   --spacing-xs: 10px;
   --spacing-sm: 16px;
   --spacing-md: 26px;
@@ -226,7 +226,7 @@ header::after {
   font-family: var(--font-display);
   font-size: 3rem;
   font-weight: 300;
-  font-style: italic;
+  font-style: normal;
   margin-bottom: 40px;
   letter-spacing: 0.03em;
   position: relative;
@@ -340,7 +340,7 @@ header::after {
 }
 
 .hero::before {
-  content: "EST. 1994";
+  content: "EST. 2016";
   position: absolute;
   top: 60px;
   left: 50%;
@@ -365,10 +365,22 @@ header::after {
 }
 
 
-.hero h1 {
+ .hero h1 {
   font-family: var(--font-display);
   font-style: normal;
 }
+
+/*
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-style: italic;
+}
+
+*/
+
+
+
 
 
 
@@ -428,7 +440,7 @@ header::after {
 
 /* =======================================
    SECCIONES GENERALES
-   ======================================= */
+   =======================================
 section {
   padding: var(--section-padding) 0;
   background: var(--color-white);
@@ -453,7 +465,34 @@ section h2::after {
   height: 3px;
   background: var(--color-gold);
   margin: 24px auto 0;
+}  
+*/
+
+section {
+  padding: var(--section-padding) 0;
+  background: var(--color-white);
 }
+
+
+section h2 {
+  font-family: var(--font-display);
+  font-size: 3.2rem;
+  font-weight: 300;
+  font-style: normal;
+  margin-bottom: var(--spacing-xl);
+  text-align: center;
+  color: var(--color-ink);
+  letter-spacing: 0.01em;
+  position: relative;
+}
+
+
+
+
+
+
+
+
 
 /* =======================================
    BASES FUNDAMENTALES
