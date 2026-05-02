@@ -1474,8 +1474,12 @@ button:focus-visible {
   .caracteristicas { grid-template-columns: 1fr; }
   .galeria-section { margin-bottom: 30px; }
   h1 { font-size: 1.8rem; }
-  h2 { font-size: 1.6rem; }
+  h2 { font-size: 1.8rem; }
   footer { font-size: 0.9rem; }
+}
+
+#publicar h2 {
+  font-size: 1.8rem;
 }
 
 /* =======================================
