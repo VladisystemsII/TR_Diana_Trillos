@@ -1483,12 +1483,45 @@ button:focus-visible {
 }
 
 .base-item p {
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 
 .base-item span {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 }
+
+@media (max-width: 768px) {
+  .loading-box {
+    font-size: 0.70rem;
+    padding: 20px 30px;
+  }
+}
+
+.loading-box,
+.loading-box * {
+  font-size: 0.70rem !important;
+}
+
+@media (max-width: 480px) {
+  .loading-box * {
+    font-size: 1.5rem !important;
+  }
+}
+
+
+@media (max-width: 768px) {
+  #propiedades h2 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #propiedades h2 {
+    font-size: 1.8rem;
+  }
+}
+
+
 
 /* =======================================
    FIX: container nav — permite clicks en
