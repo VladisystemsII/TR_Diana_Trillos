@@ -1390,7 +1390,7 @@ button:focus-visible {
 
   body { padding-top: 70px; }
   .nav { height: 70px; padding: 0 20px; }
-  .logo img { height: 75px; }
+  .logo img { height: 55px; }
 
   .menu-toggle { display: flex; }
 
@@ -1423,9 +1423,9 @@ button:focus-visible {
 
   .property-subnav { height: 56px; top: 70px; }
   .property-subnav .container { gap: 30px; overflow-x: auto; justify-content: flex-start; }
-  .hero h1 { font-size: 2.8rem; }
+  .hero h1 { font-size: 2rem; }
   .hero-subtitle { font-size: 1rem; }
-  section h2 { font-size: 2.4rem; }
+  section h2 { font-size: 1.8rem; }
   .bases-list { grid-template-columns: 1fr; gap: 40px; }
 
   #blogTable { display: block; width: 100%; padding: 0 16px; margin-bottom: 60px; }
