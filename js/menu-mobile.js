@@ -37,7 +37,7 @@ function crearBotonHamburguesa() {
     <span></span>
   `;
 
-  nav.insertBefore(menuToggle, menu);
+  nav.appendChild(menuToggle);
   console.log('✅ Botón hamburguesa creado');
 }
 
