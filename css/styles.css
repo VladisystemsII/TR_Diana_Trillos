@@ -1473,13 +1473,21 @@ button:focus-visible {
   .foto-principal { height: 280px; }
   .caracteristicas { grid-template-columns: 1fr; }
   .galeria-section { margin-bottom: 30px; }
-  h1 { font-size: 1.8rem; }
-  h2 { font-size: 1.8rem; }
+  h1 { font-size: 1.9rem; }
+  h2 { font-size: 1.9rem; }
   footer { font-size: 0.9rem; }
 }
 
 #publicar h2 {
   font-size: 1.8rem;
+}
+
+.base-item p {
+  font-size: 1rem;
+}
+
+.base-item span {
+  font-size: 0.8rem;
 }
 
 /* =======================================
