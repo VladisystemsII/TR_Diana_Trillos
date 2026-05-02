@@ -88,10 +88,17 @@ body {
   -webkit-font-smoothing: antialiased;
   letter-spacing: -0.01em;
 }
-
+/*
 .container,
 section {
   overflow-x: clip;
+  width: 100%;
+}
+
+*/
+
+section {
+  
   width: 100%;
 }
 
@@ -106,6 +113,10 @@ a {
   margin: 0 auto;
   padding: 0 var(--spacing-lg);
   width: 100%;
+}
+
+section > .container {
+  margin: 0 auto;
 }
 
 /* =======================================
@@ -149,15 +160,29 @@ header::after {
 }
 
 
+/*
+
+.logo img {
+  height: clamp(20px, 6vw, 100px);
+  width: auto;
+  display: block;
+  filter: grayscale(1) contrast(1.1);
+  transition: filter 0.4s ease;
+}      
+*/
+
 
 
 .logo img {
-  height: clamp(60px, 6vw, 100px);
+  height: 80px !important;
   width: auto;
   display: block;
-  /*filter: grayscale(1) contrast(1.1);*/
-  transition: filter 0.4s ease;
 }
+
+
+
+
+
 
 .logo img:hover {
   filter: grayscale(0) contrast(1);
@@ -647,13 +672,23 @@ section h2 {
 
 /* =======================================
    FOOTER
-   ======================================= */
+   ======================================= 
 footer {
   background: var(--color-ink);
   color: var(--color-text-footer);
   padding: 100px 0 60px;
   border-top: 2px solid var(--color-gold);
 }
+
+
+footer {
+  background: var(--color-ink);
+  color: var(--color-text-footer);
+  padding: 100px 0 60px;
+  border-top: 2px solid var(--color-gold);
+}
+
+/*
 
 .footer-grid {
   display: grid;
@@ -662,7 +697,22 @@ footer {
   text-align: left;
 }
 
-footer h4 {
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 60px;
+
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+
+  justify-content: center;
+  align-items: start;
+}
+
+
+footer h3 {
   font-family: var(--font-display);
   color: var(--color-gold-light);
   font-size: 1.3rem;
@@ -710,9 +760,99 @@ footer a:hover {
   font-family: var(--font-display);
   font-size: 1.4rem;
   font-style: normal;
-  color: var(--color-gold);
-  opacity: 0.8;
+  color: #D4AF37;
+  opacity: 1;
 }
+
+footer a {
+  transition: all 0.3s ease;
+}
+
+*/
+
+footer {
+  background: var(--color-ink);
+  color: var(--color-text-footer);
+  padding: 100px 0 60px;
+  border-top: 2px solid var(--color-gold);
+}
+
+/* CENTRADOR REAL */
+footer .container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+}
+
+/* GRID REAL */
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 60px;
+  width: 100%;
+  align-items: start;
+}
+
+.footer-grid > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+
+footer h3 {
+  font-family: var(--font-display);
+  color: var(--color-gold-light);
+  font-size: 1.3rem;
+  font-weight: 400;
+  font-style: normal;
+  margin-bottom: 28px;
+  letter-spacing: 0.05em;
+}
+
+
+
+/* SLOGAN */
+.footer-slogan {
+  text-align: center;
+  margin-top: 80px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: #D4AF37;
+  opacity: 1;
+}
+
+.agent-photo {
+  display: flex;
+  justify-content: center;
+}
+
+.agent-photo img {
+  width: 130px;
+  height: 130px;
+  max-width: 130px;
+  max-height: 130px;
+  object-fit: cover;
+  display: block;
+  border: 2px solid var(--color-gold);
+  padding: 4px;
+}
+
+.footer-legal {
+  text-align: center;
+  margin-top: 25px;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.5);
+  font-family: var(--font-body);
+}
+
+
+
+
 
 /* =======================================
    PROPIEDADES — LISTADO
@@ -1261,6 +1401,10 @@ main {
   display: block;
   min-height: calc(100vh - var(--header-height));
 }
+
+
+
+
 
 /* =======================================
    ACCESIBILIDAD
