@@ -1,8 +1,7 @@
 /* =======================================
-   CAPTACIÓN CSS — Portal33 BOLD RED (V2)
-   Usa variables de styles.css (Redesign)
+   ARTÍCULO CSS — Portal33 BOLD RED
+   Usa variables de styles.css
    Tipografía: Cormorant Garamond + DM Sans
-   Paleta: Marfil · Tinta · Crimson Red (#D10000)
    ======================================= */
 
 .captacion-page {
@@ -36,7 +35,7 @@
   font-family: var(--font-display);
   font-size: clamp(2.2rem, 5vw, 3.4rem);
   font-weight: 400;
-  font-style: italic;
+  font-style: normal;
   color: var(--color-ink);
   line-height: 1.15;
   margin-bottom: 18px;
@@ -81,7 +80,7 @@
   font-family: var(--font-display);
   font-size: 2.5rem;
   font-weight: 400;
-  font-style: italic;
+  font-style: normal;
   color: #D10000;
   line-height: 1;
   margin-bottom: 12px;
@@ -111,7 +110,7 @@
 .form-card-title {
   font-family: var(--font-display);
   font-size: 2rem;
-  font-style: italic;
+  font-style: normal;
   color: var(--color-ink);
   margin-bottom: 40px;
   padding-bottom: 24px;

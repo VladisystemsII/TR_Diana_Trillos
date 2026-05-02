@@ -153,9 +153,21 @@ function cargarGaleria(prop) {
   imgPrincipal.src = fotosArray[0];
   imgPrincipal.alt = generarAlt(prop, 0);
 
+
+  /*
+
   imgPrincipal.onerror = function () {
     this.src = 'img/sin-imagen.png';
   };
+
+  */
+
+
+  imgPrincipal.onerror = function () {
+     this.src = 'img/sin-imagen.png';
+     this.alt = 'Imagen no disponible';
+  };  
+
 
   const thumbnailsContainer = document.getElementById('thumbnailsContainer');
   thumbnailsContainer.innerHTML = '';
@@ -166,6 +178,8 @@ function cargarGaleria(prop) {
     thumbnail.className = 'thumbnail' + (index === 0 ? ' active' : '');
 
     const img = document.createElement('img');
+    img.width = 300;
+    img.height = 200;
 
     // ✔ CORRECTO: cargar imagen visible
     img.src = foto;
@@ -174,9 +188,23 @@ function cargarGaleria(prop) {
     img.alt = generarAlt(prop, index);
     img.loading = 'lazy';
 
+
+
+    /*
+
     img.onerror = function () {
       this.src = 'img/sin-imagen.png';
     };
+
+    */
+
+
+    img.onerror = function () {
+      this.src = 'img/sin-imagen.png';
+      this.alt = 'Imagen no disponible';
+    };
+
+
 
     thumbnail.appendChild(img);
 

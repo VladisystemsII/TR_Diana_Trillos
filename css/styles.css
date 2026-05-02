@@ -368,6 +368,8 @@ header::after {
  .hero h1 {
   font-family: var(--font-display);
   font-style: normal;
+  font-size: 3rem; /* ← aquí controlas el tamaño */
+  font-weight: 300; /* ← quita la negrilla */
 }
 
 /*
@@ -577,7 +579,7 @@ section h2 {
   font-family: var(--font-display);
   font-size: 1.6rem;
   font-weight: 400;
-  font-style: italic;
+  font-style: normal;
   margin-bottom: 20px;
   color: var(--color-ink);
 }
@@ -615,7 +617,7 @@ section h2 {
   font-family: var(--font-display);
   font-size: 3.5rem;
   font-weight: 300;
-  font-style: italic;
+  font-style: normal;
   margin-bottom: 48px;
   color: var(--color-white);
   letter-spacing: 0.01em;
@@ -665,7 +667,7 @@ footer h4 {
   color: var(--color-gold-light);
   font-size: 1.3rem;
   font-weight: 400;
-  font-style: italic;
+  font-style: normal;
   margin-bottom: 28px;
   letter-spacing: 0.05em;
 }
@@ -707,7 +709,7 @@ footer a:hover {
   border-top: 1px solid rgba(255,255,255,0.05);
   font-family: var(--font-display);
   font-size: 1.4rem;
-  font-style: italic;
+  font-style: normal;
   color: var(--color-gold);
   opacity: 0.8;
 }
@@ -725,7 +727,7 @@ footer a:hover {
   text-align: center;
   font-size: 3.5rem;
   font-weight: 300;
-  font-style: italic;
+  font-style: normal;
   margin-bottom: 80px;
   color: var(--color-ink);
 }
@@ -875,7 +877,7 @@ footer a:hover {
   border-top: 4px solid var(--color-gold);
   font-family: var(--font-display);
   font-size: 1.2rem;
-  font-style: italic;
+  font-style: normal;
   letter-spacing: 0.05em;
   color: var(--color-ink);
 }
@@ -909,7 +911,7 @@ h1.blog-title {
   font-family: var(--font-display);
   font-size: 4rem;
   font-weight: 300;
-  font-style: italic;
+  font-style: normal;
   color: var(--color-ink);
   letter-spacing: -0.01em;
 }
@@ -970,7 +972,7 @@ h1.blog-title {
   font-weight: 500;
   color: var(--color-ink);
   font-size: 1.4rem;
-  font-style: italic;
+  font-style: normal;
 }
 
 .blog-container {
@@ -1145,7 +1147,7 @@ h1.blog-title {
   font-family: var(--font-display);
   font-size: 4rem;
   font-weight: 300;
-  font-style: italic;
+  font-style: normal;
   margin-bottom: 20px;
   color: var(--color-ink);
   line-height: 1;
@@ -1191,7 +1193,7 @@ h1.blog-title {
 .caracteristica-item .label { font-size: 0.7rem; color: var(--color-text-light); display: block; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700; }
 
 .descripcion-section { margin-top: 48px; }
-.descripcion-section h3 { font-family: var(--font-display); font-size: 2rem; font-weight: 400; font-style: italic; margin-bottom: 24px; color: var(--color-ink); }
+.descripcion-section h3 { font-family: var(--font-display); font-size: 2rem; font-weight: 400; font-style: normal; margin-bottom: 24px; color: var(--color-ink); }
 .descripcion-section p { line-height: 2; color: var(--color-gray); font-size: 1.1rem; text-align: justify; }
 
 .sidebar-contacto {
@@ -1250,7 +1252,7 @@ h1.blog-title {
 }
 
 .mensaje-carga { text-align: center; padding: 150px 20px; }
-.mensaje-carga h2 { font-family: var(--font-display); font-size: 2.2rem; font-weight: 300; font-style: italic; color: var(--color-ink); margin-bottom: 20px; }
+.mensaje-carga h2 { font-family: var(--font-display); font-size: 2.2rem; font-weight: 300; font-style: normal; color: var(--color-ink); margin-bottom: 20px; }
 .mensaje-error { text-align: center; padding: 150px 20px; }
 .mensaje-error h2 { font-family: var(--font-display); font-size: 2.8rem; color: #D10000; margin-bottom: 20px; font-weight: 300; }
 .mensaje-error p { font-size: 1.1rem; color: var(--color-gray); margin-bottom: 40px; }
@@ -1343,7 +1345,7 @@ button:focus-visible {
 
   body { padding-top: 70px; }
   .nav { height: 70px; padding: 0 20px; }
-  .logo img { height: 40px; }
+  .logo img { height: 75px; }
 
   .menu-toggle { display: flex; }
 
@@ -1431,7 +1433,7 @@ button:focus-visible {
   .container { padding: 0 24px; }
   .nav { height: 64px; }
   body { padding-top: 64px; }
-  .logo img { height: 36px; }
+  .logo img { height: 75px; }
   .prop-grid { grid-template-columns: 1fr; }
   .hero-ui { aspect-ratio: 1 / 1; }
   .foto-principal { height: 280px; }
