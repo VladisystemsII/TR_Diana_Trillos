@@ -672,6 +672,18 @@ footer a:hover {
   font-family: var(--font-body);
 }
 
+.link-privacidad {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+}
+
+
+
+
+
+
+
 /* =======================================
    PROPIEDADES — LISTADO
    ======================================= */
