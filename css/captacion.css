@@ -36,7 +36,7 @@
 
 .captacion-hero h1 {
   font-family: var(--font-display);
-  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-size: 3rem;
   font-weight: 400;
   font-style: normal;
   color: var(--color-ink);
@@ -351,7 +351,7 @@
   .pasos-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   .form-card { padding: 32px 24px; }
   .form-row { grid-template-columns: 1fr; gap: 16px; }
-  .captacion-hero h1 { font-size: 2.4rem; }
+  .captacion-hero h1 { font-size: 1.9rem; }
 }
 
 @media (max-width: 480px) {
@@ -359,4 +359,6 @@
   .paso-item { padding: 16px 10px; }
   .form-card { padding: 24px 16px; }
   .form-card-title { font-size: 1.5rem; text-align: center; }
+  .captacion-hero h1 { font-size: 1.8rem; }
 }
+

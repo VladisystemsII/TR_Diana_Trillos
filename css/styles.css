@@ -1499,7 +1499,7 @@ button:focus-visible {
 
 .loading-box,
 .loading-box * {
-  font-size: 0.70rem !important;
+  font-size: 1.7rem !important;
 }
 
 @media (max-width: 480px) {
@@ -1511,7 +1511,7 @@ button:focus-visible {
 
 @media (max-width: 768px) {
   #propiedades h2 {
-    font-size: 1.8rem;
+    font-size: 1.9rem;
   }
 }
 
@@ -1520,6 +1520,22 @@ button:focus-visible {
     font-size: 1.8rem;
   }
 }
+
+
+@media (max-width: 768px) {
+  .blog-container .blog-title {
+    font-size: 2rem;
+  }
+}
+
+
+
+@media (max-width: 480px) {
+  .blog-container .blog-title {
+    font-size: 1.9rem ;
+  }
+}
+
 
 
 
