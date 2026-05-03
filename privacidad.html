@@ -98,13 +98,12 @@
       margin-bottom: 6px;
     }
 
-    .responsable-box {
-      background: #f5f5f0;
-      border-left: 4px solid #111;
-      border-radius: 0 8px 8px 0;
-      padding: 20px 24px;
-      margin: 20px 0;
-    }
+   .responsable-box p {
+       margin: 4px 0;
+       font-size: 0.93rem;
+       overflow-wrap: break-word;
+       word-break: break-word;
+   }
 
     .responsable-box p {
       margin: 4px 0;
@@ -153,20 +152,20 @@
   }
 }
 
+
+
+
 @media (max-width: 480px) {
   .privacidad-page {
-    padding: 24px 12px;
+    padding: 24px 16px; /* igual a container */
   }
 
   .privacidad-card {
     width: 100%;
     max-width: 100%;
-    padding: 20px 12px;
+    padding: 20px 16px; /* mismo lateral */
+    margin: 0 auto; /* centra */
     box-sizing: border-box;
-  }
-
-  .privacidad-hero {
-    padding: 0 8px;
   }
 }
 
