@@ -335,7 +335,7 @@ header::after {
 }
 
 .hero::before {
-  content: "EST. 2016";
+  content: "EST. 2008";
   position: absolute;
   top: 60px;
   left: 50%;
