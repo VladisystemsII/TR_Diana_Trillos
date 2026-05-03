@@ -23,15 +23,19 @@
   font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 700; /* Aumentado para balancear el rojo */
-  letter-spacing: 0.2em;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
   color: var(--color-gold); /* Ahora es Rojo #D10000 */
   margin-bottom: 18px;
-  padding: 6px 16px;
-  border: 1px solid rgba(209, 0, 0, 0.2);
+  padding: 8px 20px;
+  border: 1px solid rgba(209, 0, 0, 0.15);
   border-radius: 0;
   background: var(--color-white);
 }
+
+
+
+
 
 .notif-hero h1 {
   font-family: var(--font-display);
@@ -363,6 +367,7 @@
   .form-card { padding: 32px 24px; }
   .form-row { grid-template-columns: 1fr; gap: 16px; }
   .notif-hero h1 { font-size: 1.9rem; }
+  .notif-eyebrow {    font-size: 0.45rem;  }
 }
 
 @media (max-width: 480px) {
@@ -371,4 +376,5 @@
   .form-card { padding: 24px 16px; }
   .form-card-title { font-size: 1.5rem; text-align: center; }
   .notif-hero h1 { font-size: 1.8rem; }
+  .notif-eyebrow {    font-size: 0.45rem;  }
 }

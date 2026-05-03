@@ -52,7 +52,7 @@
   line-height: 1.7;
   max-width: 520px;
   margin: 0 auto;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 /* ── Pasos ── */
@@ -256,7 +256,7 @@
   border-radius: 0;
   font-family: var(--font-body);
   font-size: 0.82rem;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -352,6 +352,7 @@
   .form-card { padding: 32px 24px; }
   .form-row { grid-template-columns: 1fr; gap: 16px; }
   .captacion-hero h1 { font-size: 1.9rem; }
+  .captacion-eyebrow {    font-size: 0.45rem;  }
 }
 
 @media (max-width: 480px) {
@@ -360,5 +361,8 @@
   .form-card { padding: 24px 16px; }
   .form-card-title { font-size: 1.5rem; text-align: center; }
   .captacion-hero h1 { font-size: 1.8rem; }
+  .captacion-eyebrow {    font-size: 0.45rem;  }
 }
+
+
 
