@@ -41,7 +41,39 @@ function generarAlt(prop, index = 0) {
   return `${titulo} - ${codigo} - Foto ${index + 1}`;
 }
 
-// ===== CARGA PRINCIPAL =====
+// ===== SEO DINÁMICO =====
+function actualizarSEO(prop, fotoPrincipal) {
+  const titulo = val(prop["Título"] || prop["Titulo"]) || "Propiedad";
+  const ciudad = val(prop["Ciudad"]);
+  const tipo = val(prop["Tipo"]);
+  const descripcion = val(prop["Descripción"] || prop["Descripcion"]);
+  const codigo = val(prop["CÓDIGO"]);
+
+  // Title de la pestaña
+  document.title = `${titulo} | ${tipo} en ${ciudad} | Portal33`;
+
+  // Meta description
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc) {
+    const texto = descripcion
+      ? descripcion.substring(0, 150)
+      : `${tipo} en ${ciudad} - ${codigo} | Portal33`;
+    metaDesc.setAttribute("content", texto);
+  }
+
+  // Open Graph
+  const setOG = (prop, value) => {
+    const el = document.querySelector(`meta[property="${prop}"]`);
+    if (el) el.setAttribute("content", value);
+  };
+
+  setOG("og:title", `${titulo} | Portal33`);
+  setOG("og:description", descripcion ? descripcion.substring(0, 150) : `${tipo} en ${ciudad}`);
+  setOG("og:image", fotoPrincipal || "");
+  setOG("og:url", window.location.href);
+}
+
+
 async function cargarPropiedad() {
   const mensajeCarga = document.getElementById('mensajeCarga');
   const contenidoPropiedad = document.getElementById('contenidoPropiedad');
@@ -132,6 +164,10 @@ function renderizarPropiedad(prop) {
   document.getElementById('propClasificacion').textContent = val(prop["Residencial / Comercial"]) || "-";
 
   cargarGaleria(prop);
+
+  // SEO dinámico con foto principal
+  const fotoPrincipal = normalizarFoto(val(prop["Foto 1"]));
+  actualizarSEO(prop, fotoPrincipal);
 
   document.getElementById('btnWhatsapp').onclick = () => {
     const codProp = val(prop["CÓDIGO"]);
