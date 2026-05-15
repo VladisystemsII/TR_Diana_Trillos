@@ -1,139 +1,43 @@
-portal33/
-│
-├── index.html
-├── captacion.html
-├── propiedades.html
-├── blog.html
-├── notificaciones.html
+
+Team Realty Group
+├── index.html                ✅
+├── captacion.html            ✅
+├── blog.html                 ✅
+├── articulo.html             ✅
+├── propiedades.html          ✅ 
+├── notificaciones.html       ✅
+├── detalle-propiedad.html    ✅
+├── privacidad.html           ✅ <---Ley
 │
 ├── modules/
-│   ├── header.html
-│   ├── footer.html
-│   ├── header-loader.js
-│   └── footer-loader.js
+│   ├── header.html           ✅
+│   └── footer.html           ✅
 │
 ├── js/
-│   ├── menu-mobile.js
-│   └── header.js
+│   ├── config.js             ✅
+│   ├── header-loader.js      ✅
+│   ├── header.js             ✅
+│   ├── footer-loader.js      ✅
+│   ├── menu-mobile.js        ✅
+│   ├── blog.js               ✅
+│   ├── detalle-propiedad.js  ✅
+│   ├── notificaciones.js     ✅
+│   ├── propiedades.js        ✅
+│   └── articulo.js           ✅
 │
 ├── css/
-│   ├── styles.css
-│   └── captacion.css        ← estilos específicos por página
-│
-└── img/
-    ├── logo-portal33Logo.png
-    ├── real_estate_success.png
-    ├── Foto-perfil.png
-    └── favicon.ico
-
-
-href="articulo.html?codigo=${encodeURIComponent(post["CÓDIGO"])}"
-```
-
-Lo que nos dice que `articulo.html` es el **módulo de detalle de artículo**, y recibe un parámetro por URL:
-```
-articulo.html?codigo=XXXXX
-```
-
-Ese `codigo` se usaría para consultar el endpoint y traer el artículo específico a mostrar.
-
----
-
-### Estructura actualizada con el pendiente marcado
-```
-portal33/
-├── index.html          ✅
-├── captacion.html      ✅
-├── blog.html           ✅
-├── articulo.html       ❌ pendiente de crear/analizar
-├── propiedades.html    ❌ pendiente
-├── notificaciones.html ❌ pendiente
-│
-├── modules/
-│   ├── header.html     ✅
-│   └── footer.html     ✅
-│
-├── js/
-│   ├── header-loader.js ✅
-│   ├── header.js        ✅
-│   ├── footer-loader.js ✅
-│   ├── menu-mobile.js   ✅
-│   └── blog.js          ✅
-│
-├── css/
-│   ├── styles.css
-│   ├── captacion.css
-│   └── blog.css
-│
+│   ├── styles.css            ✅
+│   ├── captacion.css         ✅
+│   ├── notificaciones.css    ✅
+│   └── ------------------    ✅ 
 └── img/
 
 
 
+GenioTotal2026$.
 
+diana
 
-portal33/
-│
-├── index.html              ✅
-├── captacion.html          ✅
-├── blog.html               ✅
-├── articulo.html           ❌ pendiente
-├── propiedades.html        ❌ pendiente
-├── notificaciones.html     ❌ pendiente
-│
-├── modules/
-│   ├── header.html         ✅
-│   └── footer.html         ✅
-│
-├── js/
-│   ├── header-loader.js    ✅  ← movido desde modules/
-│   ├── footer-loader.js    ✅  ← movido desde modules/
-│   ├── header.js           ✅
-│   ├── menu-mobile.js      ✅
-│   └── blog.js             ✅  ← nuevo
-│
-├── css/
-│   ├── styles.css
-│   ├── captacion.css
-│   └── blog.css            ✅  ← ya existía en el proyecto
-│
-└── img/
-    ├── logo-portal33Logo.png
-    ├── real_estate_success.png
-    ├── Foto-perfil.png
-    └── favicon.ico
-
-
-
-
-
-
-
-portal33/
-├── index.html          ✅
-├── captacion.html      ✅
-├── blog.html           ✅
-├── articulo.html       ✅
-├── propiedades.html    ❌ pendiente
-├── notificaciones.html ❌ pendiente
-│
-├── modules/
-│   ├── header.html     ✅
-│   └── footer.html     ✅
-│
-├── js/
-│   ├── config.js       ✅ nuevo
-│   ├── header-loader.js ✅
-│   ├── header.js       ✅
-│   ├── footer-loader.js ✅
-│   ├── menu-mobile.js  ✅
-│   ├── blog.js         ✅
-│   └── articulo.js     ✅ nuevo
-│
-├── css/
-│   ├── styles.css
-│   ├── captacion.css
-│   ├── blog.css
-│   └── articulo.css    ✅ nuevo
-└── img/
+http://127.0.0.1:5500/admin/admin.html
 
 
