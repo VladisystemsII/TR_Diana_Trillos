@@ -12,9 +12,6 @@
 </head>
 <body>
 
-<!-- ══════════════════════════════════════
-     LOGIN
-     ══════════════════════════════════════ -->
 <div id="login-screen">
   <div class="login-box">
     <div class="login-logo">
@@ -37,12 +34,8 @@
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     ADMIN PANEL
-     ══════════════════════════════════════ -->
 <div id="admin-panel" style="display:none">
 
-  <!-- ── CONTENIDO PRINCIPAL ── -->
   <div id="admin-main">
     <div id="breadcrumb">
        <div class="bc-left">
@@ -53,7 +46,6 @@
               <span id="bc-titulo">Nueva Propiedad</span>
     </div>
 
-    <!-- VISTA: CREAR -->
     <section id="view-crear" class="admin-view active">
       <div class="view-header">
           <p>Completa los campos del registro. Los campos <span class="req">*</span> son obligatorios.</p>
@@ -150,19 +142,19 @@
         </div>
 
         <div class="form-section">
-          <h3 class="section-label">Precios</h3>
+          <h3 class="section-label">Precios <span class="hint">(escribe con puntos: 450.000.000)</span></h3>
           <div class="fields-row three">
             <div class="field-group">
               <label>Precio Venta COP</label>
-              <input type="number" id="f-precio-venta" placeholder="450000000">
+              <input type="text" id="f-precio-venta" placeholder="450.000.000">
             </div>
             <div class="field-group">
               <label>Precio Arriendo COP</label>
-              <input type="number" id="f-precio-arriendo" placeholder="2500000">
+              <input type="text" id="f-precio-arriendo" placeholder="2.500.000">
             </div>
             <div class="field-group">
               <label>Administración COP</label>
-              <input type="number" id="f-admin" placeholder="350000">
+              <input type="text" id="f-admin" placeholder="350.000">
             </div>
           </div>
         </div>
@@ -174,22 +166,25 @@
           </div>
         </div>
 
+        <div class="form-section admin-only">
+          <h3 class="section-label">Dirección Exacta <span class="hint">solo admin — no aparece en el portal</span></h3>
+          <div class="field-group full">
+            <input type="text" id="f-direccion" placeholder="Calle 123 # 45-67, Apto 301">
+          </div>
+        </div>
+
         <div class="form-section">
-          <h3 class="section-label">Fotos <span class="hint">(URLs — hasta 9)</span></h3>
-          <div class="fields-row three">
-            <div class="field-group"><label>Foto 1</label><input type="url" id="f-foto1" placeholder="https://…"></div>
-            <div class="field-group"><label>Foto 2</label><input type="url" id="f-foto2" placeholder="https://…"></div>
-            <div class="field-group"><label>Foto 3</label><input type="url" id="f-foto3" placeholder="https://…"></div>
-          </div>
-          <div class="fields-row three">
-            <div class="field-group"><label>Foto 4</label><input type="url" id="f-foto4" placeholder="https://…"></div>
-            <div class="field-group"><label>Foto 5</label><input type="url" id="f-foto5" placeholder="https://…"></div>
-            <div class="field-group"><label>Foto 6</label><input type="url" id="f-foto6" placeholder="https://…"></div>
-          </div>
-          <div class="fields-row three">
-            <div class="field-group"><label>Foto 7</label><input type="url" id="f-foto7" placeholder="https://…"></div>
-            <div class="field-group"><label>Foto 8</label><input type="url" id="f-foto8" placeholder="https://…"></div>
-            <div class="field-group"><label>Foto 9</label><input type="url" id="f-foto9" placeholder="https://…"></div>
+          <h3 class="section-label">Fotos <span class="hint">selecciona · comprime · sube automático — hasta 9</span></h3>
+          <div class="fotos-grid">
+            <div class="foto-slot"><div class="foto-dropzone" onclick="triggerFoto(1)"><div class="foto-placeholder" id="ph-1"><span class="foto-icon">+</span><span>Foto 1</span></div><img id="prev-1" class="foto-preview" style="display:none"><div class="foto-progress" id="prog-1" style="display:none"><div class="foto-progress-bar" id="bar-1"></div></div></div><input type="file" id="file-1" accept="image/*" style="display:none" onchange="procesarFoto(1,this)"><input type="hidden" id="f-foto1"><button class="foto-clear" id="clear-1" onclick="limpiarFoto(1)" style="display:none">x</button></div>
+            <div class="foto-slot"><div class="foto-dropzone" onclick="triggerFoto(2)"><div class="foto-placeholder" id="ph-2"><span class="foto-icon">+</span><span>Foto 2</span></div><img id="prev-2" class="foto-preview" style="display:none"><div class="foto-progress" id="prog-2" style="display:none"><div class="foto-progress-bar" id="bar-2"></div></div></div><input type="file" id="file-2" accept="image/*" style="display:none" onchange="procesarFoto(2,this)"><input type="hidden" id="f-foto2"><button class="foto-clear" id="clear-2" onclick="limpiarFoto(2)" style="display:none">x</button></div>
+            <div class="foto-slot"><div class="foto-dropzone" onclick="triggerFoto(3)"><div class="foto-placeholder" id="ph-3"><span class="foto-icon">+</span><span>Foto 3</span></div><img id="prev-3" class="foto-preview" style="display:none"><div class="foto-progress" id="prog-3" style="display:none"><div class="foto-progress-bar" id="bar-3"></div></div></div><input type="file" id="file-3" accept="image/*" style="display:none" onchange="procesarFoto(3,this)"><input type="hidden" id="f-foto3"><button class="foto-clear" id="clear-3" onclick="limpiarFoto(3)" style="display:none">x</button></div>
+            <div class="foto-slot"><div class="foto-dropzone" onclick="triggerFoto(4)"><div class="foto-placeholder" id="ph-4"><span class="foto-icon">+</span><span>Foto 4</span></div><img id="prev-4" class="foto-preview" style="display:none"><div class="foto-progress" id="prog-4" style="display:none"><div class="foto-progress-bar" id="bar-4"></div></div></div><input type="file" id="file-4" accept="image/*" style="display:none" onchange="procesarFoto(4,this)"><input type="hidden" id="f-foto4"><button class="foto-clear" id="clear-4" onclick="limpiarFoto(4)" style="display:none">x</button></div>
+            <div class="foto-slot"><div class="foto-dropzone" onclick="triggerFoto(5)"><div class="foto-placeholder" id="ph-5"><span class="foto-icon">+</span><span>Foto 5</span></div><img id="prev-5" class="foto-preview" style="display:none"><div class="foto-progress" id="prog-5" style="display:none"><div class="foto-progress-bar" id="bar-5"></div></div></div><input type="file" id="file-5" accept="image/*" style="display:none" onchange="procesarFoto(5,this)"><input type="hidden" id="f-foto5"><button class="foto-clear" id="clear-5" onclick="limpiarFoto(5)" style="display:none">x</button></div>
+            <div class="foto-slot"><div class="foto-dropzone" onclick="triggerFoto(6)"><div class="foto-placeholder" id="ph-6"><span class="foto-icon">+</span><span>Foto 6</span></div><img id="prev-6" class="foto-preview" style="display:none"><div class="foto-progress" id="prog-6" style="display:none"><div class="foto-progress-bar" id="bar-6"></div></div></div><input type="file" id="file-6" accept="image/*" style="display:none" onchange="procesarFoto(6,this)"><input type="hidden" id="f-foto6"><button class="foto-clear" id="clear-6" onclick="limpiarFoto(6)" style="display:none">x</button></div>
+            <div class="foto-slot"><div class="foto-dropzone" onclick="triggerFoto(7)"><div class="foto-placeholder" id="ph-7"><span class="foto-icon">+</span><span>Foto 7</span></div><img id="prev-7" class="foto-preview" style="display:none"><div class="foto-progress" id="prog-7" style="display:none"><div class="foto-progress-bar" id="bar-7"></div></div></div><input type="file" id="file-7" accept="image/*" style="display:none" onchange="procesarFoto(7,this)"><input type="hidden" id="f-foto7"><button class="foto-clear" id="clear-7" onclick="limpiarFoto(7)" style="display:none">x</button></div>
+            <div class="foto-slot"><div class="foto-dropzone" onclick="triggerFoto(8)"><div class="foto-placeholder" id="ph-8"><span class="foto-icon">+</span><span>Foto 8</span></div><img id="prev-8" class="foto-preview" style="display:none"><div class="foto-progress" id="prog-8" style="display:none"><div class="foto-progress-bar" id="bar-8"></div></div></div><input type="file" id="file-8" accept="image/*" style="display:none" onchange="procesarFoto(8,this)"><input type="hidden" id="f-foto8"><button class="foto-clear" id="clear-8" onclick="limpiarFoto(8)" style="display:none">x</button></div>
+            <div class="foto-slot"><div class="foto-dropzone" onclick="triggerFoto(9)"><div class="foto-placeholder" id="ph-9"><span class="foto-icon">+</span><span>Foto 9</span></div><img id="prev-9" class="foto-preview" style="display:none"><div class="foto-progress" id="prog-9" style="display:none"><div class="foto-progress-bar" id="bar-9"></div></div></div><input type="file" id="file-9" accept="image/*" style="display:none" onchange="procesarFoto(9,this)"><input type="hidden" id="f-foto9"><button class="foto-clear" id="clear-9" onclick="limpiarFoto(9)" style="display:none">x</button></div>
           </div>
         </div>
 
@@ -213,7 +208,6 @@
       </div>
     </section>
 
-    <!-- VISTA: LEER -->
     <section id="view-leer" class="admin-view">
       <div class="view-header">
         <p>Ingresa el CÓDIGO para cargar sus datos desde Google Sheets.</p>
@@ -230,7 +224,6 @@
       <div id="leer-resultado" class="data-card" style="display:none"></div>
     </section>
 
-    <!-- VISTA: ACTUALIZAR -->
     <section id="view-actualizar" class="admin-view">
       <div class="view-header">
          <p>Busca por CÓDIGO, modifica los campos y guarda los cambios.</p>
@@ -251,7 +244,6 @@
       </div>
     </section>
 
-    <!-- VISTA: ACTIVAR / DESACTIVAR -->
     <section id="view-activar" class="admin-view">
       <div class="view-header">
          <p>Controla la visibilidad de cada propiedad en el portal público.</p>
@@ -275,7 +267,6 @@
       </div>
     </section>
 
-    <!-- VISTA: LISTADO -->
     <section id="view-listado" class="admin-view">
       <div class="view-header">
           <p>Todas las propiedades registradas en el sistema.</p>
@@ -305,7 +296,6 @@
       </div>
     </section>
 
-    <!-- VISTA: BLOG -->
     <section id="view-blog" class="admin-view">
       <div class="view-header">
           <p>Módulo en construcción. Próxima entrega.</p>
@@ -316,10 +306,7 @@
       </div>
     </section>
 
-  </div><!-- /admin-main -->
-
-  <!-- ── SIDEBAR DERECHO ── -->
-  <aside id="admin-sidebar" class="expanded">
+  </div><aside id="admin-sidebar" class="expanded">
 
     <button id="sidebar-toggle" onclick="toggleSidebar()" title="Colapsar">
       <span class="toggle-icon">‹</span>
@@ -391,9 +378,6 @@
       <div class="sb-footer-brand">
         <span class="sb-label">Grupo Sol de Sipango Ltda</span>
       </div>
-      <!-- <div class="sb-footer-nit">
-        <span class="sb-label">NIT 900.240.499-5</span>
-      </div> -->
       <a href="https://wa.me/573114831846" target="_blank" rel="noopener noreferrer" class="sb-footer-soporte">
         <span class="wa-dot">●</span>
         <span class="sb-label">Soporte · Vladisystems</span>
@@ -409,12 +393,8 @@
 
   </aside>
 
-</div><!-- /admin-panel -->
+</div><div id="toast-container"></div>
 
-<!-- TOAST -->
-<div id="toast-container"></div>
-
-<!-- MODAL CONFIRMACIÓN -->
 <div id="confirm-overlay" style="display:none">
   <div class="confirm-box">
     <h3 id="confirm-title"></h3>

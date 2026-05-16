@@ -14,24 +14,37 @@ const ADMIN_CONFIG = {
       ? PORTAL33_CONFIG.PROPIEDADES_ENDPOINT
       : "https://script.google.com/macros/s/AKfycbyQ6k06QgekJlRkR7vxwO9-m2hdLaB_cxvaO6NPj0McKB6TYuz-3cI9RquEj6YOJzeO/exec";
   },
-  // ⚠️ Reemplazar con entry IDs reales del Google Form
+  // Entry IDs reales — Google Form Propiedades TRG
+  // CÓDIGO y Marca temporal se auto-generan en Sheets
   ENTRIES: {
-    codigo:"entry.CODIGO", marcaTemporal:"entry.MARCA",
-    titulo:"entry.TITULO", tipo:"entry.TIPO",
-    ciudad:"entry.CIUDAD", barrio:"entry.BARRIO",
-    estrato:"entry.ESTRATO", area:"entry.AREA",
-    habitaciones:"entry.HAB", banos:"entry.BAN",
-    parqueaderos:"entry.PARK", resComercial:"entry.RES",
-    estado:"entry.ESTADO", precioVenta:"entry.PVENTA",
-    precioArriendo:"entry.PARRIENDO", administracion:"entry.ADMIN",
-    descripcion:"entry.DESC",
-    foto1:"entry.F1",foto2:"entry.F2",foto3:"entry.F3",
-    foto4:"entry.F4",foto5:"entry.F5",foto6:"entry.F6",
-    foto7:"entry.F7",foto8:"entry.F8",foto9:"entry.F9",
-    activo:"entry.ACTIVO"
+    titulo:         "entry.1699706084",
+    direccion:      "entry.1337236259",
+    ciudad:         "entry.585419397",
+    barrio:         "entry.1947662059",
+    area:           "entry.676151136",
+    banos:          "entry.780113606",
+    precioVenta:    "entry.1923829294",
+    precioArriendo: "entry.964941654",
+    administracion: "entry.1194298416",
+    descripcion:    "entry.1752731594",
+    foto1:          "entry.87654233",
+    foto2:          "entry.459158562",
+    foto3:          "entry.998849546",
+    foto4:          "entry.355246951",
+    foto5:          "entry.2012934627",
+    foto6:          "entry.430056998",
+    foto7:          "entry.1530203383",
+    foto8:          "entry.612456693",
+    foto9:          "entry.1491080789",
+    tipo:           "entry.2096117089",
+    habitaciones:   "entry.1777139320",
+    estrato:        "entry.982145244",
+    parqueaderos:   "entry.1365930281",
+    resComercial:   "entry.296736527",
+    estado:         "entry.1910036077",
+    activo:         "entry.1295948975"
   },
-  // ⚠️ Reemplazar con URL real del Google Form
-  FORM_URL: "https://docs.google.com/forms/d/e/TU_FORM_ID/formResponse"
+  FORM_URL: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfYVZChBT5xAXfNIDre9AKVLVGjfT7GR-VMMR1jus_wxQ5Buw/formResponse"
 };
 
 /* ── ESTADO GLOBAL ────────────────────── */
@@ -153,25 +166,7 @@ function activarVista(viewId, section, viewName, btn) {
   }
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  const titulos = {
-  'crear':'Nueva Propiedad',
-  'leer':'Consultar Propiedad',
-  'actualizar':'Actualizar Propiedad',
-  'activar':'Activar / Desactivar',
-  'listado':'Ver Listado',
-  'blog':'Blog'
-    };
-    const t = document.getElementById('bc-titulo');
-    if(t) t.textContent = titulos[viewId] || '';
 }
-
-
-
-
-
-
-
-
 
 // ════════════════════════════════════════════
 //  CONTADOR PROPIEDADES ACTIVAS
@@ -286,33 +281,32 @@ function getVal(p, ...keys) {
 // ════════════════════════════════════════════
 function getFormData() {
   return {
-    codigo:         document.getElementById('f-codigo')?.value.trim()      || '',
-    marcaTemporal:  document.getElementById('f-marca')?.value              || new Date().toISOString(),
     titulo:         document.getElementById('f-titulo')?.value.trim()      || '',
-    tipo:           document.getElementById('f-tipo')?.value               || '',
+    direccion:      document.getElementById('f-direccion')?.value.trim()   || '',
     ciudad:         document.getElementById('f-ciudad')?.value.trim()      || '',
     barrio:         document.getElementById('f-barrio')?.value.trim()      || '',
-    estrato:        document.getElementById('f-estrato')?.value            || '',
     area:           document.getElementById('f-area')?.value               || '',
-    habitaciones:   document.getElementById('f-hab')?.value                || '',
     banos:          document.getElementById('f-ban')?.value                || '',
-    parqueaderos:   document.getElementById('f-park')?.value               || '',
-    resComercial:   document.getElementById('f-res-com')?.value            || '',
-    estado:         document.getElementById('f-estado')?.value             || '',
     precioVenta:    document.getElementById('f-precio-venta')?.value       || '',
     precioArriendo: document.getElementById('f-precio-arriendo')?.value    || '',
     administracion: document.getElementById('f-admin')?.value              || '',
     descripcion:    document.getElementById('f-descripcion')?.value.trim() || '',
-    foto1:  document.getElementById('f-foto1')?.value.trim() || '',
-    foto2:  document.getElementById('f-foto2')?.value.trim() || '',
-    foto3:  document.getElementById('f-foto3')?.value.trim() || '',
-    foto4:  document.getElementById('f-foto4')?.value.trim() || '',
-    foto5:  document.getElementById('f-foto5')?.value.trim() || '',
-    foto6:  document.getElementById('f-foto6')?.value.trim() || '',
-    foto7:  document.getElementById('f-foto7')?.value.trim() || '',
-    foto8:  document.getElementById('f-foto8')?.value.trim() || '',
-    foto9:  document.getElementById('f-foto9')?.value.trim() || '',
-    activo: document.getElementById('f-activo')?.checked ? 'si' : 'no'
+    foto1:  document.getElementById('f-foto1')?.value || '',
+    foto2:  document.getElementById('f-foto2')?.value || '',
+    foto3:  document.getElementById('f-foto3')?.value || '',
+    foto4:  document.getElementById('f-foto4')?.value || '',
+    foto5:  document.getElementById('f-foto5')?.value || '',
+    foto6:  document.getElementById('f-foto6')?.value || '',
+    foto7:  document.getElementById('f-foto7')?.value || '',
+    foto8:  document.getElementById('f-foto8')?.value || '',
+    foto9:  document.getElementById('f-foto9')?.value || '',
+    tipo:           document.getElementById('f-tipo')?.value               || '',
+    habitaciones:   document.getElementById('f-hab')?.value                || '',
+    estrato:        document.getElementById('f-estrato')?.value            || '',
+    parqueaderos:   document.getElementById('f-park')?.value               || '',
+    resComercial:   document.getElementById('f-res-com')?.value            || '',
+    estado:         document.getElementById('f-estado')?.value             || '',
+    activo:         document.getElementById('f-activo')?.checked ? 'Si' : 'No'
   };
 }
 
@@ -416,6 +410,7 @@ function renderDataCard(p) {
     ['Precio Arriendo COP', formatCOP(getVal(p,'precioArriendo','Precio Arriendo COP'))],
     ['Administración COP',  formatCOP(getVal(p,'administracion','Administración'))],
     ['Descripción',         get('descripcion','Descripción')],
+    ['Dirección (admin)',    get('direccion','Dirección exacta only admin')],
     ['Activo',              get('activo','Activo (si/no)')],
   ];
 
@@ -485,6 +480,12 @@ function renderFormActualizar(p) {
       <h3 class="section-label">Descripción</h3>
       <div class="field-group full">
         <textarea id="u-descripcion" rows="5">${v('descripcion','Descripción')}</textarea>
+      </div>
+    </div>
+    <div class="form-section admin-only">
+      <h3 class="section-label">Dirección Exacta <span class="hint">solo admin</span></h3>
+      <div class="field-group full">
+        <input type="text" id="u-direccion" value="${v('direccion','Dirección exacta only admin')}" placeholder="Calle 123 # 45-67">
       </div>
     </div>
     <div class="form-section">
@@ -688,4 +689,134 @@ async function fetchTodos() {
   const json = await res.json();
   _todosRegistros = json.data || json.registros || json || [];
   return _todosRegistros;
+}
+
+// ════════════════════════════════════════════
+//  MÓDULO FOTOS — COMPRESIÓN + CLOUDINARY
+//  Cloud: dq2osuxac  |  Preset: diadmiclou
+// ════════════════════════════════════════════
+
+const CLOUDINARY = {
+  CLOUD:  'dq2osuxac',
+  PRESET: 'diadmiclou',
+  get URL() { return `https://api.cloudinary.com/v1_1/${this.CLOUD}/image/upload`; },
+  MAX_W:  1280,   // máx ancho en px antes de subir
+  QUALITY: 0.78   // calidad canvas (0-1)
+};
+
+function triggerFoto(n) {
+  document.getElementById(`file-${n}`)?.click();
+}
+
+async function procesarFoto(n, input) {
+  const file = input.files[0];
+  if (!file) return;
+
+  const slot = document.getElementById(`slot-${n}`) ||
+               input.closest('.foto-slot');
+  const prog  = document.getElementById(`prog-${n}`);
+  const bar   = document.getElementById(`bar-${n}`);
+  const ph    = document.getElementById(`ph-${n}`);
+  const prev  = document.getElementById(`prev-${n}`);
+  const clear = document.getElementById(`clear-${n}`);
+
+  // Mostrar progreso
+  if (slot)  slot.classList.add('uploading');
+  if (ph)    ph.style.display   = 'none';
+  if (prev)  prev.style.display = 'none';
+  if (prog)  prog.style.display = 'block';
+  if (bar)   bar.style.width    = '10%';
+
+  try {
+    // 1. COMPRIMIR EN NAVEGADOR
+    const blob = await comprimirImagen(file, CLOUDINARY.MAX_W, CLOUDINARY.QUALITY);
+    if (bar) bar.style.width = '35%';
+
+    // 2. SUBIR A CLOUDINARY
+    const formData = new FormData();
+    formData.append('file', blob, `trg_foto_${Date.now()}.jpg`);
+    formData.append('upload_preset', CLOUDINARY.PRESET);
+    formData.append('folder', 'teamrealtygroup');
+
+    const res  = await fetch(CLOUDINARY.URL, { method:'POST', body: formData });
+    if (bar) bar.style.width = '85%';
+
+    const data = await res.json();
+    if (!res.ok || data.error) throw new Error(data.error?.message || 'Error Cloudinary');
+
+    // 3. GUARDAR URL OPTIMIZADA
+    const url = data.secure_url.replace('/upload/', '/upload/w_1200,f_auto,q_auto/');
+    const hiddenInput = document.getElementById(`f-foto${n}`);
+    if (hiddenInput) hiddenInput.value = url;
+
+    // 4. MOSTRAR PREVIEW
+    if (bar)  bar.style.width    = '100%';
+    if (prev) { prev.src = url; prev.style.display = 'block'; }
+    if (prog) setTimeout(() => { prog.style.display = 'none'; }, 600);
+    if (slot) { slot.classList.remove('uploading'); slot.classList.add('done'); }
+    if (clear) clear.style.display = 'flex';
+
+    toast(`✓ Foto ${n} subida correctamente`, 'success');
+
+  } catch(e) {
+    if (prog)  prog.style.display = 'none';
+    if (ph)    ph.style.display   = 'flex';
+    if (slot)  slot.classList.remove('uploading');
+    toast(`Error foto ${n}: ${e.message}`, 'error');
+  }
+
+  // Reset input para permitir volver a seleccionar el mismo archivo
+  input.value = '';
+}
+
+function comprimirImagen(file, maxW, quality) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const reader = new FileReader();
+
+    reader.onload = e => { img.src = e.target.result; };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+
+    img.onload = () => {
+      let w = img.width;
+      let h = img.height;
+
+      // Redimensionar si es más ancho que maxW
+      if (w > maxW) {
+        h = Math.round(h * maxW / w);
+        w = maxW;
+      }
+
+      const canvas = document.createElement('canvas');
+      canvas.width  = w;
+      canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, w, h);
+
+      canvas.toBlob(blob => {
+        if (blob) resolve(blob);
+        else reject(new Error('No se pudo comprimir la imagen'));
+      }, 'image/jpeg', quality);
+    };
+    img.onerror = reject;
+  });
+}
+
+function limpiarFoto(n) {
+  const hiddenInput = document.getElementById(`f-foto${n}`);
+  const prev  = document.getElementById(`prev-${n}`);
+  const ph    = document.getElementById(`ph-${n}`);
+  const clear = document.getElementById(`clear-${n}`);
+  const prog  = document.getElementById(`prog-${n}`);
+  const bar   = document.getElementById(`bar-${n}`);
+  const slot  = prev?.closest('.foto-slot');
+
+  if (hiddenInput) hiddenInput.value = '';
+  if (prev)  { prev.src = ''; prev.style.display = 'none'; }
+  if (ph)    ph.style.display   = 'flex';
+  if (clear) clear.style.display = 'none';
+  if (prog)  prog.style.display  = 'none';
+  if (bar)   bar.style.width     = '0%';
+  if (slot)  { slot.classList.remove('done','uploading'); }
 }
