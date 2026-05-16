@@ -311,7 +311,7 @@ function getFormData() {
 }
 
 function validarForm(data) {
-  if (!data.codigo) return 'El campo CÓDIGO es obligatorio.';
+  /*if (!data.codigo) return 'El campo CÓDIGO es obligatorio.';*/
   if (!data.titulo) return 'El campo Título es obligatorio.';
   if (!data.tipo)   return 'El campo Tipo es obligatorio.';
   if (!data.ciudad) return 'El campo Ciudad es obligatorio.';
