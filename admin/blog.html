@@ -1,0 +1,312 @@
+<!-- ════════════════════════════════════════════════════════
+     blog.html  (raíz del proyecto)
+     PROPÓSITO : Módulo completo de Blog.
+                 Se carga via cargarModulo('blog') → fetch('blog.html')
+                 y se inyecta en #view-container.
+     DEPENDE DE: js/blog/blog-crear.js
+                 js/blog/blog-leer.js
+                 css/admin.css
+                 css/admin-leer.css
+     ════════════════════════════════════════════════════════ -->
+
+<!-- ══ VISTA: CREAR POST ══════════════════════════════════ -->
+<div class="admin-view active" id="view-blog-crear">
+
+  <div class="modulo-wrap">
+
+    <div class="modulo-header">
+      <h2 class="modulo-titulo">Nuevo Post</h2>
+      <p class="modulo-sub">Completa los campos y guarda el post en el sistema.</p>
+    </div>
+
+    <form class="modulo-form" onsubmit="return false;">
+
+      <div class="field-group">
+        <label for="bf-fecha">Fecha <span class="req">*</span></label>
+        <input type="date" id="bf-fecha" required>
+      </div>
+
+      <div class="field-group">
+        <label for="bf-titulo">Título <span class="req">*</span></label>
+        <input type="text" id="bf-titulo" placeholder="Título del post" maxlength="200" required>
+      </div>
+
+      <div class="field-group">
+        <label for="bf-resumen">Resumen <span class="req">*</span></label>
+        <input type="text" id="bf-resumen" placeholder="Descripción breve para la tarjeta del post" maxlength="300" required>
+      </div>
+
+      <div class="field-group field-group--full">
+        <label for="bf-contenido">Contenido <span class="req">*</span></label>
+        <textarea id="bf-contenido" placeholder="Escribe aquí el contenido completo del post…" rows="10" required></textarea>
+      </div>
+
+
+
+
+      <!-- PUBLICACIÓN -->
+       <div class="form-section">
+          <h3 class="section-label">Publicación</h3>
+
+          <div class="field-group toggle-row">
+            <label>Activo <span class="req">*</span></label>
+
+            <label class="toggle-switch">
+              <input type="checkbox"
+                     id="bf-activo"
+                     checked
+                     onchange="document.getElementById('bf-activo-label').textContent =
+                     this.checked ? 'Sí' : 'No'">
+
+              <span class="toggle-track">
+                <span class="toggle-thumb"></span>
+              </span>
+            </label>
+
+            <span id="bf-activo-label" class="toggle-label">Sí</span>
+          </div>
+
+          <span class="field-hint">
+            Define si el post es visible en el sitio.
+          </span>
+        </div>
+
+<!-- ACCIONES -->
+<div class="form-actions">
+  <button type="button"
+          class="btn-secondary"
+          onclick="limpiarBlogFormCrear()">
+    Limpiar
+  </button>
+
+  <button type="button"
+          class="btn-primary"
+          id="btn-blog-crear"
+          onclick="crearBlogPost()">
+    Guardar Post
+  </button>
+</div>
+
+
+
+    </form>
+
+  </div>
+
+</div><!-- /view-blog -->
+
+
+<!-- ══ VISTA: LEER POSTS ═══════════════════════════════════ -->
+<div class="admin-view" id="view-blog-leer">
+
+  <!-- ── VISTA TABLA (listado + buscador) ── -->
+  <div id="blog-leer-vista-tabla">
+
+    <div class="view-header">
+      <p>Busca por código o explora todos los posts. Pulsa <strong>Ver</strong> para consultar el detalle completo.</p>
+    </div>
+
+    <div class="leer-search-bar">
+      <div class="leer-search-inner">
+        <span class="leer-search-icon">⌕</span>
+        <input
+          type="text"
+          id="blog-leer-search"
+          placeholder="Introduce el código del post…"
+          oninput="filtrarBlogLeer()"
+          autocomplete="off"
+        >
+        <button class="leer-search-clear" onclick="document.getElementById('blog-leer-search').value='';filtrarBlogLeer()" title="Limpiar">✕</button>
+      </div>
+      <button class="btn-secondary leer-reload-btn" onclick="recargarBlogLeer()" title="Recargar datos">↻ Actualizar</button>
+    </div>
+
+    <div id="blog-leer-skeleton" class="skeleton-wrap" style="display:none">
+      <div class="skeleton-table-row"></div>
+      <div class="skeleton-table-row"></div>
+      <div class="skeleton-table-row"></div>
+      <div class="skeleton-table-row"></div>
+      <div class="skeleton-table-row"></div>
+    </div>
+
+    <div id="blog-leer-tabla-wrap" class="tabla-wrapper">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Fecha</th>
+            <th>Título</th>
+            <th>Resumen</th>
+            <th>Activo</th>
+            <th>Ver</th>
+          </tr>
+        </thead>
+        <tbody id="blog-leer-tbody">
+          <tr><td colspan="6" class="empty-row">Cargando posts…</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div><!-- /blog-leer-vista-tabla -->
+
+  <!-- ── VISTA FICHA (detalle completo) ── -->
+  <div id="blog-leer-vista-ficha" style="display:none">
+
+    <div class="ficha-header">
+      <button class="ficha-back-btn" onclick="blogLeerVolverListado()">
+        ← Volver al listado
+      </button>
+    </div>
+
+    <div id="blog-leer-ficha"></div>
+
+  </div><!-- /blog-leer-vista-ficha -->
+
+</div><!-- /view-blog-leer -->
+
+
+
+
+<!-- ══ VISTA: ACTUALIZAR POST ══════════════════════════════ -->
+<div class="admin-view" id="view-blog-actualizar">
+
+  <!-- ── VISTA TABLA (listado + buscador) ── -->
+  <div id="blog-act-vista-tabla">
+
+    <div class="view-header">
+      <p>Busca por código o explora todos los posts. Pulsa <strong>Modificar</strong> para editar el post.</p>
+    </div>
+
+    <div class="leer-search-bar">
+      <div class="leer-search-inner">
+        <span class="leer-search-icon">⌕</span>
+        <input
+          type="text"
+          id="blog-act-search"
+          placeholder="Introduce el código del post…"
+          oninput="filtrarBlogActualizar()"
+          autocomplete="off"
+        >
+        <button class="leer-search-clear" onclick="document.getElementById('blog-act-search').value='';filtrarBlogActualizar()" title="Limpiar">✕</button>
+      </div>
+      <button class="btn-secondary leer-reload-btn" onclick="cargarTablaBlogActualizar()" title="Recargar datos">↻ Actualizar</button>
+    </div>
+
+    <div id="blog-act-skeleton" class="skeleton-wrap" style="display:none">
+      <div class="skeleton-table-row"></div>
+      <div class="skeleton-table-row"></div>
+      <div class="skeleton-table-row"></div>
+      <div class="skeleton-table-row"></div>
+      <div class="skeleton-table-row"></div>
+    </div>
+
+    <div id="blog-act-tabla-wrap" class="tabla-wrapper">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Fecha</th>
+            <th>Título</th>
+            <th>Activo</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody id="blog-act-tbody">
+          <tr><td colspan="5" class="empty-row">Cargando posts…</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div><!-- /blog-act-vista-tabla -->
+
+  <!-- ── VISTA FORMULARIO DE EDICIÓN ── -->
+  <div id="blog-act-vista-form" style="display:none">
+
+    <div class="ficha-header">
+      <button class="ficha-back-btn" onclick="blogActVolverListado()">
+        ← Volver al listado
+      </button>
+    </div>
+
+    <!-- Código solo lectura -->
+    <div class="act-form-header">
+      <div class="act-meta">
+        <span class="act-meta-label">Código</span>
+        <span class="act-meta-val" id="blog-act-codigo-display">—</span>
+      </div>
+    </div>
+
+    <div class="modulo-wrap">
+      <form class="modulo-form" onsubmit="return false;">
+
+        <div class="field-group">
+          <label for="blog-act-fecha">Fecha <span class="req">*</span></label>
+          <input type="date" id="blog-act-fecha" required>
+        </div>
+
+        <div class="field-group">
+          <label for="blog-act-titulo">Título <span class="req">*</span></label>
+          <input type="text" id="blog-act-titulo" placeholder="Título del post" maxlength="200" required>
+        </div>
+
+        <div class="field-group">
+          <label for="blog-act-resumen">Resumen <span class="req">*</span></label>
+          <input type="text" id="blog-act-resumen" placeholder="Descripción breve para la tarjeta del post" maxlength="300" required>
+        </div>
+
+        <div class="field-group field-group--full">
+          <label for="blog-act-contenido">Contenido <span class="req">*</span></label>
+          <textarea id="blog-act-contenido" placeholder="Contenido completo del post…" rows="10" required></textarea>
+        </div>
+
+        <!-- PUBLICACIÓN -->
+<div class="form-section">
+  <h3 class="section-label">Publicación</h3>
+
+  <div class="field-group toggle-row">
+    <label>Activo</label>
+
+    <label class="toggle-switch">
+      <input type="checkbox"
+             id="blog-act-activo"
+             checked
+             onchange="document.getElementById('blog-act-activo-label').textContent =
+             this.checked ? 'Sí' : 'No'">
+
+      <span class="toggle-track">
+        <span class="toggle-thumb"></span>
+      </span>
+    </label>
+
+    <span id="blog-act-activo-label" class="toggle-label">Sí</span>
+  </div>
+
+  <span class="field-hint">
+    Define si el post es visible en el sitio.
+  </span>
+</div>
+
+<!-- ACCIONES -->
+<div class="form-actions">
+  <button type="button"
+          class="btn-secondary"
+          onclick="blogActVolverListado()">
+    ← Volver
+  </button>
+
+  <button type="button"
+          class="btn-primary"
+          id="blog-btn-actualizar"
+          onclick="guardarBlogActualizacion()">
+    Guardar Cambios
+  </button>
+</div>
+
+
+      </form>
+    </div>
+
+  </div><!-- /blog-act-vista-form -->
+
+</div><!-- /view-blog-actualizar -->
+

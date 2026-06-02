@@ -1,0 +1,216 @@
+/* ════════════════════════════════════════════════════════
+   admin-leer.css — Módulo 02: Leer / Consultar propiedades
+   Team Realty Group · v1.0.0
+   Depende de: admin.css (variables y tokens base)
+   ════════════════════════════════════════════════════════ */
+
+/* ── BUSCADOR ────────────────────────────────────────────── */
+.leer-search-bar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.leer-search-inner {
+  position: relative;
+  flex: 1;
+  max-width: 520px;
+}
+.leer-search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.15rem;
+  color: var(--muted);
+  pointer-events: none;
+}
+.leer-search-inner input {
+  width: 100%;
+  padding: 11px 42px 11px 38px;
+  border: 1px solid var(--border);
+  background: var(--white);
+  font-size: .9rem;
+  color: var(--ink);
+  border-radius: var(--r);
+  outline: none;
+  transition: border-color .3s var(--ease);
+}
+.leer-search-inner input:focus {
+  border-color: var(--red);
+}
+.leer-search-clear {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: .85rem;
+  cursor: pointer;
+  padding: 2px 4px;
+  transition: color .2s;
+}
+.leer-search-clear:hover {
+  color: var(--red);
+}
+.leer-reload-btn {
+  white-space: nowrap;
+  font-size: .68rem;
+}
+
+/* ── TABLA: columnas especiales ──────────────────────────── */
+.col-codigo {
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.col-dir {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── FICHA DETALLE: cabecera ─────────────────────────────── */
+.ficha-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.ficha-back-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--gray);
+  padding: 8px 18px;
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: var(--r);
+  transition: .3s var(--ease);
+}
+.ficha-back-btn:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+/* ── FICHA DETALLE: secciones ────────────────────────────── */
+.ficha-section {
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-top: 3px solid var(--red);
+  padding: 28px 32px;
+  border-radius: var(--r);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 20px;
+}
+.ficha-section:last-child {
+  margin-bottom: 0;
+}
+
+/* ── FICHA DETALLE: grid de campos ───────────────────────── */
+.ficha-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px 24px;
+  margin-top: 16px;
+}
+.ficha-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.ficha-row.full {
+  grid-column: 1 / -1;
+}
+
+/* ── FICHA DETALLE: tipografía especial ──────────────────── */
+.ficha-titulo {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-weight: 400;
+  color: var(--ink);
+}
+.ficha-precio {
+  font-weight: 600;
+  color: var(--ink);
+  font-size: .95rem;
+}
+.ficha-desc {
+  font-size: .92rem;
+  color: var(--ink-mid);
+  line-height: 1.8;
+  margin-top: 12px;
+  white-space: pre-wrap;
+}
+.ficha-sin-fotos {
+  font-size: .85rem;
+  color: var(--muted);
+  margin-top: 12px;
+  font-style: italic;
+}
+
+/* ── FICHA DETALLE: galería de fotos ─────────────────────── */
+.ficha-fotos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+.ficha-fotos a {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--r);
+  border: 1px solid var(--border-light);
+}
+.ficha-fotos img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  display: block;
+  transition: transform .35s var(--ease);
+}
+.ficha-fotos a:hover img {
+  transform: scale(1.04);
+}
+
+/* ── FICHA DETALLE: estado activo ────────────────────────── */
+.ficha-section-activo {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.badge-lg {
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  padding: 7px 18px;
+  border-radius: 20px;
+  display: inline-block;
+  align-self: flex-start;
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .ficha-section {
+    padding: 20px 18px;
+  }
+  .ficha-grid {
+    grid-template-columns: 1fr;
+  }
+  .ficha-fotos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .leer-search-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .leer-search-inner {
+    max-width: 100%;
+  }
+}

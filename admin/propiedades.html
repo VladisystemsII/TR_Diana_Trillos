@@ -1,0 +1,764 @@
+<!-- ══════════════════════════════════════════════════════
+     propiedades.html
+     Módulos HTML de Propiedades: Crear · Leer · Actualizar ·
+     Activar/Desactivar · Ver Listado
+     Este archivo NO es una página independiente.
+     Es inyectado por cargarModulo('propiedades') en admin-config.js
+     dentro de <div id="view-container"> en admin.html
+     ══════════════════════════════════════════════════════ -->
+
+
+<!-- ══════════════════════════════════════════
+     MÓDULO 01 — CREAR PROPIEDAD
+     Campos en orden estricto de la Sheet:
+     Título · Dirección · Tipo · Ciudad · Barrio ·
+     Estrato · Área · Habitaciones · Baños ·
+     Parqueaderos · Uso del suelo · Tipo de negocio ·
+     Estado · Precio Venta · Precio Arriendo ·
+     Administración · Descripción · Fotos 1–9 · Activo
+     ══════════════════════════════════════════ -->
+<section id="view-crear" class="admin-view active">
+
+  <div class="view-header">
+    <p>Completa los campos del registro. Los campos <span class="req">*</span> son obligatorios.</p>
+  </div>
+
+  <div class="form-grid">
+
+    <!-- INFORMACIÓN PRINCIPAL -->
+    <div class="form-section">
+      <h3 class="section-label">Información Principal</h3>
+
+      <!-- Título -->
+      <div class="field-group full" style="margin-bottom:18px">
+        <label>Título <span class="req">*</span></label>
+        <input type="text" id="f-titulo" placeholder="Ej: Apartamento luminoso en Usaquén">
+      </div>
+
+      <!-- Tipo · Ciudad · Barrio -->
+      <div class="fields-row three">
+        <div class="field-group">
+          <label>Tipo de inmueble</label>
+          <select id="f-tipo">
+            <option value="">Seleccionar</option>
+            <option>Casa</option>
+            <option>Apartamento</option>
+            <option>Oficina</option>
+            <option>Local</option>
+            <option>Lote</option>
+            <option>Bodega</option>
+            <option>Finca</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>Ciudad</label>
+          <input type="text" id="f-ciudad" placeholder="Bogotá">
+        </div>
+        <div class="field-group">
+          <label>Barrio / Sector</label>
+          <input type="text" id="f-barrio" placeholder="Ej: Chicó Norte">
+        </div>
+      </div>
+
+      <!-- Estrato · Área · Uso del suelo -->
+      <div class="fields-row three">
+        <div class="field-group">
+          <label>Estrato</label>
+          <select id="f-estrato">
+            <option value="">—</option>
+            <option>1</option><option>2</option><option>3</option>
+            <option>4</option><option>5</option><option>6</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>Área m²</label>
+          <input type="number" id="f-area" placeholder="120" min="0">
+        </div>
+        <div class="field-group">
+          <label>Uso del suelo</label>
+          <input type="text" id="f-res-com" placeholder="Residencial / Comercial">
+        </div>
+      </div>
+    </div>
+
+    <!-- CARACTERÍSTICAS -->
+    <div class="form-section">
+      <h3 class="section-label">Características</h3>
+      <div class="fields-row four">
+        <div class="field-group">
+          <label>Habitaciones</label>
+          <select id="f-hab">
+            <option value="">—</option>
+            <option>1</option><option>2</option><option>3</option>
+            <option>4</option><option>5</option><option>otro</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>Baños</label>
+          <input type="text" id="f-ban" placeholder="Ej: 2, 2 1/2, 3">
+        </div>
+        <div class="field-group">
+          <label>Parqueaderos</label>
+          <select id="f-park">
+            <option value="">—</option>
+            <option>1</option><option>2</option><option>3</option>
+            <option>4</option><option>otro</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>Tipo de Negocio</label>
+          <select id="f-tipo-negocio">
+            <option value="">—</option>
+            <option>En Venta</option>
+            <option>Vendida</option>
+            <option>En Arriendo</option>
+            <option>Arrendada</option>
+            <option>En Venta o En Arriendo</option>
+          </select>
+        </div>
+      </div>
+      <div class="fields-row two" style="margin-top:0">
+        <div class="field-group">
+          <label>Estado</label>
+          <select id="f-estado">
+            <option value="">—</option>
+            <option>Nuevo</option>
+            <option>Usado</option>
+            <option>Remodelado</option>
+            <option>En construcción</option>
+            <option>Otro</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRECIOS -->
+    <div class="form-section">
+      <h3 class="section-label">Precios <span class="hint">(escribe con puntos: 450.000.000)</span></h3>
+      <div class="fields-row three">
+        <div class="field-group">
+          <label>Precio Venta COP</label>
+          <input type="text" id="f-precio-venta" placeholder="450.000.000">
+        </div>
+        <div class="field-group">
+          <label>Precio Arriendo COP</label>
+          <input type="text" id="f-precio-arriendo" placeholder="2.500.000">
+        </div>
+        <div class="field-group">
+          <label>Administración COP</label>
+          <input type="text" id="f-admin" placeholder="350.000">
+        </div>
+      </div>
+    </div>
+
+    <!-- DESCRIPCIÓN -->
+    <div class="form-section">
+      <h3 class="section-label">Descripción</h3>
+      <div class="field-group full">
+        <textarea id="f-descripcion" rows="5" placeholder="Describe la propiedad: características, estado, ubicación, amenidades…"></textarea>
+      </div>
+    </div>
+
+    <!-- DIRECCIÓN EXACTA (solo admin) -->
+    <div class="form-section admin-only">
+      <h3 class="section-label">Dirección Exacta <span class="hint">solo admin — no aparece en el portal</span></h3>
+      <div class="field-group full">
+        <input type="text" id="f-direccion" placeholder="Calle 123 # 45-67, Apto 301">
+      </div>
+    </div>
+
+    <!-- FOTOS (Cloudinary: selecciona → comprime → sube → guarda URL) -->
+    <div class="form-section">
+      <h3 class="section-label">
+        Fotos <span class="req">*</span>
+        <span class="hint">selecciona · comprime automático · sube a CDN — hasta 9 imágenes</span>
+      </h3>
+      <div class="fotos-grid">
+
+        <!-- Foto 1 (obligatoria) -->
+        <div class="foto-slot">
+          <div class="foto-dropzone" onclick="triggerFoto(1)">
+            <div class="foto-placeholder" id="ph-1">
+              <span class="foto-icon">+</span>
+              <span>Foto 1 <span class="req">*</span></span>
+            </div>
+            <img id="prev-1" class="foto-preview" style="display:none">
+            <div class="foto-progress" id="prog-1" style="display:none">
+              <div class="foto-progress-bar" id="bar-1"></div>
+            </div>
+          </div>
+          <input type="file" id="file-1" accept="image/*" style="display:none" onchange="procesarFoto(1,this)">
+          <input type="hidden" id="f-foto1">
+          <button class="foto-clear" id="clear-1" onclick="limpiarFoto(1)" style="display:none">✕</button>
+        </div>
+
+        <!-- Fotos 2–9 (opcionales) -->
+        <div class="foto-slot">
+          <div class="foto-dropzone" onclick="triggerFoto(2)">
+            <div class="foto-placeholder" id="ph-2"><span class="foto-icon">+</span><span>Foto 2</span></div>
+            <img id="prev-2" class="foto-preview" style="display:none">
+            <div class="foto-progress" id="prog-2" style="display:none"><div class="foto-progress-bar" id="bar-2"></div></div>
+          </div>
+          <input type="file" id="file-2" accept="image/*" style="display:none" onchange="procesarFoto(2,this)">
+          <input type="hidden" id="f-foto2">
+          <button class="foto-clear" id="clear-2" onclick="limpiarFoto(2)" style="display:none">✕</button>
+        </div>
+
+        <div class="foto-slot">
+          <div class="foto-dropzone" onclick="triggerFoto(3)">
+            <div class="foto-placeholder" id="ph-3"><span class="foto-icon">+</span><span>Foto 3</span></div>
+            <img id="prev-3" class="foto-preview" style="display:none">
+            <div class="foto-progress" id="prog-3" style="display:none"><div class="foto-progress-bar" id="bar-3"></div></div>
+          </div>
+          <input type="file" id="file-3" accept="image/*" style="display:none" onchange="procesarFoto(3,this)">
+          <input type="hidden" id="f-foto3">
+          <button class="foto-clear" id="clear-3" onclick="limpiarFoto(3)" style="display:none">✕</button>
+        </div>
+
+        <div class="foto-slot">
+          <div class="foto-dropzone" onclick="triggerFoto(4)">
+            <div class="foto-placeholder" id="ph-4"><span class="foto-icon">+</span><span>Foto 4</span></div>
+            <img id="prev-4" class="foto-preview" style="display:none">
+            <div class="foto-progress" id="prog-4" style="display:none"><div class="foto-progress-bar" id="bar-4"></div></div>
+          </div>
+          <input type="file" id="file-4" accept="image/*" style="display:none" onchange="procesarFoto(4,this)">
+          <input type="hidden" id="f-foto4">
+          <button class="foto-clear" id="clear-4" onclick="limpiarFoto(4)" style="display:none">✕</button>
+        </div>
+
+        <div class="foto-slot">
+          <div class="foto-dropzone" onclick="triggerFoto(5)">
+            <div class="foto-placeholder" id="ph-5"><span class="foto-icon">+</span><span>Foto 5</span></div>
+            <img id="prev-5" class="foto-preview" style="display:none">
+            <div class="foto-progress" id="prog-5" style="display:none"><div class="foto-progress-bar" id="bar-5"></div></div>
+          </div>
+          <input type="file" id="file-5" accept="image/*" style="display:none" onchange="procesarFoto(5,this)">
+          <input type="hidden" id="f-foto5">
+          <button class="foto-clear" id="clear-5" onclick="limpiarFoto(5)" style="display:none">✕</button>
+        </div>
+
+        <div class="foto-slot">
+          <div class="foto-dropzone" onclick="triggerFoto(6)">
+            <div class="foto-placeholder" id="ph-6"><span class="foto-icon">+</span><span>Foto 6</span></div>
+            <img id="prev-6" class="foto-preview" style="display:none">
+            <div class="foto-progress" id="prog-6" style="display:none"><div class="foto-progress-bar" id="bar-6"></div></div>
+          </div>
+          <input type="file" id="file-6" accept="image/*" style="display:none" onchange="procesarFoto(6,this)">
+          <input type="hidden" id="f-foto6">
+          <button class="foto-clear" id="clear-6" onclick="limpiarFoto(6)" style="display:none">✕</button>
+        </div>
+
+        <div class="foto-slot">
+          <div class="foto-dropzone" onclick="triggerFoto(7)">
+            <div class="foto-placeholder" id="ph-7"><span class="foto-icon">+</span><span>Foto 7</span></div>
+            <img id="prev-7" class="foto-preview" style="display:none">
+            <div class="foto-progress" id="prog-7" style="display:none"><div class="foto-progress-bar" id="bar-7"></div></div>
+          </div>
+          <input type="file" id="file-7" accept="image/*" style="display:none" onchange="procesarFoto(7,this)">
+          <input type="hidden" id="f-foto7">
+          <button class="foto-clear" id="clear-7" onclick="limpiarFoto(7)" style="display:none">✕</button>
+        </div>
+
+        <div class="foto-slot">
+          <div class="foto-dropzone" onclick="triggerFoto(8)">
+            <div class="foto-placeholder" id="ph-8"><span class="foto-icon">+</span><span>Foto 8</span></div>
+            <img id="prev-8" class="foto-preview" style="display:none">
+            <div class="foto-progress" id="prog-8" style="display:none"><div class="foto-progress-bar" id="bar-8"></div></div>
+          </div>
+          <input type="file" id="file-8" accept="image/*" style="display:none" onchange="procesarFoto(8,this)">
+          <input type="hidden" id="f-foto8">
+          <button class="foto-clear" id="clear-8" onclick="limpiarFoto(8)" style="display:none">✕</button>
+        </div>
+
+        <div class="foto-slot">
+          <div class="foto-dropzone" onclick="triggerFoto(9)">
+            <div class="foto-placeholder" id="ph-9"><span class="foto-icon">+</span><span>Foto 9</span></div>
+            <img id="prev-9" class="foto-preview" style="display:none">
+            <div class="foto-progress" id="prog-9" style="display:none"><div class="foto-progress-bar" id="bar-9"></div></div>
+          </div>
+          <input type="file" id="file-9" accept="image/*" style="display:none" onchange="procesarFoto(9,this)">
+          <input type="hidden" id="f-foto9">
+          <button class="foto-clear" id="clear-9" onclick="limpiarFoto(9)" style="display:none">✕</button>
+        </div>
+
+      </div><!-- /fotos-grid -->
+    </div><!-- /form-section fotos -->
+
+    <!-- PUBLICACIÓN -->
+    <div class="form-section">
+      <h3 class="section-label">Publicación</h3>
+      <div class="field-group toggle-row">
+        <label>Activo <span class="req">*</span></label>
+        <label class="toggle-switch">
+          <input type="checkbox" id="f-activo" checked>
+          <span class="toggle-track"><span class="toggle-thumb"></span></span>
+        </label>
+        <span id="activo-label" class="toggle-label">Sí</span>
+      </div>
+    </div>
+
+    <!-- ACCIONES -->
+    <div class="form-actions">
+      <button type="button" class="btn-secondary" onclick="limpiarFormCrear()">Limpiar</button>
+      <button type="button" class="btn-primary" id="btn-crear" onclick="crearPropiedad()">Guardar Propiedad</button>
+    </div>
+
+  </div><!-- /form-grid -->
+</section><!-- /view-crear -->
+
+
+<!-- ══════════════════════════════════════
+     MÓDULO 02 — LEER / CONSULTAR
+     ══════════════════════════════════════ -->
+<section id="view-leer" class="admin-view">
+
+  <!-- ── VISTA TABLA (listado + buscador) ── -->
+  <div id="leer-vista-tabla">
+
+    <div class="view-header">
+      <p>Busca por código o explora todas las propiedades. Pulsa <strong>Ver</strong> para consultar el detalle completo.</p>
+    </div>
+
+    <!-- Buscador -->
+    <div class="leer-search-bar">
+      <div class="leer-search-inner">
+        <span class="leer-search-icon">⌕</span>
+        <input
+          type="text"
+          id="leer-search"
+          placeholder="Introduce el código de la propiedad…"
+          oninput="filtrarLeer()"
+          autocomplete="off"
+        >
+        <button class="leer-search-clear" onclick="document.getElementById('leer-search').value='';filtrarLeer()" title="Limpiar">✕</button>
+      </div>
+      <button class="btn-secondary leer-reload-btn" onclick="recargarLeer()" title="Recargar datos">↻ Actualizar</button>
+    </div>
+
+    <!-- Skeleton de carga -->
+    <div id="leer-skeleton" class="skeleton-wrap" style="display:none">
+      <div class="skeleton-table-row"></div>
+      <div class="skeleton-table-row"></div>
+      <div class="skeleton-table-row"></div>
+      <div class="skeleton-table-row"></div>
+      <div class="skeleton-table-row"></div>
+    </div>
+
+    <!-- Tabla -->
+    <div id="leer-tabla-wrap" class="tabla-wrapper">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Tipo de Inmueble</th>
+            <th>Barrio</th>
+            <th>Dirección</th>
+            <th>Activo</th>
+            <th>Ver</th>
+          </tr>
+        </thead>
+        <tbody id="leer-tbody">
+          <tr><td colspan="6" class="empty-row">Cargando propiedades…</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div><!-- /leer-vista-tabla -->
+
+
+  <!-- ── VISTA FICHA (detalle completo) ── -->
+  <div id="leer-vista-ficha" style="display:none">
+
+    <div class="ficha-header">
+      <button class="ficha-back-btn" onclick="leerVolverListado()">
+        ← Volver al listado
+      </button>
+    </div>
+
+    <!-- Contenido dinámico generado por verPropiedadLeer() -->
+    <div id="leer-ficha"></div>
+
+  </div><!-- /leer-vista-ficha -->
+
+</section><!-- /view-leer -->
+
+
+<!-- ══════════════════════════════════════
+     MÓDULO 03 — ACTUALIZAR PROPIEDAD
+     ══════════════════════════════════════ -->
+<section id="view-actualizar" class="admin-view">
+
+  <div class="view-header">
+    <p>Busca la propiedad por código o pincha <strong>Modificar</strong> en la tabla para editar sus datos.</p>
+  </div>
+
+  <!-- BUSCADOR -->
+  <div class="leer-search-bar">
+    <input type="text" id="act-search"
+           placeholder="Ej: PROP-0001"
+           oninput="filtrarActualizar()"
+           onkeydown="if(event.key==='Enter') filtrarActualizar()">
+    <button class="btn-secondary" onclick="cargarTablaActualizar()">↺ Recargar</button>
+  </div>
+
+  <!-- SKELETON -->
+  <div id="act-skeleton" class="leer-spinner" style="display:none">
+    <div class="leer-spin"></div><span>Cargando propiedades…</span>
+  </div>
+
+  <!-- VISTA TABLA -->
+  <div id="act-vista-tabla">
+    <div id="act-tabla-wrap" class="tabla-wrapper">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Código</th><th>Tipo</th><th>Barrio</th>
+            <th>Dirección</th><th>Activo</th><th>Acción</th>
+          </tr>
+        </thead>
+        <tbody id="act-tbody">
+          <tr><td colspan="6" class="empty-row">Cargando…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- VISTA FORM EDICIÓN -->
+  <div id="act-vista-form" style="display:none">
+
+    <!-- Cabecera: código + timestamp solo lectura -->
+    <div class="act-form-header">
+      <div class="act-meta">
+        <span class="act-meta-label">Código</span>
+        <span class="act-meta-val" id="act-codigo-display">—</span>
+      </div>
+      <div class="act-meta">
+        <span class="act-meta-label">Fecha de Creación</span>
+        <span class="act-meta-val" id="act-timestamp">—</span>
+      </div>
+    </div>
+
+    <div class="form-grid">
+
+      <!-- INFORMACIÓN PRINCIPAL -->
+      <div class="form-section">
+        <h3 class="section-label">Información Principal</h3>
+        <div class="field-group full" style="margin-bottom:18px">
+          <label>Título</label>
+          <input type="text" id="act-titulo" placeholder="Título de la propiedad">
+        </div>
+        <div class="fields-row three">
+          <div class="field-group">
+            <label>Tipo de inmueble</label>
+            <select id="act-tipo">
+              <option value="">Seleccionar</option>
+              <option>Casa</option><option>Apartamento</option><option>Oficina</option>
+              <option>Local</option><option>Lote</option><option>Bodega</option>
+              <option>Finca</option><option>Otros</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Ciudad</label>
+            <input type="text" id="act-ciudad" autocomplete="off" name="p33-ciudad" data-form-type="other">
+          </div>
+          <div class="field-group">
+            <label>Barrio / Sector</label>
+            <input id="act-barrio" type="text" autocomplete="off" name="p33-barrio" data-form-type="other">
+          </div>
+        </div>
+        <div class="fields-row three">
+          <div class="field-group">
+            <label>Estrato</label>
+            <select id="act-estrato">
+              <option value="">—</option>
+              <option>1</option><option>2</option><option>3</option>
+              <option>4</option><option>5</option><option>6</option><option>Otro</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Área m²</label>
+            <input type="number" id="act-area" min="0">
+          </div>
+          <div class="field-group">
+            <label>Uso del suelo</label>
+            <input type="text" id="act-res-com">
+          </div>
+        </div>
+      </div>
+
+      <!-- CARACTERÍSTICAS -->
+      <div class="form-section">
+        <h3 class="section-label">Características</h3>
+        <div class="fields-row four">
+          <div class="field-group">
+            <label>Habitaciones</label>
+            <select id="act-hab">
+              <option value="">—</option>
+              <option>1</option><option>2</option><option>3</option>
+              <option>4</option><option>5</option><option>otro</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Baños</label>
+            <input type="text" id="act-ban" placeholder="Ej: 2, 2 1/2">
+          </div>
+          <div class="field-group">
+            <label>Parqueaderos</label>
+            <select id="act-park">
+              <option value="">—</option>
+              <option>1</option><option>2</option><option>3</option>
+              <option>4</option><option>otro</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Tipo de Negocio</label>
+            <select id="act-tipo-negocio">
+              <option value="">—</option>
+              <option>En Venta</option>
+              <option>Vendida</option>
+              <option>En Arriendo</option>
+              <option>Arrendada</option>
+              <option>En Venta o En Arriendo</option>
+            </select>
+          </div>
+        </div>
+        <div class="fields-row two">
+          <div class="field-group">
+            <label>Estado</label>
+            <select id="act-estado">
+              <option value="">—</option>
+              <option>Nuevo</option><option>Usado</option><option>Remodelado</option>
+              <option>En construcción</option><option>Otro</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRECIOS -->
+      <div class="form-section">
+        <h3 class="section-label">Precios</h3>
+        <div class="fields-row three">
+          <div class="field-group">
+            <label>Precio Venta COP</label>
+            <input type="text" id="act-precio-venta" placeholder="450.000.000">
+          </div>
+          <div class="field-group">
+            <label>Precio Arriendo COP</label>
+            <input type="text" id="act-precio-arriendo" placeholder="2.500.000">
+          </div>
+          <div class="field-group">
+            <label>Administración COP</label>
+            <input type="text" id="act-admin" placeholder="350.000">
+          </div>
+        </div>
+      </div>
+
+      <!-- DESCRIPCIÓN -->
+      <div class="form-section">
+        <h3 class="section-label">Descripción</h3>
+        <div class="field-group full">
+          <textarea id="act-descripcion" rows="5"></textarea>
+        </div>
+      </div>
+
+      <!-- DIRECCIÓN -->
+      <div class="form-section admin-only">
+        <h3 class="section-label">Dirección Exacta <span class="hint">solo admin</span></h3>
+        <div class="field-group full">
+          <input type="text" id="act-direccion" autocomplete="off" name="p33-direccion" data-form-type="other">
+        </div>
+      </div>
+
+      <!-- FOTOS -->
+      <div class="form-section">
+        <h3 class="section-label">Fotos <span class="hint">deja igual si no quieres cambiar · sube nueva para reemplazar</span></h3>
+        <div class="fotos-grid">
+          <div class="foto-slot">
+            <div class="foto-dropzone" onclick="triggerFotoAct(1)">
+              <div class="foto-placeholder" id="act-ph-1"><span class="foto-icon">+</span><span>Foto 1</span></div>
+              <img id="act-prev-1" class="foto-preview" style="display:none">
+              <div class="foto-progress" id="act-prog-1" style="display:none">
+                <div class="foto-progress-bar" id="act-bar-1"></div>
+              </div>
+            </div>
+            <input type="file" id="act-file-1" accept="image/*" style="display:none" onchange="procesarFotoAct(1,this)">
+            <input type="hidden" id="act-foto1-hidden">
+            <button class="foto-clear" id="act-clear-1" onclick="limpiarFotoAct(1)" style="display:none">✕</button>
+          </div>
+          <div class="foto-slot">
+            <div class="foto-dropzone" onclick="triggerFotoAct(2)">
+              <div class="foto-placeholder" id="act-ph-2"><span class="foto-icon">+</span><span>Foto 2</span></div>
+              <img id="act-prev-2" class="foto-preview" style="display:none">
+              <div class="foto-progress" id="act-prog-2" style="display:none">
+                <div class="foto-progress-bar" id="act-bar-2"></div>
+              </div>
+            </div>
+            <input type="file" id="act-file-2" accept="image/*" style="display:none" onchange="procesarFotoAct(2,this)">
+            <input type="hidden" id="act-foto2-hidden">
+            <button class="foto-clear" id="act-clear-2" onclick="limpiarFotoAct(2)" style="display:none">✕</button>
+          </div>
+          <div class="foto-slot">
+            <div class="foto-dropzone" onclick="triggerFotoAct(3)">
+              <div class="foto-placeholder" id="act-ph-3"><span class="foto-icon">+</span><span>Foto 3</span></div>
+              <img id="act-prev-3" class="foto-preview" style="display:none">
+              <div class="foto-progress" id="act-prog-3" style="display:none">
+                <div class="foto-progress-bar" id="act-bar-3"></div>
+              </div>
+            </div>
+            <input type="file" id="act-file-3" accept="image/*" style="display:none" onchange="procesarFotoAct(3,this)">
+            <input type="hidden" id="act-foto3-hidden">
+            <button class="foto-clear" id="act-clear-3" onclick="limpiarFotoAct(3)" style="display:none">✕</button>
+          </div>
+          <div class="foto-slot">
+            <div class="foto-dropzone" onclick="triggerFotoAct(4)">
+              <div class="foto-placeholder" id="act-ph-4"><span class="foto-icon">+</span><span>Foto 4</span></div>
+              <img id="act-prev-4" class="foto-preview" style="display:none">
+              <div class="foto-progress" id="act-prog-4" style="display:none">
+                <div class="foto-progress-bar" id="act-bar-4"></div>
+              </div>
+            </div>
+            <input type="file" id="act-file-4" accept="image/*" style="display:none" onchange="procesarFotoAct(4,this)">
+            <input type="hidden" id="act-foto4-hidden">
+            <button class="foto-clear" id="act-clear-4" onclick="limpiarFotoAct(4)" style="display:none">✕</button>
+          </div>
+          <div class="foto-slot">
+            <div class="foto-dropzone" onclick="triggerFotoAct(5)">
+              <div class="foto-placeholder" id="act-ph-5"><span class="foto-icon">+</span><span>Foto 5</span></div>
+              <img id="act-prev-5" class="foto-preview" style="display:none">
+              <div class="foto-progress" id="act-prog-5" style="display:none">
+                <div class="foto-progress-bar" id="act-bar-5"></div>
+              </div>
+            </div>
+            <input type="file" id="act-file-5" accept="image/*" style="display:none" onchange="procesarFotoAct(5,this)">
+            <input type="hidden" id="act-foto5-hidden">
+            <button class="foto-clear" id="act-clear-5" onclick="limpiarFotoAct(5)" style="display:none">✕</button>
+          </div>
+          <div class="foto-slot">
+            <div class="foto-dropzone" onclick="triggerFotoAct(6)">
+              <div class="foto-placeholder" id="act-ph-6"><span class="foto-icon">+</span><span>Foto 6</span></div>
+              <img id="act-prev-6" class="foto-preview" style="display:none">
+              <div class="foto-progress" id="act-prog-6" style="display:none">
+                <div class="foto-progress-bar" id="act-bar-6"></div>
+              </div>
+            </div>
+            <input type="file" id="act-file-6" accept="image/*" style="display:none" onchange="procesarFotoAct(6,this)">
+            <input type="hidden" id="act-foto6-hidden">
+            <button class="foto-clear" id="act-clear-6" onclick="limpiarFotoAct(6)" style="display:none">✕</button>
+          </div>
+          <div class="foto-slot">
+            <div class="foto-dropzone" onclick="triggerFotoAct(7)">
+              <div class="foto-placeholder" id="act-ph-7"><span class="foto-icon">+</span><span>Foto 7</span></div>
+              <img id="act-prev-7" class="foto-preview" style="display:none">
+              <div class="foto-progress" id="act-prog-7" style="display:none">
+                <div class="foto-progress-bar" id="act-bar-7"></div>
+              </div>
+            </div>
+            <input type="file" id="act-file-7" accept="image/*" style="display:none" onchange="procesarFotoAct(7,this)">
+            <input type="hidden" id="act-foto7-hidden">
+            <button class="foto-clear" id="act-clear-7" onclick="limpiarFotoAct(7)" style="display:none">✕</button>
+          </div>
+          <div class="foto-slot">
+            <div class="foto-dropzone" onclick="triggerFotoAct(8)">
+              <div class="foto-placeholder" id="act-ph-8"><span class="foto-icon">+</span><span>Foto 8</span></div>
+              <img id="act-prev-8" class="foto-preview" style="display:none">
+              <div class="foto-progress" id="act-prog-8" style="display:none">
+                <div class="foto-progress-bar" id="act-bar-8"></div>
+              </div>
+            </div>
+            <input type="file" id="act-file-8" accept="image/*" style="display:none" onchange="procesarFotoAct(8,this)">
+            <input type="hidden" id="act-foto8-hidden">
+            <button class="foto-clear" id="act-clear-8" onclick="limpiarFotoAct(8)" style="display:none">✕</button>
+          </div>
+          <div class="foto-slot">
+            <div class="foto-dropzone" onclick="triggerFotoAct(9)">
+              <div class="foto-placeholder" id="act-ph-9"><span class="foto-icon">+</span><span>Foto 9</span></div>
+              <img id="act-prev-9" class="foto-preview" style="display:none">
+              <div class="foto-progress" id="act-prog-9" style="display:none">
+                <div class="foto-progress-bar" id="act-bar-9"></div>
+              </div>
+            </div>
+            <input type="file" id="act-file-9" accept="image/*" style="display:none" onchange="procesarFotoAct(9,this)">
+            <input type="hidden" id="act-foto9-hidden">
+            <button class="foto-clear" id="act-clear-9" onclick="limpiarFotoAct(9)" style="display:none">✕</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PUBLICACIÓN -->
+      <div class="form-section">
+        <h3 class="section-label">Publicación</h3>
+        <div class="field-group toggle-row">
+          <label>Activo</label>
+          <label class="toggle-switch">
+            <input type="checkbox" id="act-activo" checked>
+            <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          </label>
+          <span id="act-activo-label" class="toggle-label">Sí</span>
+        </div>
+      </div>
+
+      <!-- ACCIONES -->
+      <div class="form-actions">
+        <button type="button" class="btn-secondary" onclick="actVolverListado()">← Volver</button>
+        <button type="button" class="btn-primary" id="btn-actualizar" onclick="guardarActualizacion()">Guardar Cambios</button>
+      </div>
+
+    </div><!-- /form-grid -->
+  </div><!-- /act-vista-form -->
+
+</section><!-- /view-actualizar -->
+
+
+<!-- ══════════════════════════════════════
+     MÓDULO 04 — ACTIVAR / DESACTIVAR
+     Próxima iteración
+     ══════════════════════════════════════ -->
+<!-- ══════════════════════════════════════
+     MÓDULO 04 — ACTIVAR / DESACTIVAR
+     ══════════════════════════════════════ -->
+<section id="view-activar" class="admin-view">
+
+  
+
+  <div id="act2-vista-tabla">
+
+    <div class="view-header">
+      <p>Activa o desactiva propiedades.</p>
+    </div>
+
+    <div class="act2-search-bar">
+      <div class="act2-search-inner">
+        <span class="leer-search-icon">⌕</span>
+        <input type="text" id="act2-search" placeholder="Buscar por código…" oninput="filtrarActivar()" autocomplete="off">
+        <button class="act2-search-clear" onclick="document.getElementById('act2-search').value='';filtrarActivar()" title="Limpiar">✕</button>
+      </div>
+      <button class="btn-secondary leer-reload-btn" onclick="recargarActivar()">↻ Actualizar</button>
+    </div>
+
+    <div id="act2-skeleton" class="skeleton-wrap" style="display:none">
+      <div class="skeleton-table-row"></div>
+      <div class="skeleton-table-row"></div>
+      <div class="skeleton-table-row"></div>
+    </div>
+
+    <div id="act2-tabla-wrap">
+      <div id="act2-tbody" class="act2-lista">
+        <p style="color:#9e9488;font-size:14px;">Cargando propiedades…</p>
+      </div>
+    </div>
+
+  </div>
+
+</section><!-- /view-activar -->
+
+
+
+<!-- ══════════════════════════════════════
+     MÓDULO 05 — VER LISTADO
+     Próxima iteración
+     ══════════════════════════════════════ -->
+<section id="view-listado" class="admin-view">
+  <div class="coming-soon"><span>⑤</span><p>Módulo Ver Listado · próxima iteración.</p></div>
+</section>

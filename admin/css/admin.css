@@ -575,10 +575,10 @@ input,select,textarea,button{font-family:var(--font-body)}
 .dc-fotos img{width:90px;height:64px;object-fit:cover;border-radius:var(--r);border:1px solid var(--border-light)}
 
 /* VISTA ACTIVAR PANEL */
-.toggle-panel{
+/*.toggle-panel{
   background:var(--white);border:1px solid var(--border-light);
   padding:32px;border-radius:var(--r);box-shadow:var(--shadow-sm);max-width:580px;
-}
+}*/
 .toggle-info{display:flex;align-items:center;gap:16px;margin-bottom:28px}
 .toggle-info #activar-titulo{font-family:var(--font-display);font-size:1.5rem;color:var(--ink)}
 .estado-tag{font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:4px 12px;border-radius:20px}
@@ -704,3 +704,45 @@ input,select,textarea,button{font-family:var(--font-body)}
   #admin-main{padding:20px 18px 60px}
   .view-header h1{font-size:2rem}
 }
+
+
+
+
+
+/* BOTONES ACTIVAR / DESACTIVAR */
+.btn-act2-activar {
+  background: #2e7d32;
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: var(--r);
+  cursor: pointer;
+  font-size: .75rem;
+  font-weight: 600;
+}
+.btn-act2-desactivar {
+  background: #c62828;
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: var(--r);
+  cursor: pointer;
+  font-size: .75rem;
+  font-weight: 600;
+}
+.act2-negocio {
+  font-weight: 700;
+  font-size: .8rem;
+}
+.act2-precio {
+  font-size: .8rem;
+  color: var(--ink-mid);
+}
+.act2-titulo {
+  font-weight: 500;
+}
+.act2-row-inactiva {
+  opacity: 0.55;
+}
+
+

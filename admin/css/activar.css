@@ -1,0 +1,182 @@
+/* ═══════════════════════════════════════════════
+   activar.css — Módulo 04 Activar / Desactivar
+   ═══════════════════════════════════════════════ */
+
+.act2-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.act2-search-inner {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 0 12px;
+  gap: 8px;
+}
+.act2-search-inner input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 10px 0;
+  font-size: 14px;
+  font-family: var(--font-body);
+  color: var(--ink);
+}
+.act2-search-clear {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 14px;
+  padding: 0;
+}
+
+/* ── LISTA ───────────────────────────────────── */
+.act2-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── REGISTRO ────────────────────────────────── */
+.act2-registro {
+  background: var(--white);
+  border: 1px solid var(--border);
+}
+.act2-registro.inactivo {
+  opacity: 0.55;
+}
+
+/* Filas 4 columnas */
+.act2-fila-label,
+.act2-fila-valor {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 2fr;
+}
+.act2-fila-label { border-bottom: 1px solid var(--border); }
+.act2-fila-valor { border-bottom: 1px solid var(--border-light); }
+
+.act2-fila-label .act2-lbl {
+  padding: 6px 14px;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  text-align: center;
+  border-right: 1px solid var(--border);
+}
+.act2-fila-label .act2-lbl:last-child { border-right: none; }
+
+.act2-fila-valor .act2-val {
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 400;
+  font-family: var(--font-body);
+  color: var(--ink-mid);
+  border-right: 1px solid var(--border-light);
+}
+.act2-fila-valor .act2-val:last-child { border-right: none; }
+
+/* Fila precios — 4 columnas: pv | pa | negocio | ACTIVO */
+.act2-fila-label2,
+.act2-fila-valor2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.act2-fila-label2 {
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border);
+}
+.act2-fila-label2 .act2-lbl {
+  padding: 6px 14px;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  text-align: center;
+  border-right: 1px solid var(--border);
+}
+.act2-fila-label2 .act2-lbl:last-child { border-right: none; }
+
+/* Label ACTIVO centrado y destacado */
+.act2-fila-label2 .act2-lbl.lbl-activo {
+  color: var(--ink);
+  font-size: 11px;
+}
+
+.act2-fila-valor2 .act2-val {
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 400;
+  font-family: var(--font-body);
+  color: var(--ink-mid);
+  border-right: 1px solid var(--border-light);
+}
+.act2-fila-valor2 .act2-val:last-child { border-right: none; }
+
+/* Celda ACTIVO — cuadritos clickeables */
+.act2-estado-celda {
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+  align-items: center;
+  padding: 8px 14px;
+  border-right: none;
+}
+
+.act2-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 28px;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: var(--font-body);
+  letter-spacing: 0.04em;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.act2-badge-si.on  { background: #1a7a3e; color: #fff; }
+.act2-badge-si.off { background: var(--border); color: var(--gray); }
+.act2-badge-no.on  { background: var(--red);    color: #fff; }
+.act2-badge-no.off { background: var(--border); color: var(--gray); }
+.act2-badge:disabled { cursor: not-allowed; opacity: 0.6; }
+
+
+
+.act2-search-icon {
+  color: var(--muted);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+
+
+/* Fix 1: anular padding nativo del browser en los badges */
+.act2-badge {
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Fix 2: centrar verticalmente los badges en la celda */
+.act2-estado-celda {
+  align-items: center;
+}
+
+/* Fix 3: anclar el ícono leer-search-icon absoluto */
+.act2-search-inner {
+  position: relative;
+}

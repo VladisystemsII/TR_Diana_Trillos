@@ -6,12 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin-leer.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/activar.css">
 </head>
+
 <body>
 
+<!-- ══════════════════════════════════════════
+     LOGIN
+     ══════════════════════════════════════════ -->
 <div id="login-screen">
   <div class="login-box">
     <div class="login-logo">
@@ -34,281 +41,39 @@
   </div>
 </div>
 
+<!-- ══════════════════════════════════════════
+     PANEL ADMIN
+     ══════════════════════════════════════════ -->
 <div id="admin-panel" style="display:none">
 
+  <!-- CONTENIDO PRINCIPAL -->
   <div id="admin-main">
+
+    <!-- Breadcrumb -->
     <div id="breadcrumb">
-       <div class="bc-left">
-                <span id="bc-section">Propiedades</span>
-                <span class="bc-sep">›</span>
-                <span id="bc-view">Crear</span>
-       </div>
-              <span id="bc-titulo">Nueva Propiedad</span>
+      <div class="bc-left">
+        <span id="bc-section">Propiedades</span>
+        <span class="bc-sep">›</span>
+        <span id="bc-view">Crear</span>
+      </div>
+      <span id="bc-titulo">Nueva Propiedad</span>
     </div>
 
-    <section id="view-crear" class="admin-view active">
-      <div class="view-header">
-          <p>Completa los campos del registro. Los campos <span class="req">*</span> son obligatorios.</p>
-      </div>
-      <div class="form-grid">
+    <!-- ══════════════════════════════════════
+         CONTENEDOR DINÁMICO
+         Los módulos se inyectan aquí via fetch()
+         desde admin-config.js → cargarModulo()
+         ══════════════════════════════════════ -->
+    <div id="view-container"></div>
 
-        <div class="form-section">
-          <h3 class="section-label">Identificación</h3>
-          <div class="fields-row two">
-            <div class="field-group">
-              <label>CÓDIGO <span class="req">*</span></label>
-              <input type="text" id="f-codigo" placeholder="Ej: TRG-2024-001">
-            </div>
-            <div class="field-group">
-              <label>Marca Temporal</label>
-              <input type="datetime-local" id="f-marca">
-            </div>
-          </div>
-        </div>
+  </div><!-- /admin-main -->
 
-        <div class="form-section">
-          <h3 class="section-label">Información Principal</h3>
-          <div class="field-group full">
-            <label>Título <span class="req">*</span></label>
-            <input type="text" id="f-titulo" placeholder="Ej: Apartamento luminoso en Usaquén">
-          </div>
-          <div class="fields-row three">
-            <div class="field-group">
-              <label>Tipo <span class="req">*</span></label>
-              <select id="f-tipo">
-                <option value="">Seleccionar</option>
-                <option>Apartamento</option><option>Casa</option>
-                <option>Local</option><option>Oficina</option>
-                <option>Bodega</option><option>Lote</option><option>Finca</option>
-              </select>
-            </div>
-            <div class="field-group">
-              <label>Ciudad <span class="req">*</span></label>
-              <input type="text" id="f-ciudad" placeholder="Bogotá">
-            </div>
-            <div class="field-group">
-              <label>Barrio / Sector</label>
-              <input type="text" id="f-barrio" placeholder="Ej: Chicó Norte">
-            </div>
-          </div>
-          <div class="fields-row three">
-            <div class="field-group">
-              <label>Estrato</label>
-              <select id="f-estrato">
-                <option value="">—</option>
-                <option>1</option><option>2</option><option>3</option>
-                <option>4</option><option>5</option><option>6</option>
-              </select>
-            </div>
-            <div class="field-group">
-              <label>Área m²</label>
-              <input type="number" id="f-area" placeholder="120">
-            </div>
-            <div class="field-group">
-              <label>Residencial / Comercial</label>
-              <select id="f-res-com">
-                <option value="">—</option>
-                <option>Residencial</option><option>Comercial</option>
-              </select>
-            </div>
-          </div>
-        </div>
+  <!-- ══════════════════════════════════════
+       SIDEBAR
+       ══════════════════════════════════════ -->
+  <aside id="admin-sidebar" class="expanded">
 
-        <div class="form-section">
-          <h3 class="section-label">Características</h3>
-          <div class="fields-row four">
-            <div class="field-group">
-              <label>Habitaciones</label>
-              <input type="number" id="f-hab" min="0" placeholder="3">
-            </div>
-            <div class="field-group">
-              <label>Baños</label>
-              <input type="number" id="f-ban" min="0" placeholder="2">
-            </div>
-            <div class="field-group">
-              <label>Parqueaderos</label>
-              <input type="number" id="f-park" min="0" placeholder="1">
-            </div>
-            <div class="field-group">
-              <label>Estado</label>
-              <select id="f-estado">
-                <option value="">—</option>
-                <option>Nuevo</option><option>Usado</option>
-                <option>En planos</option><option>En construcción</option>
-                <option>Para remodelar</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-section">
-          <h3 class="section-label">Precios <span class="hint">(escribe con puntos: 450.000.000)</span></h3>
-          <div class="fields-row three">
-            <div class="field-group">
-              <label>Precio Venta COP</label>
-              <input type="text" id="f-precio-venta" placeholder="450.000.000">
-            </div>
-            <div class="field-group">
-              <label>Precio Arriendo COP</label>
-              <input type="text" id="f-precio-arriendo" placeholder="2.500.000">
-            </div>
-            <div class="field-group">
-              <label>Administración COP</label>
-              <input type="text" id="f-admin" placeholder="350.000">
-            </div>
-          </div>
-        </div>
-
-        <div class="form-section">
-          <h3 class="section-label">Descripción</h3>
-          <div class="field-group full">
-            <textarea id="f-descripcion" rows="5" placeholder="Describe la propiedad…"></textarea>
-          </div>
-        </div>
-
-        <div class="form-section admin-only">
-          <h3 class="section-label">Dirección Exacta <span class="hint">solo admin — no aparece en el portal</span></h3>
-          <div class="field-group full">
-            <input type="text" id="f-direccion" placeholder="Calle 123 # 45-67, Apto 301">
-          </div>
-        </div>
-
-        <div class="form-section">
-          <h3 class="section-label">Fotos <span class="hint">selecciona · comprime · sube automático — hasta 9</span></h3>
-          <div class="fotos-grid">
-            <div class="foto-slot"><div class="foto-dropzone" onclick="triggerFoto(1)"><div class="foto-placeholder" id="ph-1"><span class="foto-icon">+</span><span>Foto 1</span></div><img id="prev-1" class="foto-preview" style="display:none"><div class="foto-progress" id="prog-1" style="display:none"><div class="foto-progress-bar" id="bar-1"></div></div></div><input type="file" id="file-1" accept="image/*" style="display:none" onchange="procesarFoto(1,this)"><input type="hidden" id="f-foto1"><button class="foto-clear" id="clear-1" onclick="limpiarFoto(1)" style="display:none">x</button></div>
-            <div class="foto-slot"><div class="foto-dropzone" onclick="triggerFoto(2)"><div class="foto-placeholder" id="ph-2"><span class="foto-icon">+</span><span>Foto 2</span></div><img id="prev-2" class="foto-preview" style="display:none"><div class="foto-progress" id="prog-2" style="display:none"><div class="foto-progress-bar" id="bar-2"></div></div></div><input type="file" id="file-2" accept="image/*" style="display:none" onchange="procesarFoto(2,this)"><input type="hidden" id="f-foto2"><button class="foto-clear" id="clear-2" onclick="limpiarFoto(2)" style="display:none">x</button></div>
-            <div class="foto-slot"><div class="foto-dropzone" onclick="triggerFoto(3)"><div class="foto-placeholder" id="ph-3"><span class="foto-icon">+</span><span>Foto 3</span></div><img id="prev-3" class="foto-preview" style="display:none"><div class="foto-progress" id="prog-3" style="display:none"><div class="foto-progress-bar" id="bar-3"></div></div></div><input type="file" id="file-3" accept="image/*" style="display:none" onchange="procesarFoto(3,this)"><input type="hidden" id="f-foto3"><button class="foto-clear" id="clear-3" onclick="limpiarFoto(3)" style="display:none">x</button></div>
-            <div class="foto-slot"><div class="foto-dropzone" onclick="triggerFoto(4)"><div class="foto-placeholder" id="ph-4"><span class="foto-icon">+</span><span>Foto 4</span></div><img id="prev-4" class="foto-preview" style="display:none"><div class="foto-progress" id="prog-4" style="display:none"><div class="foto-progress-bar" id="bar-4"></div></div></div><input type="file" id="file-4" accept="image/*" style="display:none" onchange="procesarFoto(4,this)"><input type="hidden" id="f-foto4"><button class="foto-clear" id="clear-4" onclick="limpiarFoto(4)" style="display:none">x</button></div>
-            <div class="foto-slot"><div class="foto-dropzone" onclick="triggerFoto(5)"><div class="foto-placeholder" id="ph-5"><span class="foto-icon">+</span><span>Foto 5</span></div><img id="prev-5" class="foto-preview" style="display:none"><div class="foto-progress" id="prog-5" style="display:none"><div class="foto-progress-bar" id="bar-5"></div></div></div><input type="file" id="file-5" accept="image/*" style="display:none" onchange="procesarFoto(5,this)"><input type="hidden" id="f-foto5"><button class="foto-clear" id="clear-5" onclick="limpiarFoto(5)" style="display:none">x</button></div>
-            <div class="foto-slot"><div class="foto-dropzone" onclick="triggerFoto(6)"><div class="foto-placeholder" id="ph-6"><span class="foto-icon">+</span><span>Foto 6</span></div><img id="prev-6" class="foto-preview" style="display:none"><div class="foto-progress" id="prog-6" style="display:none"><div class="foto-progress-bar" id="bar-6"></div></div></div><input type="file" id="file-6" accept="image/*" style="display:none" onchange="procesarFoto(6,this)"><input type="hidden" id="f-foto6"><button class="foto-clear" id="clear-6" onclick="limpiarFoto(6)" style="display:none">x</button></div>
-            <div class="foto-slot"><div class="foto-dropzone" onclick="triggerFoto(7)"><div class="foto-placeholder" id="ph-7"><span class="foto-icon">+</span><span>Foto 7</span></div><img id="prev-7" class="foto-preview" style="display:none"><div class="foto-progress" id="prog-7" style="display:none"><div class="foto-progress-bar" id="bar-7"></div></div></div><input type="file" id="file-7" accept="image/*" style="display:none" onchange="procesarFoto(7,this)"><input type="hidden" id="f-foto7"><button class="foto-clear" id="clear-7" onclick="limpiarFoto(7)" style="display:none">x</button></div>
-            <div class="foto-slot"><div class="foto-dropzone" onclick="triggerFoto(8)"><div class="foto-placeholder" id="ph-8"><span class="foto-icon">+</span><span>Foto 8</span></div><img id="prev-8" class="foto-preview" style="display:none"><div class="foto-progress" id="prog-8" style="display:none"><div class="foto-progress-bar" id="bar-8"></div></div></div><input type="file" id="file-8" accept="image/*" style="display:none" onchange="procesarFoto(8,this)"><input type="hidden" id="f-foto8"><button class="foto-clear" id="clear-8" onclick="limpiarFoto(8)" style="display:none">x</button></div>
-            <div class="foto-slot"><div class="foto-dropzone" onclick="triggerFoto(9)"><div class="foto-placeholder" id="ph-9"><span class="foto-icon">+</span><span>Foto 9</span></div><img id="prev-9" class="foto-preview" style="display:none"><div class="foto-progress" id="prog-9" style="display:none"><div class="foto-progress-bar" id="bar-9"></div></div></div><input type="file" id="file-9" accept="image/*" style="display:none" onchange="procesarFoto(9,this)"><input type="hidden" id="f-foto9"><button class="foto-clear" id="clear-9" onclick="limpiarFoto(9)" style="display:none">x</button></div>
-          </div>
-        </div>
-
-        <div class="form-section">
-          <h3 class="section-label">Publicación</h3>
-          <div class="field-group toggle-row">
-            <label>Activo</label>
-            <label class="toggle-switch">
-              <input type="checkbox" id="f-activo" checked>
-              <span class="toggle-track"><span class="toggle-thumb"></span></span>
-            </label>
-            <span id="activo-label" class="toggle-label">Sí</span>
-          </div>
-        </div>
-
-        <div class="form-actions">
-          <button class="btn-secondary" onclick="limpiarFormCrear()">Limpiar</button>
-          <button class="btn-primary" onclick="crearPropiedad()">Guardar Propiedad</button>
-        </div>
-
-      </div>
-    </section>
-
-    <section id="view-leer" class="admin-view">
-      <div class="view-header">
-        <p>Ingresa el CÓDIGO para cargar sus datos desde Google Sheets.</p>
-      </div>
-      <div class="search-bar">
-        <input type="text" id="leer-codigo" placeholder="Ej: TRG-2024-001">
-        <button class="btn-primary" onclick="leerPropiedad()">Buscar</button>
-      </div>
-      <div id="leer-skeleton" class="skeleton-wrap" style="display:none">
-        <div class="skeleton-row"></div><div class="skeleton-row short"></div>
-        <div class="skeleton-row"></div><div class="skeleton-row short"></div>
-        <div class="skeleton-row"></div>
-      </div>
-      <div id="leer-resultado" class="data-card" style="display:none"></div>
-    </section>
-
-    <section id="view-actualizar" class="admin-view">
-      <div class="view-header">
-         <p>Busca por CÓDIGO, modifica los campos y guarda los cambios.</p>
-      </div>
-      <div class="search-bar">
-        <input type="text" id="actualizar-codigo" placeholder="Código de la propiedad">
-        <button class="btn-secondary" onclick="cargarParaActualizar()">Cargar</button>
-      </div>
-      <div id="actualizar-skeleton" class="skeleton-wrap" style="display:none">
-        <div class="skeleton-row"></div><div class="skeleton-row short"></div>
-        <div class="skeleton-row"></div><div class="skeleton-row short"></div>
-      </div>
-      <div id="actualizar-form" style="display:none">
-        <div class="form-grid" id="actualizar-fields"></div>
-        <div class="form-actions">
-          <button class="btn-primary" onclick="guardarActualizacion()">Guardar Cambios</button>
-        </div>
-      </div>
-    </section>
-
-    <section id="view-activar" class="admin-view">
-      <div class="view-header">
-         <p>Controla la visibilidad de cada propiedad en el portal público.</p>
-      </div>
-      <div class="search-bar">
-        <input type="text" id="activar-codigo" placeholder="Código de la propiedad">
-        <button class="btn-secondary" onclick="cargarEstado()">Verificar</button>
-      </div>
-      <div id="activar-skeleton" class="skeleton-wrap" style="display:none">
-        <div class="skeleton-row short"></div><div class="skeleton-row"></div>
-      </div>
-      <div id="activar-panel" class="toggle-panel" style="display:none">
-        <div class="toggle-info">
-          <span id="activar-titulo"></span>
-          <span id="activar-estado-tag" class="estado-tag"></span>
-        </div>
-        <div class="toggle-actions">
-          <button class="btn-on" onclick="cambiarEstado(true)">Activar publicación</button>
-          <button class="btn-off" onclick="pedirConfirmacion('¿Desactivar publicación?', 'La propiedad dejará de verse en el portal público.', () => cambiarEstado(false))">Desactivar publicación</button>
-        </div>
-      </div>
-    </section>
-
-    <section id="view-listado" class="admin-view">
-      <div class="view-header">
-          <p>Todas las propiedades registradas en el sistema.</p>
-      </div>
-      <div class="listado-controls">
-        <input type="text" id="listado-filtro" placeholder="Filtrar por código, título, ciudad…" oninput="filtrarListado()">
-        <button class="btn-secondary" onclick="cargarListado()">↺ Recargar</button>
-      </div>
-      <div id="listado-skeleton" class="skeleton-wrap" style="display:none">
-        <div class="skeleton-table-row"></div><div class="skeleton-table-row"></div>
-        <div class="skeleton-table-row"></div><div class="skeleton-table-row"></div>
-        <div class="skeleton-table-row"></div>
-      </div>
-      <div class="tabla-wrapper">
-        <table class="admin-table">
-          <thead>
-            <tr>
-              <th>Código</th><th>Título</th><th>Tipo</th><th>Ciudad</th>
-              <th>Precio Venta</th><th>Precio Arriendo</th><th>Estado</th>
-              <th>Activo</th><th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody id="tabla-body">
-            <tr><td colspan="9" class="empty-row">Pulsa "Recargar" para cargar los datos</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <section id="view-blog" class="admin-view">
-      <div class="view-header">
-          <p>Módulo en construcción. Próxima entrega.</p>
-      </div>
-      <div class="coming-soon">
-        <span>✦</span>
-        <p>El módulo de Blog se activará en la próxima iteración.</p>
-      </div>
-    </section>
-
-  </div><aside id="admin-sidebar" class="expanded">
-
-    <button id="sidebar-toggle" onclick="toggleSidebar()" title="Colapsar">
+    <button id="sidebar-toggle" title="Colapsar">
       <span class="toggle-icon">‹</span>
     </button>
 
@@ -324,13 +89,6 @@
 
     <div class="sb-divider"></div>
 
-    <div class="sb-search">
-      <span class="sb-search-icon">⌕</span>
-      <input type="text" id="global-search" placeholder="Buscar propiedad…" oninput="busquedaGlobal(this.value)">
-    </div>
-
-    <div class="sb-divider"></div>
-
     <div class="sb-counter">
       <span class="counter-num" id="counter-num">—</span>
       <span class="counter-label">propiedades activas</span>
@@ -340,7 +98,7 @@
 
     <nav class="sb-nav">
       <div class="sb-nav-item">
-        <button class="sb-menu-btn active" id="btn-sec-propiedades" onclick="toggleSbSubmenu('propiedades', this)">
+        <button class="sb-menu-btn active open" id="btn-sec-propiedades">
           <span class="sb-icon">⊞</span>
           <span class="sb-label">Propiedades</span>
           <span class="sb-arrow">▾</span>
@@ -358,18 +116,31 @@
           <button class="sb-sub" data-view="activar" onclick="activarVista('activar','Propiedades','Activar / Desactivar',this)">
             <span class="sb-sub-num">4</span><span class="sb-label"> Activar / Desactivar</span>
           </button>
-          <button class="sb-sub" data-view="listado" onclick="activarVista('listado','Propiedades','Ver Listado',this); cargarListado()">
+          <!--<button class="sb-sub" data-view="listado" onclick="activarVista('listado','Propiedades','Ver Listado',this)">
             <span class="sb-sub-num">5</span><span class="sb-label"> Ver Listado</span>
-          </button>
+          </button>   -->
         </div>
       </div>
 
       <div class="sb-nav-item">
-        <button class="sb-menu-btn" id="btn-sec-blog" onclick="activarVista('blog','Blog','',this)">
+        <button class="sb-menu-btn" id="btn-sec-blog">
           <span class="sb-icon">✍</span>
           <span class="sb-label">Blog</span>
+          <span class="sb-arrow">▾</span>
         </button>
+        <div class="sb-submenu" id="sbsub-blog">
+          <button class="sb-sub" data-view="blog-crear" onclick="activarVista('blog-crear','Blog','Crear',this)">
+            <span class="sb-sub-num">1</span><span class="sb-label"> Crear</span>
+          </button>
+          <button class="sb-sub" data-view="blog-leer" onclick="activarVista('blog-leer','Blog','Leer',this)">
+            <span class="sb-sub-num">2</span><span class="sb-label"> Leer</span>
+          </button>
+          <button class="sb-sub" data-view="blog-actualizar" onclick="activarVista('blog-actualizar','Blog','Actualizar',this)">
+            <span class="sb-sub-num">3</span><span class="sb-label"> Actualizar</span>
+          </button>
+        </div>
       </div>
+    
     </nav>
 
     <div class="sb-spacer"></div>
@@ -393,20 +164,42 @@
 
   </aside>
 
-</div><div id="toast-container"></div>
+</div><!-- /admin-panel -->
 
+<!-- Toast -->
+<div id="toast-container"></div>
+
+<!-- Modal confirmación -->
 <div id="confirm-overlay" style="display:none">
   <div class="confirm-box">
     <h3 id="confirm-title"></h3>
     <p id="confirm-msg"></p>
     <div class="confirm-actions">
-      <button class="btn-secondary" onclick="cerrarModal()">Cancelar</button>
+      <button class="btn-secondary" id="modal-cancelar">Cancelar</button>
       <button class="btn-danger" id="confirm-ok">Confirmar</button>
     </div>
   </div>
 </div>
 
-<script src="js/config.js"></script>
-<script src="js/admin.js"></script>
+<!-- ══════════════════════════════════════════
+     SCRIPTS — orden obligatorio
+     1. admin-config.js  → configuración global + cargarModulo()
+     2. admin-auth.js    → autenticación + navegación + utilidades
+     3. propiedades JS   → lógica de cada módulo de propiedades
+     4. blog JS          → lógica de cada módulo de blog (próxima iteración)
+     ══════════════════════════════════════════ -->
+<script src="js/admin-config.js"></script>
+<script src="js/admin-auth.js"></script>
+<script src="js/propiedades/admin-crear.js"></script>
+<script src="js/propiedades/admin-leer.js"></script>
+<script src="js/propiedades/admin-actualizar.js"></script>
+<script src="js/propiedades/admin-activar.js"></script>
+<!-- js/propiedades/admin-listado.js    → próxima iteración -->
+<script src="js/blog/blog-crear.js"></script>
+<script src="js/blog/blog-leer.js"></script>
+<script src="js/blog/blog-actualizar.js"></script>
+<!-- js/blog/blog-activar.js            → próxima iteración -->
+<!-- js/blog/blog-listado.js            → próxima iteración -->
+
 </body>
 </html>
