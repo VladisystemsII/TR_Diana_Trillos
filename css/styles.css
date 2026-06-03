@@ -1380,6 +1380,8 @@ button:focus-visible {
   box-shadow: var(--shadow-lg);
 }
 
+
+
 /* =======================================
    RESPONSIVE
    ======================================= */
@@ -1574,4 +1576,10 @@ button:focus-visible {
   pointer-events: auto;
 }
 
+
+
+#articleContent,
+#articleContent p {
+  text-align: justify;
+}
 

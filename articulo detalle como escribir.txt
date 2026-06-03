@@ -1,0 +1,36 @@
+Regla práctica para tu backend desde ahora:
+
+### Subtítulo → subtítulos
+**texto** → negrilla
+doble Enter → párrafos
+listas:
+- punto 1
+- punto 2
+
+
+En tu sistema está funcionando con Markdown.
+
+Entonces:
+
+# Título grande
+## Subtítulo
+### Subsubtítulo
+
+Negrilla:
+
+**texto en negrilla**
+
+Párrafos:
+
+Párrafo uno.
+
+Párrafo dos.
+
+(doble Enter)
+
+Lista:
+
+- Punto 1
+- Punto 2
+
+Ese es el formato correcto para tus artículos en el backend.

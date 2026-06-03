@@ -71,6 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const contenido = post["Contenido"] || post["contenido"] || "";
       contentEl.innerHTML = contenido.trim()
         ? marked.parse(contenido)
+        //? contenido
         : "<p>Este artículo no tiene contenido disponible.</p>";
 
       containerEl.style.display = "block";
