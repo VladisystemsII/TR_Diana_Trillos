@@ -18,6 +18,9 @@
   padding: 0 12px;
   gap: 8px;
 }
+
+
+/*
 .act2-search-inner input {
   flex: 1;
   border: none;
@@ -27,7 +30,23 @@
   font-size: 14px;
   font-family: var(--font-body);
   color: var(--ink);
-}
+}   */
+
+
+.act2-search-inner input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 10px 0 10px 28px;  /* ← agrega padding-left */
+  font-size: 14px;
+  font-family: var(--font-body);
+  color: var(--ink);
+}S
+
+
+
+
 .act2-search-clear {
   background: none;
   border: none;

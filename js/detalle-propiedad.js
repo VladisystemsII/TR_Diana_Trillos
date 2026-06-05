@@ -131,7 +131,13 @@ function renderizarPropiedad(prop) {
     `${ciudad}${barrio ? ', ' + barrio : ''}`;
 
   const tipo = val(prop["Tipo"]) || "Propiedad";
-  const clasificacion = val(prop["Residencial / Comercial"]);
+  //const clasificacion = val(prop["Residencial / Comercial"]);
+  // NUEVO
+  const clasificacion = val(prop["Uso del suelo"]);
+
+
+
+
   document.getElementById('propTipo').textContent =
     `${tipo} ${clasificacion}`.trim();
 
@@ -144,24 +150,55 @@ function renderizarPropiedad(prop) {
   document.getElementById('propDescripcion').innerHTML =
     descripcion ? marked.parse(descripcion) : "<p>Sin descripción disponible.</p>";
 
-  const estado = val(prop["Estado"]);
-  const pVenta = val(prop["Precio Venta COP"]);
-  const pArriendo = val(prop["Precio Arriendo COP"]);
+  //const estado = val(prop["Estado"]);
+  //const pVenta = val(prop["Precio Venta COP"]);
+  //const pArriendo = val(prop["Precio Arriendo COP"]);
 
-  if (estado.includes("Venta") && pVenta) {
-    document.getElementById('propPrecioVenta').textContent = pVenta;
-    document.getElementById('propEstadoVenta').textContent = "Precio de venta";
-  } else if (estado.includes("Arriendo") && pArriendo) {
-    document.getElementById('propPrecioVenta').textContent = pArriendo;
-    document.getElementById('propEstadoVenta').textContent = "Precio de arriendo";
-  } else {
-    document.getElementById('propPrecioVenta').textContent = "Consultar";
-    document.getElementById('propEstadoVenta').textContent = "";
-  }
+  //if (estado.includes("Venta") && pVenta) {
+  //  document.getElementById('propPrecioVenta').textContent = pVenta;
+  //  document.getElementById('propEstadoVenta').textContent = "Precio de venta";
+  //} else if (estado.includes("Arriendo") && pArriendo) {
+  //  document.getElementById('propPrecioVenta').textContent = pArriendo;
+  //  document.getElementById('propEstadoVenta').textContent = "Precio de arriendo";
+  //} else {
+  //  document.getElementById('propPrecioVenta').textContent = "Consultar";
+  //  document.getElementById('propEstadoVenta').textContent = "";
+  //}
+
+
+
+  // DESPUÉS
+const tipoNegocio = val(prop["Tipo de Negocio"]);
+const pVenta      = val(prop["Precio Venta COP"]);
+const pArriendo   = val(prop["Precio Arriendo COP"]);
+
+if (tipoNegocio.includes("Venta") && pVenta) {
+  document.getElementById('propPrecioVenta').textContent = pVenta;
+  document.getElementById('propEstadoVenta').textContent = "Precio de venta";
+} else if (tipoNegocio.includes("Arriendo") && pArriendo) {
+  document.getElementById('propPrecioVenta').textContent = pArriendo;
+  document.getElementById('propEstadoVenta').textContent = "Precio de arriendo";
+} else {
+  document.getElementById('propPrecioVenta').textContent = pVenta || pArriendo || "Consultar";
+  document.getElementById('propEstadoVenta').textContent = "";
+}
+
+
+
+
+
+
+
+
+
 
   document.getElementById('propEstrato').textContent = val(prop["Estrato"]) || "-";
   document.getElementById('propAdministracion').textContent = val(prop["Administración"]) || "-";
-  document.getElementById('propClasificacion').textContent = val(prop["Residencial / Comercial"]) || "-";
+  //document.getElementById('propClasificacion').textContent = val(prop["Residencial / Comercial"]) || "-";
+
+  // NUEVO
+  document.getElementById('propClasificacion').textContent = val(prop["Uso del suelo"]) || "-";
+
 
   cargarGaleria(prop);
 

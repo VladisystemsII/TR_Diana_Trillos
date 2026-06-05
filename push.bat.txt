@@ -13,3 +13,9 @@ git add . && git commit -m "update" && git push
 git add .
 git commit -m "backendfull"
 git push
+
+
+
+git add .
+git commit -m "ajuste de campos registro"
+git push

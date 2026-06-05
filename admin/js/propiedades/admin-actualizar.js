@@ -153,12 +153,29 @@ function abrirFormActualizar(idxEnFiltrado) {
     const el = document.getElementById(id);
     if (el) el.value = val || '';
   };
-  const sel = (id, val) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    const opt = [...el.options].find(o => o.value === val);
-    el.value = opt ? val : '';
-  };
+  //const sel = (id, val) => {
+  //  const el = document.getElementById(id);
+  //  if (!el) return;
+  //  const opt = [...el.options].find(o => o.value === val);
+  //  el.value = opt ? val : '';
+  //};
+
+
+  // DESPUÉS
+const sel = (id, val) => {
+  const el = document.getElementById(id);
+  if (!el || val == null) return;
+  const v = String(val).trim();  // convierte 5 → "5"
+  const byVal = [...el.options].find(o => o.value === v);
+  if (byVal) { el.value = byVal.value; return; }
+  const byTxt = [...el.options].find(o => o.text.trim() === v);
+  if (byTxt) { el.value = byTxt.value; return; }
+  el.value = '';
+};
+
+
+
+
 
   const codEl = document.getElementById('act-codigo-display');
   if (codEl) codEl.textContent = r['CÓDIGO'] || '—';
