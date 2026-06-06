@@ -202,7 +202,7 @@ async function crearPropiedad() {
     // submitForm (en admin-auth.js) agrega fvv, pageHistory y sentinels
     await submitForm(ADMIN_CONFIG.FORM_CREAR_URL, params);
     toast(`✓ Propiedad "${data.titulo}" registrada correctamente.`, 'success', 5000);
-    limpiarFormCrear();
+    limpiarFormCrear();,'f-admi
     cargarContador();
   } catch (e) {
     toast(`Error al registrar: ${e.message}`, 'error');
@@ -212,12 +212,14 @@ async function crearPropiedad() {
 }
 
 // ── LIMPIAR FORMULARIO COMPLETO ───────────────────────────
+
+
+
 function limpiarFormCrear() {
   [
     'f-titulo','f-direccion','f-ciudad','f-barrio','f-area','f-res-com',
-    'f-hab','f-ban','f-park',-arriendo','f-admin','f-descripcion'
+    'f-hab','f-ban','f-park','f-precio-venta','f-precio-arriendo','f-admin','f-descripcion'
   ].forEach(id => {
-    'f-precio-venta','f-precio
     const el = document.getElementById(id);
     if (el) el.value = '';
   });
