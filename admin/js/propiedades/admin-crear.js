@@ -215,9 +215,9 @@ async function crearPropiedad() {
 function limpiarFormCrear() {
   [
     'f-titulo','f-direccion','f-ciudad','f-barrio','f-area','f-res-com',
-    'f-han','f-ban','f-park',
-    'f-precio-venta','f-precio-arriendo','f-admin','f-descripcion'
+    'f-hab','f-ban','f-park',-arriendo','f-admin','f-descripcion'
   ].forEach(id => {
+    'f-precio-venta','f-precio
     const el = document.getElementById(id);
     if (el) el.value = '';
   });
