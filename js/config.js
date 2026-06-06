@@ -14,5 +14,5 @@ function optimizarImagen(url, ancho = 800) {
 const PORTAL33_CONFIG = {
   BLOG_ENDPOINT: "https://script.google.com/macros/s/AKfycbwkbqpfrWBdcaU8P5p65pvCcx5lD0osca_d_Pl1YlBo8tqbf6FA-9-xkN0NjpMVcAuUAg/exec",
   PROPIEDADES_ENDPOINT: "https://script.google.com/macros/s/AKfycbyQ6k06QgekJlRkR7vxwO9-m2hdLaB_cxvaO6NPj0McKB6TYuz-3cI9RquEj6YOJzeO/exec",
-  WHATSAPP_NUMBER: "573001234567" // ⚠️ Actualizar con número real
+  WHATSAPP_NUMBER: "573164624872" // ⚠️ Actualizar con número real
 };
