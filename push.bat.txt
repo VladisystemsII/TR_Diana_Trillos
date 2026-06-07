@@ -16,6 +16,14 @@ git push
 
 
 
-git add .
+it add .
 git commit -m "ajuste de campos registro"
+git pushg
+
+
+
+
+
+git add .
+git commit -m "CORRECCION ENTRIES v"
 git push
