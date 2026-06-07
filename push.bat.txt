@@ -25,5 +25,5 @@ git pushg
 
 
 git add .
-git commit -m "CORRECCION ENTRIES v"
+git commit -m "CORRECCION ENTRIES vi"
 git push
