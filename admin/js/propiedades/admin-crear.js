@@ -202,7 +202,7 @@ async function crearPropiedad() {
     // submitForm (en admin-auth.js) agrega fvv, pageHistory y sentinels
     await submitForm(ADMIN_CONFIG.FORM_CREAR_URL, params);
     toast(`✓ Propiedad "${data.titulo}" registrada correctamente.`, 'success', 5000);
-    limpiarFormCrear();,'f-admi
+    limpiarFormCrear();
     cargarContador();
   } catch (e) {
     toast(`Error al registrar: ${e.message}`, 'error');
