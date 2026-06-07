@@ -38,9 +38,9 @@ const ADMIN_CONFIG = {
     TIPO:            "entry.2096117089",
     CIUDAD:          "entry.585419397",
     BARRIO:          "entry.1947662059",
-    ESTRATO:         "entry.1777139320",
+    ESTRATO:         "entry.567738076",
     AREA:            "entry.676151136",
-    HABITACIONES:    "entry.982145244",
+    HABITACIONES:    "entry.435817126",
     BANOS:           "entry.780113606",
     PARQUEADEROS:    "entry.1365930281",
     RES_COMERCIAL:   "entry.296736527",
@@ -65,8 +65,8 @@ const ADMIN_CONFIG = {
   // ── Sentinels Form 1 ───────────────────────────────────
   SENTINELS: [
     "entry.2096117089",
-    "entry.982145244",
-    "entry.1777139320",
+    "entry.567738076",
+    "entry.435817126",
     "entry.1365930281",
     "entry.1910036077",
     "entry.124825591",
