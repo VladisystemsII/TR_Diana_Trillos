@@ -48,7 +48,7 @@ async function loadPropiedades() {
     loading.style.display = "block";
     grid.innerHTML = "";
 
-    const response = await fetch(PORTAL33_CONFIG.PROPIEDADES_ENDPOINT);
+    const response = await fetch(TEAM_REALTY_HISTORY_CONFIG.PROPIEDADES_ENDPOINT);
     if (!response.ok) throw new Error(`HTTP error ${response.status}`);
 
     const data = await response.json();

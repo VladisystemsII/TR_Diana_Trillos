@@ -27,3 +27,7 @@ git pushg
 git add .
 git commit -m "CORRECCION ENTRIES vi"
 git push
+
+git add .
+git commit -m "area m2 y )"
+git push

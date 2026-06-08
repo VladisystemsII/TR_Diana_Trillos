@@ -1,4 +1,4 @@
-// blog.js — Lógica de carga de artículos del Blog de Portal33
+// blog.js — Lógica de carga de artículos del Blog de Team Realty History | Inmobiliaria
 // Dependencia: config.js debe cargarse antes que este script.
 // Dependencia: DOM debe tener #loadingBlogs y #blogTable antes de ejecutarse.
 
@@ -16,7 +16,7 @@ async function loadBlogs() {
   try {
     loading.style.display = "block";
 
-    const response = await fetch(PORTAL33_CONFIG.BLOG_ENDPOINT);
+    const response = await fetch(TEAM_REALTY_HISTORY_CONFIG.BLOG_ENDPOINT);
     if (!response.ok) throw new Error(`HTTP error ${response.status}`);
 
     const data = await response.json();

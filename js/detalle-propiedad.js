@@ -50,14 +50,14 @@ function actualizarSEO(prop, fotoPrincipal) {
   const codigo = val(prop["CÓDIGO"]);
 
   // Title de la pestaña
-  document.title = `${titulo} | ${tipo} en ${ciudad} | Portal33`;
+  document.title = `${titulo} | ${tipo} en ${ciudad} | Team Realty History`;
 
   // Meta description
   const metaDesc = document.querySelector('meta[name="description"]');
   if (metaDesc) {
     const texto = descripcion
       ? descripcion.substring(0, 150)
-      : `${tipo} en ${ciudad} - ${codigo} | Portal33`;
+      : `${tipo} en ${ciudad} - ${codigo} | Team Realty History`;
     metaDesc.setAttribute("content", texto);
   }
 
@@ -67,7 +67,7 @@ function actualizarSEO(prop, fotoPrincipal) {
     if (el) el.setAttribute("content", value);
   };
 
-  setOG("og:title", `${titulo} | Portal33`);
+  setOG("og:title", `${titulo} | Team Realty History`);
   setOG("og:description", descripcion ? descripcion.substring(0, 150) : `${tipo} en ${ciudad}`);
   setOG("og:image", fotoPrincipal || "");
   setOG("og:url", window.location.href);
@@ -90,7 +90,7 @@ async function cargarPropiedad() {
     mensajeCarga.style.display = 'block';
     contenidoPropiedad.style.display = 'none';
 
-    const response = await fetch(PORTAL33_CONFIG.PROPIEDADES_ENDPOINT, {
+    const response = await fetch(TEAM_REALTY_HISTORY_CONFIG.PROPIEDADES_ENDPOINT, {
       redirect: "follow"
     });
     if (!response.ok) throw new Error(`HTTP error ${response.status}`);
@@ -210,7 +210,7 @@ if (tipoNegocio.includes("Venta") && pVenta) {
     const codProp = val(prop["CÓDIGO"]);
     const mensaje = `Hola! Estoy interesado en la propiedad *${codProp}*: ${titulo}`;
     window.open(
-      `https://wa.me/${PORTAL33_CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`,
+      `https://wa.me/${TEAM_REALTY_HISTORY_CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`,
       '_blank'
     );
   };

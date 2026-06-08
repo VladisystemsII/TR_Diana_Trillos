@@ -1,4 +1,4 @@
-// articulo.js — Lógica de carga del detalle de artículo de Portal33
+// articulo.js — Lógica de carga del detalle de artículo de Team Realty History | Inmobiliaria
 // Dependencia: config.js debe cargarse antes que este script.
 // Dependencia: marked.js debe cargarse antes que este script.
 // Dependencia: DOM debe tener #loadingArticulo y #articleContainer.
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   loading.style.display = "block";
 
-  fetch(PORTAL33_CONFIG.BLOG_ENDPOINT)
+  fetch(TEAM_REALTY_HISTORY_CONFIG.BLOG_ENDPOINT)
     .then(function (response) {
       if (!response.ok) throw new Error(`HTTP error ${response.status}`);
       return response.json();

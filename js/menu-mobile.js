@@ -1,5 +1,5 @@
 /* =======================================
-   MENÚ HAMBURGUESA MÓVIL - Portal 33
+   MENÚ HAMBURGUESA MÓVIL - <img src="https://res.cloudinary.com/diifewvvs/image/upload/Logo_TR_1_ihwkcs" alt="Team Realty History" width="120" height="120">
    Escucha el evento "headerListo" emitido
    por header-loader.js para garantizar que
    .nav y .menu existen antes de ejecutarse.
