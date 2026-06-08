@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ficha PDF – Team Realty History</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+
+  <!-- html2pdf.js para exportar -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <style>
+    /* ===== VARIABLES (espejo del sistema) ===== */
+    :root {
+      --color-ink:        #0a0a0a;
+      --color-ink-soft:   #151515;
+      --color-ink-mid:    #2d2d2d;
+      --color-gray:       #5a5a5a;
+      --color-ivory:      #fcfaf7;
+      --color-ivory-deep: #efede8;
+      --color-white:      #ffffff;
+      --color-gold:       #D10000;
+      --color-gold-light: #FF1A1A;
+      --color-border:     #e2ded5;
+      --font-display:     'Cormorant Garamond', Georgia, serif;
+      --font-body:        'DM Sans', Arial, sans-serif;
+    }
+
+    /* ===== PÁGINA WRAPPER (UI de la app) ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--color-ivory-deep);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px 60px;
+    }
+
+    /* ===== CONTROLES UI (NO se imprimen) ===== */
+    .ui-controls {
+      width: 100%;
+      max-width: 794px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      gap: 12px;
+    }
+
+    .ui-controls .back-link {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-ink-mid);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.3s;
+    }
+
+    .ui-controls .back-link:hover { color: var(--color-gold); }
+
+    .btn-descargar {
+      background: var(--color-gold);
+      color: var(--color-white);
+      border: none;
+      padding: 12px 32px;
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-descargar:hover {
+      background: var(--color-ink);
+    }
+
+    .btn-descargar:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* ===== ESTADO DE CARGA ===== */
+    #estadoCarga {
+      text-align: center;
+      padding: 80px 20px;
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      color: var(--color-ink-mid);
+    }
+
+    /* ===== FICHA — A4 ===== */
+    #fichaPropiedad {
+      width: 794px;
+      min-height: 1123px;
+      background: var(--color-white);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      position: relative;
+      overflow: hidden;
+      display: none; /* se muestra al cargar datos */
+    }
+
+    /* FRANJA SUPERIOR */
+    .ficha-top-stripe {
+      height: 5px;
+      background: var(--color-gold);
+      width: 100%;
+    }
+
+    /* ===== HEADER ===== */
+    .ficha-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 40px 18px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .ficha-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .ficha-logo {
+      height: 52px;
+      width: auto;
+      display: block;
+    }
+
+    .ficha-brand-text h1 {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-ink);
+      letter-spacing: 0.05em;
+      line-height: 1.1;
+    }
+
+    .ficha-brand-text p {
+      font-size: 9px;
+      font-weight: 500;
+      color: var(--color-gray);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-top: 3px;
+    }
+
+    .ficha-header-right {
+      text-align: right;
+    }
+
+    .ficha-codigo-badge {
+      display: inline-block;
+      background: var(--color-ink);
+      color: var(--color-white);
+      font-size: 8.5px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      margin-bottom: 6px;
+    }
+
+    .ficha-tipo-badge {
+      display: block;
+      font-size: 8px;
+      font-weight: 500;
+      color: var(--color-gold);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* ===== IMAGEN PRINCIPAL ===== */
+    .ficha-hero {
+      width: 100%;
+      height: 340px;
+      overflow: hidden;
+      position: relative;
+      background: var(--color-ink);
+    }
+
+    .ficha-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .ficha-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,10,0.65) 0%, transparent 50%);
+    }
+
+    .ficha-hero-titulo {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 24px 40px;
+    }
+
+    .ficha-hero-titulo h2 {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 500;
+      color: var(--color-white);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .ficha-hero-titulo .ubicacion-txt {
+      font-size: 11px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* ===== DATOS CLAVE — FILA ===== */
+    .ficha-datos {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .dato-cell {
+      padding: 16px 20px;
+      border-right: 1px solid var(--color-border);
+      text-align: center;
+    }
+
+    .dato-cell:last-child { border-right: none; }
+
+    .dato-cell.precio-cell {
+      background: var(--color-ink);
+    }
+
+    .dato-cell .dato-label {
+      font-size: 7.5px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-gray);
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .dato-cell.precio-cell .dato-label {
+      color: rgba(255,255,255,0.5);
+    }
+
+    .dato-cell .dato-valor {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-ink);
+      display: block;
+      line-height: 1.1;
+    }
+
+    .dato-cell.precio-cell .dato-valor {
+      color: var(--color-gold-light);
+      font-size: 14px;
+    }
+
+    /* ===== CUERPO PRINCIPAL ===== */
+    .ficha-body {
+      padding: 28px 40px 32px;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 32px;
+    }
+
+    /* DESCRIPCIÓN */
+    .ficha-col-left {}
+
+    .ficha-section-title {
+      font-size: 8px;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--color-border);
+      display: block;
+    }
+
+    .ficha-descripcion {
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--color-ink-mid);
+      line-height: 1.7;
+      text-align: justify;
+      margin-bottom: 24px;
+    }
+
+    /* CARACTERÍSTICAS */
+    .ficha-caracteristicas {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--color-border);
+      border: 1px solid var(--color-border);
+      margin-bottom: 24px;
+    }
+
+    .caract-item {
+      background: var(--color-white);
+      padding: 12px 14px;
+    }
+
+    .caract-item .c-label {
+      font-size: 7.5px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-gray);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .caract-item .c-valor {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--color-ink);
+      line-height: 1;
+    }
+
+    /* DETALLES EXTRA */
+    .ficha-detalles {}
+
+    .detalle-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--color-border);
+      font-size: 10.5px;
+    }
+
+    .detalle-row:last-child { border-bottom: none; }
+
+    .detalle-row .d-label {
+      font-weight: 400;
+      color: var(--color-gray);
+      letter-spacing: 0.05em;
+    }
+
+    .detalle-row .d-valor {
+      font-weight: 600;
+      color: var(--color-ink);
+      text-align: right;
+    }
+
+    /* ===== COLUMNA DERECHA ===== */
+    .ficha-col-right {}
+
+    /* PRECIO DESTACADO */
+    .ficha-precio-box {
+      background: var(--color-ink);
+      padding: 20px 22px;
+      margin-bottom: 20px;
+    }
+
+    .ficha-precio-box .p-label {
+      font-size: 7.5px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .ficha-precio-box .p-valor {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 600;
+      color: #FF1A1A;
+      display: block;
+      line-height: 1;
+    }
+
+    .ficha-precio-box .p-tipo {
+      font-size: 8px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      display: block;
+      margin-top: 6px;
+    }
+
+    /* AGENTE */
+    .ficha-agente {
+      border: 1px solid var(--color-border);
+      border-top: 3px solid var(--color-gold);
+      padding: 18px 20px;
+      margin-bottom: 18px;
+    }
+
+    .ficha-agente-nombre {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--color-ink);
+      margin-bottom: 4px;
+    }
+
+    .ficha-agente-cargo {
+      font-size: 8px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .ficha-contacto-item {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-size: 10px;
+      color: var(--color-ink-mid);
+      align-items: flex-start;
+    }
+
+    .ficha-contacto-item .c-icon {
+      font-size: 11px;
+      flex-shrink: 0;
+      margin-top: 0;
+    }
+
+    .ficha-contacto-item .c-text {
+      font-weight: 400;
+      color: var(--color-gray);
+      word-break: break-all;
+    }
+
+    .ficha-contacto-item .c-text strong {
+      color: var(--color-ink);
+      font-weight: 600;
+    }
+
+    /* QR / ENLACE */
+    .ficha-url-box {
+      background: var(--color-ivory);
+      border: 1px solid var(--color-border);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .ficha-url-box .url-label {
+      font-size: 7.5px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-gray);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .ficha-url-box .url-link {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--color-gold);
+      word-break: break-all;
+    }
+
+    /* ===== FOOTER FICHA ===== */
+    .ficha-footer {
+      background: var(--color-ink);
+      padding: 14px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .ficha-footer-left {
+      font-size: 8.5px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.1em;
+    }
+
+    .ficha-footer-right {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.05em;
+      font-style: italic;
+    }
+
+    /* FRANJA INFERIOR */
+    .ficha-bottom-stripe {
+      height: 4px;
+      background: linear-gradient(90deg, var(--color-gold), #FF1A1A, var(--color-gold));
+      width: 100%;
+    }
+
+    /* ===== PRINT / PDF — ocultar controles ===== */
+    @media print {
+      body { background: none; padding: 0; margin: 0; }
+      .ui-controls { display: none !important; }
+      #fichaPropiedad { box-shadow: none; display: block !important; }
+      #estadoCarga { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CONTROLES DE UI -->
+  <div class="ui-controls" id="uiControles" style="display:none;">
+    <a href="javascript:history.back()" class="back-link">← Volver a la propiedad</a>
+    <button class="btn-descargar" id="btnDescargarPDF" onclick="exportarPDF()">
+      Descargar PDF
+    </button>
+  </div>
+
+  <!-- ESTADO CARGA -->
+  <div id="estadoCarga">Cargando ficha…</div>
+
+  <!-- ============================
+       FICHA PDF — A4
+  ============================= -->
+  <div id="fichaPropiedad">
+
+    <div class="ficha-top-stripe"></div>
+
+    <!-- HEADER -->
+    <header class="ficha-header">
+      <div class="ficha-brand">
+        <img
+          src="https://res.cloudinary.com/diifewvvs/image/upload/Logo_TR_1_ihwkcs"
+          alt="Team Realty History"
+          class="ficha-logo"
+          onerror="this.style.display='none'"
+        >
+        <div class="ficha-brand-text">
+          <h1>Team Realty History</h1>
+          <p>Inmobiliaria · Bogotá, Colombia</p>
+        </div>
+      </div>
+      <div class="ficha-header-right">
+        <span class="ficha-codigo-badge" id="fCodigo">PROP-0000</span>
+        <span class="ficha-tipo-badge" id="fTipoNegocio">En Venta</span>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <div class="ficha-hero">
+      <img id="fFoto" src="" alt="Foto principal de la propiedad"
+           onerror="this.src='img/sin-imagen.png'">
+      <div class="ficha-hero-overlay"></div>
+      <div class="ficha-hero-titulo">
+        <h2 id="fTitulo">Cargando título…</h2>
+        <span class="ubicacion-txt" id="fUbicacion"></span>
+      </div>
+    </div>
+
+    <!-- DATOS CLAVE -->
+    <div class="ficha-datos">
+      <div class="dato-cell">
+        <span class="dato-label">Área</span>
+        <span class="dato-valor" id="fArea">—</span>
+        <span style="font-size:8px;color:var(--color-gray);">m²</span>
+      </div>
+      <div class="dato-cell">
+        <span class="dato-label">Habitaciones</span>
+        <span class="dato-valor" id="fHabitaciones">—</span>
+      </div>
+      <div class="dato-cell">
+        <span class="dato-label">Baños</span>
+        <span class="dato-valor" id="fBanos">—</span>
+      </div>
+      <div class="dato-cell">
+        <span class="dato-label">Parqueaderos</span>
+        <span class="dato-valor" id="fParqueaderos">—</span>
+      </div>
+      <div class="dato-cell precio-cell">
+        <span class="dato-label">Precio</span>
+        <span class="dato-valor" id="fPrecioTop">Consultar</span>
+      </div>
+    </div>
+
+    <!-- CUERPO -->
+    <div class="ficha-body">
+
+      <!-- COL IZQUIERDA -->
+      <div class="ficha-col-left">
+
+        <span class="ficha-section-title">Descripción de la propiedad</span>
+        <p class="ficha-descripcion" id="fDescripcion">Sin descripción disponible.</p>
+
+        <span class="ficha-section-title">Características principales</span>
+        <div class="ficha-caracteristicas">
+          <div class="caract-item">
+            <span class="c-label">Tipo de propiedad</span>
+            <span class="c-valor" id="fTipo">—</span>
+          </div>
+          <div class="caract-item">
+            <span class="c-label">Uso del suelo</span>
+            <span class="c-valor" id="fClasificacion">—</span>
+          </div>
+          <div class="caract-item">
+            <span class="c-label">Estrato</span>
+            <span class="c-valor" id="fEstrato">—</span>
+          </div>
+          <div class="caract-item">
+            <span class="c-label">Administración</span>
+            <span class="c-valor" id="fAdministracion" style="font-size:12px;">—</span>
+          </div>
+        </div>
+
+        <span class="ficha-section-title">Información adicional</span>
+        <div class="ficha-detalles">
+          <div class="detalle-row">
+            <span class="d-label">Ciudad</span>
+            <span class="d-valor" id="fCiudad">—</span>
+          </div>
+          <div class="detalle-row">
+            <span class="d-label">Barrio / Sector</span>
+            <span class="d-valor" id="fBarrio">—</span>
+          </div>
+          <div class="detalle-row">
+            <span class="d-label">Tipo de negocio</span>
+            <span class="d-valor" id="fTipoNegocioDetalle">—</span>
+          </div>
+          <div class="detalle-row">
+            <span class="d-label">Código interno</span>
+            <span class="d-valor" id="fCodigoDetalle">—</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- COL DERECHA -->
+      <div class="ficha-col-right">
+
+        <!-- PRECIO -->
+        <div class="ficha-precio-box">
+          <span class="p-label">Precio</span>
+          <span class="p-valor" id="fPrecio">Consultar</span>
+          <span class="p-tipo" id="fPrecioLabel">—</span>
+        </div>
+
+        <!-- AGENTE -->
+        <div class="ficha-agente">
+          <p class="ficha-agente-nombre">Diana Trillos</p>
+          <span class="ficha-agente-cargo">Asesora Inmobiliaria</span>
+
+          <div class="ficha-contacto-item">
+            <span class="c-icon">📱</span>
+            <span class="c-text">
+              <strong>WhatsApp</strong><br>
+              +57 316 462 4872
+            </span>
+          </div>
+          <div class="ficha-contacto-item">
+            <span class="c-icon">🌐</span>
+            <span class="c-text">
+              <strong>Web</strong><br>
+              teamrealtyhistory.com
+            </span>
+          </div>
+          <div class="ficha-contacto-item">
+            <span class="c-icon">🏢</span>
+            <span class="c-text">
+              <strong>Empresa</strong><br>
+              Team Realty History
+            </span>
+          </div>
+        </div>
+
+        <!-- ENLACE PROPIEDAD -->
+        <div class="ficha-url-box">
+          <div>
+            <span class="url-label">Ver propiedad online</span>
+            <span class="url-link" id="fUrlPropiedad">teamrealtyhistory.com/propiedades</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- FOOTER FICHA -->
+    <footer class="ficha-footer">
+      <span class="ficha-footer-left">
+        Team Realty History · Información sujeta a cambios sin previo aviso · <span id="fFechaGen"></span>
+      </span>
+      <span class="ficha-footer-right">Historia que construye hogares</span>
+    </footer>
+
+    <div class="ficha-bottom-stripe"></div>
+
+  </div><!-- / fichaPropiedad -->
+
+  <!-- ===== SCRIPTS ===== -->
+  <script src="js/config.js"></script>
+  <script>
+    // ===== HELPERS (mismos que detalle-propiedad.js) =====
+    function val(v) {
+      if (v === null || v === undefined) return "";
+      return String(v).trim();
+    }
+
+    function extraerFileId(url) {
+      const u = val(url);
+      if (!u) return null;
+      let m = u.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+      if (m) return m[1];
+      m = u.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+      if (m) return m[1];
+      m = u.match(/\/d\/([a-zA-Z0-9_-]{10,})/);
+      if (m) return m[1];
+      return null;
+    }
+
+    function normalizarFoto(url) {
+      const u = val(url);
+      if (!u) return null;
+      const fileId = extraerFileId(u);
+      if (fileId) return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1200`;
+      return u;
+    }
+
+    function set(id, texto) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = texto || "—";
+    }
+
+    // ===== CARGAR Y RENDERIZAR =====
+    async function cargarFicha() {
+      const params   = new URLSearchParams(window.location.search);
+      const codigo   = params.get("codigo");
+
+      if (!codigo) {
+        document.getElementById("estadoCarga").textContent =
+          "Error: no se especificó un código de propiedad.";
+        return;
+      }
+
+      try {
+        const response = await fetch(TEAM_REALTY_HISTORY_CONFIG.PROPIEDADES_ENDPOINT, {
+          redirect: "follow"
+        });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+        const data = await response.json();
+
+        const prop = data.find(p =>
+          val(p["CÓDIGO"]) === codigo.trim() &&
+          val(p["Activo (si/no)"]).toLowerCase() === "si"
+        );
+
+        if (!prop) {
+          document.getElementById("estadoCarga").textContent =
+            "Propiedad no encontrada o inactiva.";
+          return;
+        }
+
+        renderizarFicha(prop);
+
+      } catch (err) {
+        console.error("Error:", err);
+        document.getElementById("estadoCarga").textContent =
+          "Error al cargar la ficha. Intenta más tarde.";
+      }
+    }
+
+    function renderizarFicha(prop) {
+      const titulo    = val(prop["Título"] || prop["Titulo"]) || "Sin título";
+      const codigo    = val(prop["CÓDIGO"]);
+      const ciudad    = val(prop["Ciudad"]);
+      const barrio    = val(prop["Barrio/Sector"]);
+      const tipo      = val(prop["Tipo"]);
+      const clasif    = val(prop["Uso del suelo"]);
+      const area      = val(prop["Área m2"]);
+      const hab       = val(prop["Habitaciones"]);
+      const banos     = val(prop["Baños"]);
+      const parq      = val(prop["Parqueaderos"]);
+      const estrato   = val(prop["Estrato"]);
+      const admin     = val(prop["Administración"]);
+      const negocio   = val(prop["Tipo de Negocio"]);
+      const pVenta    = val(prop["Precio Venta COP"]);
+      const pArriendo = val(prop["Precio Arriendo COP"]);
+      const desc      = val(prop["Descripción"] || prop["Descripcion"]);
+      const foto1     = normalizarFoto(val(prop["Foto 1"]));
+
+      // Precio
+      let precioTexto = "Consultar";
+      let precioLabel = "";
+      if (negocio.includes("Venta") && pVenta) {
+        precioTexto = pVenta;
+        precioLabel = "Precio de venta";
+      } else if (negocio.includes("Arriendo") && pArriendo) {
+        precioTexto = pArriendo;
+        precioLabel = "Precio de arriendo";
+      } else {
+        precioTexto = pVenta || pArriendo || "Consultar";
+      }
+
+      // Rellenar DOM
+      set("fCodigo", codigo);
+      set("fTipoNegocio", negocio || "En Venta");
+      set("fTitulo", titulo);
+      set("fUbicacion", `${ciudad}${barrio ? " · " + barrio : ""}`);
+      set("fArea", area || "—");
+      set("fHabitaciones", hab || "—");
+      set("fBanos", banos || "—");
+      set("fParqueaderos", parq || "—");
+      set("fPrecioTop", precioTexto);
+      set("fDescripcion", desc || "Sin descripción disponible.");
+      set("fTipo", tipo || "—");
+      set("fClasificacion", clasif || "—");
+      set("fEstrato", estrato || "—");
+      set("fAdministracion", admin || "—");
+      set("fCiudad", ciudad || "—");
+      set("fBarrio", barrio || "—");
+      set("fTipoNegocioDetalle", negocio || "—");
+      set("fCodigoDetalle", codigo);
+      set("fPrecio", precioTexto);
+      set("fPrecioLabel", precioLabel);
+
+      // URL online
+      const urlBase = window.location.origin + "/detalle-propiedad.html?codigo=" + codigo;
+      const urlEl   = document.getElementById("fUrlPropiedad");
+      if (urlEl) urlEl.textContent = urlBase;
+
+      // Foto
+      if (foto1) {
+        document.getElementById("fFoto").src = foto1;
+      }
+
+      // Fecha generación
+      const hoy = new Date();
+      set("fFechaGen", hoy.toLocaleDateString("es-CO", {
+        year: "numeric", month: "long", day: "numeric"
+      }));
+
+      // Mostrar ficha y controles
+      document.getElementById("estadoCarga").style.display = "none";
+      document.getElementById("fichaPropiedad").style.display = "block";
+      document.getElementById("uiControles").style.display = "flex";
+    }
+
+    // ===== EXPORTAR PDF =====
+    function exportarPDF() {
+      const btn = document.getElementById("btnDescargarPDF");
+      btn.disabled = true;
+      btn.textContent = "Generando PDF…";
+
+      const ficha    = document.getElementById("fichaPropiedad");
+      const controls = document.getElementById("uiControles");
+      controls.style.display = "none";
+
+      const codigo = new URLSearchParams(window.location.search).get("codigo") || "ficha";
+
+      const opt = {
+        margin:      0,
+        filename:    `TRH_Ficha_${codigo}.pdf`,
+        image:       { type: "jpeg", quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, logging: false },
+        jsPDF:       { unit: "px", format: [794, 1123], orientation: "portrait" }
+      };
+
+      html2pdf().set(opt).from(ficha).save().then(() => {
+        btn.disabled = false;
+        btn.textContent = "Descargar PDF";
+        controls.style.display = "flex";
+      });
+    }
+
+    // ===== INIT =====
+    document.addEventListener("DOMContentLoaded", cargarFicha);
+  </script>
+
+</body>
+</html>
