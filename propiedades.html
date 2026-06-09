@@ -13,13 +13,51 @@
 
 <body>
 
-  <!-- HEADER cargado dinámicamente desde modules/header.html -->
+  <!-- HEADER -->
   <div id="header-container"></div>
 
-  <!-- CONTENIDO PRINCIPAL -->
-  <section id="propiedades">
+  <!-- =======================================
+       PANTALLA A: MINIATURAS + FILTRO
+       Visible al entrar. Desaparece al elegir filtro.
+  ======================================= -->
+  <section id="buscadorMiniaturas">
     <div class="container">
-      <h2>Propiedades disponibles</h2>
+
+      <div class="busqueda-header">
+        <h2>¿Buscas en arriendo o en venta?</h2>
+        <div class="busqueda-filtros">
+          <button class="btn-filtro" data-filtro="venta">En Venta</button>
+          <button class="btn-filtro" data-filtro="arriendo">En Arriendo</button>
+        </div>
+      </div>
+
+      <!-- INDICADOR DE CARGA -->
+      <div id="loadingMiniaturas" class="loading-box" role="status"
+           aria-live="polite" style="display:none;">
+        <h2>Cargando propiedades…</h2>
+      </div>
+
+      <!-- GRID DE MINIATURAS -->
+      <div class="thumb-grid" id="thumbGrid"></div>
+
+    </div>
+  </section>
+
+  <!-- =======================================
+       PANTALLA B: FICHAS COMPLETAS (como antes)
+       Oculta al entrar. Aparece al elegir filtro.
+  ======================================= -->
+  <section id="propiedades" style="display:none;">
+    <div class="container">
+
+      <!-- Botón volver a miniaturas -->
+      <div style="text-align:center; margin-bottom: 40px;">
+        <button class="btn-volver-miniaturas" id="btnVolverMiniaturas">
+          ← Cambiar búsqueda
+        </button>
+      </div>
+
+      <h2 id="tituloFichas">Propiedades disponibles</h2>
 
       <!-- INDICADOR DE CARGA -->
       <div id="loadingPropiedades" class="loading-box" role="status"
@@ -27,25 +65,15 @@
         <h2>Cargando propiedades…</h2>
       </div>
 
-      <!-- GRID DE CARDS -->
+      <!-- GRID DE CARDS (idéntico al original) -->
       <div class="prop-grid" id="propiedadesGrid"></div>
 
     </div>
   </section>
 
-  <!-- FOOTER cargado dinámicamente desde modules/footer.html -->
+  <!-- FOOTER -->
   <div id="footer-container"></div>
 
-  <!-- =======================================
-       SCRIPTS
-       Orden requerido:
-       1. header-loader  → inyecta HTML del header
-       2. header.js      → enlace activo + submódulos
-       3. footer-loader  → inyecta HTML del footer
-       4. menu-mobile    → menú responsive
-       5. config.js      → endpoints centralizados
-       6. propiedades.js → carga y renderiza cards
-  ======================================= -->
   <script src="js/header-loader.js"></script>
   <script src="js/header.js"></script>
   <script src="js/footer-loader.js"></script>

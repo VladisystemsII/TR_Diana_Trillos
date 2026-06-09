@@ -37,3 +37,13 @@ git push
 git add .
 git commit -m "donde las casas...."
 git push
+
+
+git add .
+git commit -m "fichas de propiedades Pdf Png"
+git push
+
+
+git add .
+git commit -m "criterio de busqueda en venta o en arriendo"
+git push
