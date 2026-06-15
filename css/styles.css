@@ -886,14 +886,28 @@ h1.blog-title {
   letter-spacing: -0.01em;
 }
 
-#blogTable {
+/*#blogTable {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto 100px;
+  
   padding: 0 var(--spacing-lg);
   border-collapse: collapse;
   table-layout: fixed;
 }
+*/
+
+#blogTable {
+  width: 100%;
+  max-width: 100%;                /* ← ocupa todo el container */
+  margin: 0 auto 100px;
+  padding: 0;                     /* ← sin padding propio */
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+
+
 
 #blogTable th {
   padding: 24px 16px 24px 0;
@@ -1894,6 +1908,16 @@ button:focus-visible {
   border-color: var(--color-gold);
   color: var(--color-gold);
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

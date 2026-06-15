@@ -29,6 +29,7 @@ function getBlogFormData() {
     titulo:    g('bf-titulo'),
     resumen:   g('bf-resumen'),
     contenido: g('bf-contenido'),
+    imagen: g('bf-imagen'),
     activo:    g('bf-activo')
   };
 }
@@ -63,6 +64,7 @@ async function crearBlogPost() {
   params.append(E.TITULO,      data.titulo);
   params.append(E.RESUMEN,     data.resumen);
   params.append(E.CONTENIDO,   data.contenido);
+  params.append(E.IMAGEN,      data.imagen);
   params.append(E.ACTIVO,      data.activo);
 
   try {
@@ -77,7 +79,7 @@ async function crearBlogPost() {
 }
 
 function limpiarBlogFormCrear() {
-  ['bf-fecha', 'bf-titulo', 'bf-resumen', 'bf-contenido'].forEach(id => {
+  ['bf-fecha', 'bf-titulo', 'bf-resumen', 'bf-contenido', 'bf-imagen'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.value = '';
   });
@@ -87,5 +89,49 @@ function limpiarBlogFormCrear() {
     chk.checked = true;
     const lbl = document.getElementById('bf-activo-label');
     if (lbl) lbl.textContent = 'Sí';
+  }
+}
+
+
+
+async function procesarImagenBlog(input) {
+  if (!input.files || !input.files[0]) return;
+
+  const file = input.files[0];
+  const CLD  = ADMIN_CONFIG.CLOUDINARY;
+
+  try {
+    const comprimida = await _comprimirImagen(
+      file,
+      CLD.MAX_W,
+      CLD.MAX_H,
+      CLD.QUALITY
+    );
+
+    const formData = new FormData();
+    formData.append('file', comprimida);
+    formData.append('upload_preset', CLD.UPLOAD_PRESET);
+    formData.append('folder', 'team_realty_blog');
+
+    const res = await fetch(
+      `https://api.cloudinary.com/v1_1/${CLD.CLOUD_NAME}/image/upload`,
+      {
+        method: 'POST',
+        body: formData
+      }
+    );
+
+    const data = await res.json();
+
+    if (data.secure_url) {
+      blogImagenURL = data.secure_url;
+      document.getElementById('bf-imagen').value = data.secure_url;
+      toast('Imagen subida correctamente', 'success', 2000);
+    } else {
+      throw new Error(data.error?.message || 'Error Cloudinary');
+    }
+
+  } catch (err) {
+    toast(`Error imagen blog: ${err.message}`, 'error');
   }
 }

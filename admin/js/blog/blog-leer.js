@@ -60,7 +60,7 @@ function _renderTablaBlog(registros) {
   tbody.innerHTML = registros.map((r, idx) => {
     const codigo  = r['CÓDIGO']           || '—';
     const fecha   = r['Fecha']            || '—';
-    const titulo  = r['Título']           || '—';
+    const titulo  = r['Titulo']           || '—';
     const resumen = r['Resumen']          || '—';
     const activo  = (r['Activo (si/no)'] || 'no').toLowerCase();
     const badgeActivo = activo === 'si'
@@ -125,7 +125,7 @@ function verBlogPostLeer(idxEnFiltrado) {
         <div class="ficha-row"><span class="dc-label">Fecha</span><span class="dc-val">${v('Fecha')}</span></div>
         <div class="ficha-row full">
           <span class="dc-label">Título</span>
-          <span class="dc-val ficha-titulo">${v('Título')}</span>
+          <span class="dc-val ficha-titulo">${v('Titulo')}</span>
         </div>
         <div class="ficha-row full">
           <span class="dc-label">Resumen</span>
@@ -133,6 +133,17 @@ function verBlogPostLeer(idxEnFiltrado) {
         </div>
       </div>
     </div>
+
+
+    <div class="ficha-section">
+  <h3 class="section-label">Imagen</h3>
+  <img src="${v('Imagen')}" style="width:100%;height:320px;object-fit:contain;">
+  
+</div>
+
+
+
+
     <div class="ficha-section">
       <h3 class="section-label">Contenido</h3>
       <p class="ficha-desc">${v('Contenido')}</p>

@@ -47,3 +47,9 @@ git push
 git add .
 git commit -m "criterio de busqueda en venta o en arriendo"
 git push
+
+
+
+git add .
+git commit -m "inclusion de imagen en modulo blog y articulo"
+git push

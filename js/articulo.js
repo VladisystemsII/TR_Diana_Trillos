@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const titleEl     = document.getElementById("articleTitle");
   const dateEl      = document.getElementById("articleDate");
   const resumenEl   = document.getElementById("articleResumen");
+  const imageEl     = document.getElementById("articleImage");
   const contentEl   = document.getElementById("articleContent");
 
   // Configuración de marked.js — seguro y limpio
@@ -66,6 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Resumen — texto plano debajo de la fecha
       resumenEl.textContent = post["Resumen"] || "";
+      imageEl.src = post["Imagen"] || "";
 
       // Contenido — Markdown → HTML
       const contenido = post["Contenido"] || post["contenido"] || "";

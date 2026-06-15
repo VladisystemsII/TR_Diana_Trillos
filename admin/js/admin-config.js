@@ -96,6 +96,7 @@ const BLOG_CONFIG = {
     TITULO:      'entry.1499185813',
     RESUMEN:     'entry.1020293648',
     CONTENIDO:   'entry.1525865495',
+    IMAGEN:      'entry.2091584793',
     ACTIVO:      'entry.1253123361'
   },
 
@@ -109,6 +110,7 @@ const BLOG_CONFIG = {
     TITULO:      'entry.1911901743',
     RESUMEN:     'entry.667480293',
     CONTENIDO:   'entry.153504690',
+    IMAGEN:      'entry.174248761',
     ACTIVO:      'entry.345300605'
   },
 

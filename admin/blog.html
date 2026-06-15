@@ -41,6 +41,23 @@
         <textarea id="bf-contenido" placeholder="Escribe aquí el contenido completo del post…" rows="10" required></textarea>
       </div>
 
+      
+
+ <div class="field-group">
+  <label for="file-blog">Imagen del post <span class="req">*</span></label>
+  <input
+    type="file"
+    id="file-blog"
+    accept="image/*"
+    onchange="procesarImagenBlog(this)">
+</div>
+
+<input type="hidden" id="bf-imagen">
+
+
+
+
+
 
 
 
@@ -258,6 +275,32 @@
           <label for="blog-act-contenido">Contenido <span class="req">*</span></label>
           <textarea id="blog-act-contenido" placeholder="Contenido completo del post…" rows="10" required></textarea>
         </div>
+
+
+
+        <!-- IMAGEN -->
+<div class="field-group">
+  <label for="file-blog-act">Imagen del post</label>
+  <input
+    type="file"
+    id="file-blog-act"
+    accept="image/*"
+    onchange="procesarImagenBlogActualizar(this)">
+</div>
+
+<!-- Preview URL actual -->
+<div class="field-group">
+  <label for="blog-act-imagen">URL de imagen actual</label>
+  <input type="text" id="blog-act-imagen" placeholder="URL se llenará al subir imagen" readonly style="font-size:0.78rem;color:#888;">
+</div>
+
+<input type="hidden" id="blog-act-imagen-hidden">
+
+
+
+
+
+
 
         <!-- PUBLICACIÓN -->
 <div class="form-section">

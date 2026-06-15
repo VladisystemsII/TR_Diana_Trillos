@@ -11,6 +11,8 @@
 
   <!-- html2pdf.js para exportar -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <!-- QRCode.js para generar QR dinámico -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <style>
     /* ===== VARIABLES (espejo del sistema) ===== */
@@ -487,6 +489,26 @@
       word-break: break-all;
     }
 
+    /* QR autogenerado */
+    #fQrCode {
+      flex-shrink: 0;
+      width: 72px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      padding: 4px;
+    }
+
+    #fQrCode img,
+    #fQrCode canvas {
+      width: 64px !important;
+      height: 64px !important;
+      display: block;
+    }
+
     /* ===== FOOTER FICHA ===== */
     .ficha-footer {
       background: var(--color-ink);
@@ -695,9 +717,10 @@
 
         <!-- ENLACE PROPIEDAD -->
         <div class="ficha-url-box">
+          <div id="fQrCode"></div>
           <div>
             <span class="url-label">Ver propiedad online</span>
-            <span class="url-link" id="fUrlPropiedad">teamrealtyhistory.com/propiedades</span>
+            <a class="url-link" id="fUrlPropiedad" href="#" target="_blank">teamrealtyhistory.com/propiedades</a>
           </div>
         </div>
 
@@ -846,7 +869,24 @@
       // URL online
       const urlBase = window.location.origin + "/detalle-propiedad.html?codigo=" + codigo;
       const urlEl   = document.getElementById("fUrlPropiedad");
-      if (urlEl) urlEl.textContent = urlBase;
+      if (urlEl) {
+        urlEl.textContent = urlBase;
+        urlEl.href = urlBase;
+      }
+
+      // QR autogenerado
+      const qrContainer = document.getElementById("fQrCode");
+      if (qrContainer) {
+        qrContainer.innerHTML = ""; // limpiar si ya había uno
+        new QRCode(qrContainer, {
+          text:           urlBase,
+          width:          64,
+          height:         64,
+          colorDark:      "#0a0a0a",
+          colorLight:     "#ffffff",
+          correctLevel:   QRCode.CorrectLevel.M
+        });
+      }
 
       // Foto
       if (foto1) {
@@ -885,7 +925,19 @@
         jsPDF:       { unit: "px", format: [794, 1123], orientation: "portrait" }
       };
 
-      html2pdf().set(opt).from(ficha).save().then(() => {
+      html2pdf().set(opt).from(ficha).toPdf().get('pdf').then((pdf) => {
+        // Agregar link clickeable sobre la zona del cuadro de URL/QR
+        const urlBase = window.location.origin + "/detalle-propiedad.html?codigo=" + codigo;
+        const box = document.querySelector(".ficha-url-box");
+        if (box) {
+          const r = box.getBoundingClientRect();
+          const ficheR = ficha.getBoundingClientRect();
+          // Convertir px del DOM (794x1123) a unidades del PDF (mismas, ya que jsPDF usa "px")
+          const x = r.left - ficheR.left;
+          const y = r.top - ficheR.top;
+          pdf.link(x, y, r.width, r.height, { url: urlBase });
+        }
+      }).save().then(() => {
         btn.disabled = false;
         btn.textContent = "Descargar PDF";
         controls.style.display = "flex";

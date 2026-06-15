@@ -13,6 +13,7 @@
 let _blogActDatos    = [];   // registros cargados
 let _blogActFiltrado = [];   // subconjunto tras búsqueda
 let _blogActPost     = null; // post actualmente en edición
+let _blogActImagenURL = ''; // URL de imagen del post en edición
 
 // ── INIT ──────────────────────────────────────────────────
 function initBlogActualizar() {
@@ -60,7 +61,7 @@ function _renderTablaBlogAct(registros) {
   tbody.innerHTML = registros.map((r, idx) => {
     const codigo  = r['CÓDIGO']           || '—';
     const fecha   = r['Fecha']            || '—';
-    const titulo  = r['Título']           || '—';
+    const titulo  = r['Titulo']           || '—';
     const activo  = (r['Activo (si/no)'] || 'no').toLowerCase() === 'si';
     return `
       <tr>
@@ -119,9 +120,16 @@ function abrirFormBlogActualizar(idxEnFiltrado) {
     } catch { fechaVal = fechaRaw; }
   }
   s('blog-act-fecha',     fechaVal);
-  s('blog-act-titulo',    r['Título']);
+  s('blog-act-titulo',    r['Titulo']);
   s('blog-act-resumen',   r['Resumen']);
   s('blog-act-contenido', r['Contenido']);
+
+  // Imagen actual
+_blogActImagenURL = r['Imagen'] || '';
+const imgText   = document.getElementById('blog-act-imagen');
+const imgHidden = document.getElementById('blog-act-imagen-hidden');
+if (imgText)   imgText.value   = _blogActImagenURL;
+if (imgHidden) imgHidden.value = _blogActImagenURL;
 
   const activo = (r['Activo (si/no)'] || 'no').toLowerCase() === 'si';
   const chk    = document.getElementById('blog-act-activo');
@@ -174,6 +182,7 @@ async function guardarBlogActualizacion() {
     [BLOG_CONFIG.ENTRY_MODIFICAR.TITULO]:      g('blog-act-titulo'),
     [BLOG_CONFIG.ENTRY_MODIFICAR.RESUMEN]:     g('blog-act-resumen'),
     [BLOG_CONFIG.ENTRY_MODIFICAR.CONTENIDO]:   g('blog-act-contenido'),
+    [BLOG_CONFIG.ENTRY_MODIFICAR.IMAGEN]:      g('blog-act-imagen-hidden'),    
     [BLOG_CONFIG.ENTRY_MODIFICAR.ACTIVO]:      g('blog-act-activo'),
   });
 
@@ -214,6 +223,57 @@ async function guardarBlogActualizacion() {
     if (btn) { btn.disabled = false; btn.textContent = 'Guardar Cambios'; }
   }
 }
+
+
+
+// ── SUBIR IMAGEN (modo actualizar) ────────────────────────
+async function procesarImagenBlogActualizar(input) {
+  if (!input.files || !input.files[0]) return;
+
+  const file = input.files[0];
+  const CLD  = ADMIN_CONFIG.CLOUDINARY;
+
+  try {
+    const comprimida = await _comprimirImagen(
+      file,
+      CLD.MAX_W,
+      CLD.MAX_H,
+      CLD.QUALITY
+    );
+
+    const formData = new FormData();
+    formData.append('file', comprimida);
+    formData.append('upload_preset', CLD.UPLOAD_PRESET);
+    formData.append('folder', 'team_realty_blog');
+
+    const res  = await fetch(
+      `https://api.cloudinary.com/v1_1/${CLD.CLOUD_NAME}/image/upload`,
+      { method: 'POST', body: formData }
+    );
+    const data = await res.json();
+
+    if (data.secure_url) {
+      _blogActImagenURL = data.secure_url;
+      const imgText   = document.getElementById('blog-act-imagen');
+      const imgHidden = document.getElementById('blog-act-imagen-hidden');
+      if (imgText)   imgText.value   = data.secure_url;
+      if (imgHidden) imgHidden.value = data.secure_url;
+      toast('Imagen subida correctamente', 'success', 2000);
+    } else {
+      throw new Error(data.error?.message || 'Error Cloudinary');
+    }
+
+  } catch (err) {
+    toast(`Error imagen blog: ${err.message}`, 'error');
+  }
+}
+
+
+
+
+
+
+
 
 // ── VOLVER AL LISTADO ─────────────────────────────────────
 function blogActVolverListado() {

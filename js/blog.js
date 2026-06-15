@@ -30,7 +30,7 @@ async function loadBlogs() {
     if (activos.length === 0) {
       tableBody.innerHTML = `
         <tr>
-          <td colspan="4" style="text-align:center; padding:40px; color:#555;">
+          <td colspan="5" style="text-align:center; padding:40px; color:#555;">
             No hay artículos publicados aún.
           </td>
         </tr>
@@ -64,6 +64,11 @@ async function loadBlogs() {
             Leer Más
           </a>
         </td>
+        <td data-label="Imagen">
+          <a href="articulo.html?codigo=${encodeURIComponent(codigo)}">
+            <img src="${post["Imagen"]}" style="width:80px;height:60px;object-fit:cover;border-radius:6px;">
+          </a>
+        </td>
       `;
 
       tableBody.appendChild(row);
@@ -73,7 +78,7 @@ async function loadBlogs() {
     console.error("❌ Error cargando blogs:", err);
     tableBody.innerHTML = `
       <tr>
-        <td colspan="4" style="text-align:center; color:#d32f2f; padding:40px;">
+        <td colspan="5" style="text-align:center; color:#d32f2f; padding:40px;">
           Error al cargar los blogs. Intenta más tarde.
         </td>
       </tr>
