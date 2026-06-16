@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ficha WhatsApp – Team Realty History</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+
+  <!-- html2canvas para exportar a PNG -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <style>
+    :root {
+      --color-ink:        #0a0a0a;
+      --color-ink-soft:   #151515;
+      --color-ink-mid:    #2d2d2d;
+      --color-gray:       #5a5a5a;
+      --color-ivory:      #fcfaf7;
+      --color-ivory-deep: #efede8;
+      --color-white:      #ffffff;
+      --color-gold:       #D10000;
+      --color-gold-light: #FF1A1A;
+      --color-border:     #e2ded5;
+      --font-display:     'Cormorant Garamond', Georgia, serif;
+      --font-body:        'DM Sans', Arial, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--color-ivory-deep);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px 60px;
+    }
+
+    /* ===== CONTROLES UI ===== */
+    .ui-controls {
+      width: 100%;
+      max-width: 540px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      gap: 12px;
+    }
+
+    .back-link {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-ink-mid);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.3s;
+    }
+
+    .back-link:hover { color: var(--color-gold); }
+
+    .btn-descargar {
+      background: var(--color-gold);
+      color: var(--color-white);
+      border: none;
+      padding: 12px 28px;
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-descargar:hover { background: var(--color-ink); }
+    .btn-descargar:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* ===== CARGA ===== */
+    #estadoCarga {
+      text-align: center;
+      padding: 80px 20px;
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      color: var(--color-ink-mid);
+    }
+
+    /* ===== FICHA FORMATO CUADRADO/VERTICAL — 540×720px ===== */
+    #fichaPropiedad {
+      width: 540px;
+      background: var(--color-white);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      display: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* TOP STRIPE */
+    .ficha-top-stripe {
+      height: 4px;
+      background: var(--color-gold);
+    }
+
+    /* IMAGEN HERO */
+    .ficha-hero {
+      width: 100%;
+      height: 260px;
+      overflow: hidden;
+      position: relative;
+      background: var(--color-ink);
+    }
+
+    .ficha-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .ficha-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,10,0.75) 0%, transparent 55%);
+    }
+
+    /* BADGE TIPO NEGOCIO */
+    .negocio-badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: var(--color-gold);
+      color: var(--color-white);
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+    }
+
+    /* TITULO SOBRE FOTO */
+    .hero-titulo {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 16px 22px;
+    }
+
+    .hero-titulo h2 {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--color-white);
+      line-height: 1.15;
+      margin-bottom: 4px;
+    }
+
+    .hero-titulo .ubicacion-txt {
+      font-size: 9px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.65);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    /* ===== STATS HORIZONTALES ===== */
+    .ficha-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: var(--color-ink);
+    }
+
+    .stat-cell {
+      padding: 12px 10px;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .stat-cell:last-child { border-right: none; }
+
+    .stat-cell .s-label {
+      font-size: 7px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .stat-cell .s-valor {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--color-white);
+      display: block;
+      line-height: 1;
+    }
+
+    .stat-cell .s-unit {
+      font-size: 7px;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ===== CUERPO ===== */
+    .ficha-body {
+      padding: 18px 22px 16px;
+    }
+
+    /* PRECIO */
+    .precio-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--color-border);
+      margin-bottom: 14px;
+    }
+
+    .precio-valor {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--color-gold);
+      line-height: 1;
+    }
+
+    .precio-label {
+      font-size: 8px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-gray);
+    }
+
+    /* DETALLES FICHA */
+    .ficha-detalles {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 20px;
+      margin-bottom: 14px;
+    }
+
+    .det-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .det-item .det-label {
+      font-size: 7.5px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-gray);
+    }
+
+    .det-item .det-valor {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-ink);
+      line-height: 1.2;
+    }
+
+    /* SEPARADOR */
+    .ficha-divider {
+      height: 1px;
+      background: var(--color-border);
+      margin: 12px 0;
+      position: relative;
+    }
+
+    .ficha-divider::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 2px;
+      width: 40px;
+      background: var(--color-gold);
+    }
+
+    /* DESCRIPCION CORTA */
+    .ficha-desc {
+      font-size: 10px;
+      font-weight: 300;
+      color: var(--color-gray);
+      line-height: 1.6;
+      margin-bottom: 14px;
+      text-align: justify;
+
+    }
+
+    /* ===== FOOTER ===== */
+    .ficha-footer {
+      background: var(--color-ink);
+      padding: 12px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-logo {
+      height: 30px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      opacity: 0.7;
+    }
+
+    .footer-brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .footer-brand-name {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.1;
+    }
+
+    .footer-brand-sub {
+      font-size: 7.5px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .footer-contacto {
+      text-align: right;
+    }
+
+    .footer-contacto .fc-nombre {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.85);
+      display: block;
+    }
+
+    .footer-contacto .fc-tel {
+      font-size: 9px;
+      font-weight: 400;
+      color: var(--color-gold-light);
+      letter-spacing: 0.05em;
+      display: block;
+      margin-top: 2px;
+    }
+
+    .footer-contacto .fc-codigo {
+      font-size: 7.5px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      display: block;
+      margin-top: 3px;
+    }
+
+    /* BOTTOM STRIPE */
+    .ficha-bottom-stripe {
+      height: 3px;
+      background: linear-gradient(90deg, var(--color-gold), #FF1A1A, var(--color-gold));
+    }
+
+    /* PRINT */
+    @media print {
+      body { background: none; padding: 0; }
+      .ui-controls { display: none !important; }
+      #fichaPropiedad { box-shadow: none; display: block !important; }
+      #estadoCarga { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CONTROLES -->
+  <div class="ui-controls" id="uiControles" style="display:none;">
+    <a href="javascript:history.back()" class="back-link">← Volver</a>
+    <button class="btn-descargar" id="btnWA" onclick="compartirWA()" style="background:#25D366;">
+      📲 Compartir por WhatsApp
+    </button>
+  </div>
+
+  <!-- CARGA -->
+  <div id="estadoCarga">Cargando ficha…</div>
+
+  <!-- ============================
+       FICHA PNG — 540px
+  ============================= -->
+  <div id="fichaPropiedad">
+
+    <div class="ficha-top-stripe"></div>
+
+    <!-- HERO -->
+    <div class="ficha-hero">
+      <img id="fFoto" src="" alt="Foto principal"
+           onerror="this.src='img/sin-imagen.png'">
+      <div class="ficha-hero-overlay"></div>
+      <span class="negocio-badge" id="fTipoNegocio">En Venta</span>
+      <div class="hero-titulo">
+        <h2 id="fTitulo">Cargando…</h2>
+        <span class="ubicacion-txt" id="fUbicacion"></span>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="ficha-stats">
+      <div class="stat-cell">
+        <span class="s-label">Área</span>
+        <span class="s-valor" id="fArea">—</span>
+        <span class="s-unit">m²</span>
+      </div>
+      <div class="stat-cell">
+        <span class="s-label">Hab.</span>
+        <span class="s-valor" id="fHabitaciones">—</span>
+      </div>
+      <div class="stat-cell">
+        <span class="s-label">Baños</span>
+        <span class="s-valor" id="fBanos">—</span>
+      </div>
+      <div class="stat-cell">
+        <span class="s-label">Parq.</span>
+        <span class="s-valor" id="fParqueaderos">—</span>
+      </div>
+    </div>
+
+    <!-- CUERPO -->
+    <div class="ficha-body">
+
+      <!-- PRECIO -->
+      <div class="precio-row">
+        <span class="precio-valor" id="fPrecio">Consultar</span>
+        <span class="precio-label" id="fPrecioLabel">—</span>
+      </div>
+
+      <!-- DETALLES -->
+      <div class="ficha-detalles">
+        <div class="det-item">
+          <span class="det-label">Tipo</span>
+          <span class="det-valor" id="fTipo">—</span>
+        </div>
+        <div class="det-item">
+          <span class="det-label">Ciudad</span>
+          <span class="det-valor" id="fCiudad">—</span>
+        </div>
+        <div class="det-item">
+          <span class="det-label">Estrato</span>
+          <span class="det-valor" id="fEstrato">—</span>
+        </div>
+        <div class="det-item">
+          <span class="det-label">Uso del suelo</span>
+          <span class="det-valor" id="fClasificacion">—</span>
+        </div>
+      </div>
+
+      <div class="ficha-divider"></div>
+
+      <!-- DESCRIPCIÓN CORTA -->
+      <p class="ficha-desc" id="fDescripcion">Sin descripción disponible.</p>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="ficha-footer">
+      <div class="footer-brand">
+        <img
+          src="https://res.cloudinary.com/diifewvvs/image/upload/Logo_TR_1_ihwkcs"
+          alt="Team Realty History"
+          class="footer-logo"
+          onerror="this.style.display='none'"
+        >
+        <div class="footer-brand-text">
+          <span class="footer-brand-name">Team Realty History</span>
+          <span class="footer-brand-sub">Inmobiliaria</span>
+        </div>
+      </div>
+      <div class="footer-contacto">
+        <span class="fc-nombre">Diana Trillos</span>
+        <span class="fc-tel">+57 316 462 4872</span>
+        <span class="fc-codigo" id="fCodigo">PROP-0000</span>
+      </div>
+    </footer>
+
+    <div class="ficha-bottom-stripe"></div>
+
+  </div><!-- / fichaPropiedad -->
+
+  <!-- ===== SCRIPTS ===== -->
+  <script src="js/config.js"></script>
+  <script>
+    function val(v) {
+      if (v === null || v === undefined) return "";
+      return String(v).trim();
+    }
+
+    function extraerFileId(url) {
+      const u = val(url);
+      if (!u) return null;
+      let m = u.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+      if (m) return m[1];
+      m = u.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+      if (m) return m[1];
+      m = u.match(/\/d\/([a-zA-Z0-9_-]{10,})/);
+      if (m) return m[1];
+      return null;
+    }
+
+    function normalizarFoto(url) {
+      const u = val(url);
+      if (!u) return null;
+      const fileId = extraerFileId(u);
+      if (fileId) return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1200`;
+      return u;
+    }
+
+    function set(id, texto) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = texto || "—";
+    }
+
+    async function cargarFicha() {
+      const params = new URLSearchParams(window.location.search);
+      const codigo = params.get("codigo");
+
+      if (!codigo) {
+        document.getElementById("estadoCarga").textContent =
+          "Error: no se especificó un código de propiedad.";
+        return;
+      }
+
+      try {
+        const response = await fetch(TEAM_REALTY_HISTORY_CONFIG.PROPIEDADES_ENDPOINT, {
+          redirect: "follow"
+        });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+        const data = await response.json();
+
+        const prop = data.find(p =>
+          val(p["CÓDIGO"]) === codigo.trim() &&
+          val(p["Activo (si/no)"]).toLowerCase() === "si"
+        );
+
+        if (!prop) {
+          document.getElementById("estadoCarga").textContent =
+            "Propiedad no encontrada o inactiva.";
+          return;
+        }
+
+        renderizarFicha(prop);
+
+      } catch (err) {
+        console.error("Error:", err);
+        document.getElementById("estadoCarga").textContent =
+          "Error al cargar la ficha. Intenta más tarde.";
+      }
+    }
+
+    function renderizarFicha(prop) {
+      const titulo    = val(prop["Título"] || prop["Titulo"]) || "Sin título";
+      const codigo    = val(prop["CÓDIGO"]);
+      const ciudad    = val(prop["Ciudad"]);
+      const barrio    = val(prop["Barrio/Sector"]);
+      const tipo      = val(prop["Tipo"]);
+      const clasif    = val(prop["Uso del suelo"]);
+      const area      = val(prop["Área m2"]);
+      const hab       = val(prop["Habitaciones"]);
+      const banos     = val(prop["Baños"]);
+      const parq      = val(prop["Parqueaderos"]);
+      const estrato   = val(prop["Estrato"]);
+      const negocio   = val(prop["Tipo de Negocio"]);
+      const pVenta    = val(prop["Precio Venta COP"]);
+      const pArriendo = val(prop["Precio Arriendo COP"]);
+      const desc      = val(prop["Descripción"] || prop["Descripcion"]);
+      const foto1     = normalizarFoto(val(prop["Foto 1"]));
+
+      let precioTexto = "Consultar";
+      let precioLabel = "";
+      if (negocio.includes("Venta") && pVenta) {
+        precioTexto = pVenta;
+        precioLabel = "Precio de venta";
+      } else if (negocio.includes("Arriendo") && pArriendo) {
+        precioTexto = pArriendo;
+        precioLabel = "Precio de arriendo";
+      } else {
+        precioTexto = pVenta || pArriendo || "Consultar";
+      }
+
+      set("fCodigo", codigo);
+      set("fTipoNegocio", negocio || "En Venta");
+      set("fTitulo", titulo);
+      set("fUbicacion", `${ciudad}${barrio ? " · " + barrio : ""}`);
+      set("fArea", area || "—");
+      set("fHabitaciones", hab || "—");
+      set("fBanos", banos || "—");
+      set("fParqueaderos", parq || "—");
+      set("fPrecio", precioTexto);
+      set("fPrecioLabel", precioLabel);
+      set("fTipo", tipo || "—");
+      set("fCiudad", ciudad || "—");
+      set("fEstrato", estrato || "—");
+      set("fClasificacion", clasif || "—");
+      // Recortar historia a 50 palabras
+      const palabras = (desc || "").replace(/[#*_~`>\[\]]/g,"").trim().split(/\s+/);
+      const historia = palabras.length <= 50 ? (desc || "") : palabras.slice(0,50).join(" ") + "…";
+      set("fDescripcion", historia || "Sin descripción disponible.");
+
+      if (foto1) document.getElementById("fFoto").src = foto1;
+
+      document.getElementById("estadoCarga").style.display = "none";
+      document.getElementById("fichaPropiedad").style.display = "block";
+      document.getElementById("uiControles").style.display = "flex";
+    }
+
+    // ===== COMPARTIR WHATSAPP =====
+    function compartirWA() {
+      const btn     = document.getElementById("btnWA");
+      const ficha   = document.getElementById("fichaPropiedad");
+      const codigo  = new URLSearchParams(window.location.search).get("codigo") || "ficha";
+      const link    = `https://teamrealtyhistory.com/detalle-propiedad.html?codigo=${encodeURIComponent(codigo)}`;
+
+      btn.disabled = true;
+      btn.textContent = "Generando…";
+
+      html2canvas(ficha, {
+        scale: 2.5,
+        useCORS: true,
+        allowTaint: true,
+        logging: false,
+        backgroundColor: "#ffffff"
+      }).then(canvas => {
+        canvas.toBlob(async (blob) => {
+          const file = new File([blob], `TRH_${codigo}.png`, { type: "image/png" });
+
+          // Móvil: compartir imagen directo
+          if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            try {
+              await navigator.share({ files: [file] });
+              btn.disabled = false;
+              btn.textContent = "📲 Compartir por WhatsApp";
+              return;
+            } catch(e) {}
+          }
+
+          // Desktop: descarga imagen + abre WhatsApp con texto y link
+          const a = document.createElement("a");
+          a.download = `TRH_${codigo}.png`;
+          a.href = URL.createObjectURL(blob);
+          a.click();
+          URL.revokeObjectURL(a.href);
+
+          const titulo = document.getElementById("propTitulo")?.textContent || "";
+          const msg = `🏠 *${titulo}*\n\n✨ ¿Quieres saber más de esta historia?\n👉 ${link}`;
+          setTimeout(() => window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, "_blank"), 600);
+
+          btn.disabled = false;
+          btn.textContent = "📲 Compartir por WhatsApp";
+        }, "image/png");
+      }).catch(err => {
+        console.error(err);
+        btn.disabled = false;
+        btn.textContent = "📲 Compartir por WhatsApp";
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", cargarFicha);
+  </script>
+
+</body>
+</html>

@@ -53,3 +53,9 @@ git push
 git add .
 git commit -m "inclusion de imagen en modulo blog y articulo"
 git push
+
+
+
+git add .
+git commit -m "caso wasi"
+git push

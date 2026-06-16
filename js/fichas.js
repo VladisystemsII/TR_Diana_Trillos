@@ -71,6 +71,18 @@
       border-left: 3px solid var(--color-ink-mid);
     }
 
+    .btn-ficha.btn-ficha-wa {
+      border-left: 3px solid #25D366;
+      background: #f0fdf4;
+      color: #15803d;
+    }
+
+    .btn-ficha.btn-ficha-wa:hover {
+      background: #25D366;
+      color: var(--color-white);
+      border-color: #25D366;
+    }
+
     .btn-ficha-icono {
       font-size: 1rem;
       flex-shrink: 0;
@@ -122,6 +134,16 @@
         >
           <span class="btn-ficha-icono">🖼️</span>
           Ficha rápida PNG
+        </a>
+        <a
+          href="${basePath}ficha-whatsapp.html?codigo=${encodeURIComponent(codigo)}"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-ficha btn-ficha-wa"
+          aria-label="Compartir ficha por WhatsApp"
+        >
+          <span class="btn-ficha-icono">📲</span>
+          Compartir por WhatsApp
         </a>
       </div>
     `;
