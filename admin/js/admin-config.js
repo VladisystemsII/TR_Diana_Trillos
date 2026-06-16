@@ -26,7 +26,7 @@ const ADMIN_CONFIG = {
   },
 
   // ── Web App URL (doGet — JSON) ─────────────────────────
-  ENDPOINT: "https://script.google.com/macros/s/AKfycbw8yOkwg9vFSfqbOvyAmHKAK4IvLVRRb90uRUldZp-N6T6Q_oRdZjlhmlfmjcvkx77F/exec",
+  ENDPOINT: "https://script.google.com/macros/s/AKfycbwNMuIV9-mCqqMxUgb4FrJElHGNSmoIy38yYL-BCsmoxkS4Vf709_kEY4rdk1JVEsPt/exec",
 
   // ── Form 1 — Crear propiedad ───────────────────────────
   FORM_CREAR_URL: "https://docs.google.com/forms/d/e/1FAIpQLSfYVZChBT5xAXfNIDre9AKVLVGjfT7GR-VMMR1jus_wxQ5Buw/formResponse",
