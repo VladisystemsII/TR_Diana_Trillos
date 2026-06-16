@@ -13,6 +13,6 @@ function optimizarImagen(url, ancho = 800) {
 
 const TEAM_REALTY_HISTORY_CONFIG = {
   BLOG_ENDPOINT: "https://script.google.com/macros/s/AKfycbwkbqpfrWBdcaU8P5p65pvCcx5lD0osca_d_Pl1YlBo8tqbf6FA-9-xkN0NjpMVcAuUAg/exec",
-  PROPIEDADES_ENDPOINT: "https://script.google.com/macros/s/AKfycbyQ6k06QgekJlRkR7vxwO9-m2hdLaB_cxvaO6NPj0McKB6TYuz-3cI9RquEj6YOJzeO/exec",
+  PROPIEDADES_ENDPOINT: "https://script.google.com/macros/s/AKfycbwNMuIV9-mCqqMxUgb4FrJElHGNSmoIy38yYL-BCsmoxkS4Vf709_kEY4rdk1JVEsPt/exec",
   WHATSAPP_NUMBER: "573164624872" // ⚠️ Actualizar con número real
 };
