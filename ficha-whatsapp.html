@@ -4,56 +4,391 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Compartiendo ficha...</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:          #0a0a0a;
+      --ink-mid:      #2d2d2d;
+      --gray:         #5a5a5a;
+      --gray-light:   #f4f2ee;
+      --ivory:        #fcfaf7;
+      --ivory-deep:   #efede8;
+      --white:        #ffffff;
+      --red:          #D10000;
+      --border:       #e2ded5;
+      --muted:        #9e9488;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'DM Sans', Arial, sans-serif;
+    }
+
     body {
-      margin: 0;
       min-height: 100vh;
+      background: var(--ivory);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: sans-serif;
-      background: #f0fdf4;
-      color: #15803d;
-      flex-direction: column;
-      gap: 16px;
+      font-family: var(--font-body);
+      padding: 24px 16px;
     }
-    .icono { font-size: 3rem; }
-    .mensaje { font-size: 1rem; font-weight: 600; letter-spacing: 0.05em; }
-    .sub { font-size: 0.8rem; color: #666; }
+
+    .ficha {
+      background: var(--white);
+      width: 100%;
+      max-width: 480px;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 50px rgba(10,10,10,0.10);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Franja roja superior */
+    .ficha::before {
+      content: '';
+      display: block;
+      height: 3px;
+      background: var(--red);
+      width: 100%;
+    }
+
+    /* Header con logo */
+    .ficha-header {
+      padding: 20px 24px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ficha-logo {
+      height: 32px;
+      width: auto;
+    }
+
+    .ficha-badge {
+      font-family: var(--font-body);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* Foto */
+    .ficha-foto {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+      background: var(--ivory-deep);
+    }
+
+    /* Tipo de negocio */
+    .ficha-tipo {
+      padding: 14px 24px 0;
+      font-family: var(--font-body);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+    }
+
+    /* Título */
+    .ficha-titulo {
+      padding: 6px 24px 0;
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--ink);
+      font-style: italic;
+    }
+
+    /* Precio */
+    .ficha-precio {
+      padding: 10px 24px 0;
+      font-family: var(--font-display);
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+
+    /* Divider */
+    .ficha-divider {
+      margin: 16px 24px;
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Ubicación */
+    .ficha-ubicacion {
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      color: var(--gray);
+      letter-spacing: 0.02em;
+    }
+
+    .ficha-ubicacion-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--red);
+      flex-shrink: 0;
+    }
+
+    /* Características */
+    .ficha-caract {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin: 16px 24px 0;
+      border: 1px solid var(--border);
+    }
+
+    .ficha-caract-item {
+      padding: 12px 8px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+
+    .ficha-caract-item:last-child {
+      border-right: none;
+    }
+
+    .ficha-caract-valor {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1;
+    }
+
+    .ficha-caract-label {
+      display: block;
+      font-family: var(--font-body);
+      font-size: 0.55rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* Descripción */
+    .ficha-desc {
+      padding: 16px 24px 0;
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.6;
+      color: var(--gray);
+    }
+
+    /* Botón WhatsApp */
+    .ficha-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 20px 24px;
+      padding: 15px 20px;
+      background: var(--ink);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      width: calc(100% - 48px);
+      transition: background 0.3s ease;
+    }
+
+    .ficha-btn:hover {
+      background: #25D366;
+    }
+
+    .ficha-btn-wa {
+      font-size: 1.1rem;
+    }
+
+    /* Footer */
+    .ficha-footer {
+      padding: 14px 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--ivory);
+    }
+
+    .ficha-agente-nombre {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--ink-mid);
+      letter-spacing: 0.05em;
+    }
+
+    .ficha-agente-tel {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      color: var(--gray);
+      font-style: italic;
+    }
+
+    .ficha-codigo {
+      font-family: var(--font-body);
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* Loading state */
+    .ficha-loading {
+      padding: 60px 24px;
+      text-align: center;
+      color: var(--muted);
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1rem;
+    }
   </style>
 </head>
 <body>
 
-  <div class="icono">📲</div>
-  <div class="mensaje">Abriendo WhatsApp...</div>
-  <div class="sub">Redirigiendo en un momento</div>
+  <div class="ficha" id="ficha">
+    <div class="ficha-loading" id="fichaLoading">Cargando ficha...</div>
+  </div>
 
   <script>
-    (function () {
+  (function () {
 
-      // ── Leer código desde la URL ──────────────────────────────
-      const params = new URLSearchParams(window.location.search);
-      const codigo = params.get("codigo");
+    const ENDPOINT = "https://script.google.com/macros/s/AKfycbw8yOkwg9vFSfqbOvyAmHKAK4IvLVRRb90uRUldZp-N6T6Q_oRdZjlhmlfmjcvkx77F/exec";
+    const AGENTE_NOMBRE = "Diana Trillos";
+    const AGENTE_TEL    = "+57 316 462 4872";
+    const AGENTE_WA     = "573164624872";
+    const LOGO_URL      = "https://res.cloudinary.com/diifewvvs/image/upload/Logo_TR_1_ihwkcs";
 
-      if (!codigo) {
-        document.querySelector(".mensaje").textContent = "Código no encontrado";
-        document.querySelector(".sub").textContent = "Verifica el link e intenta de nuevo";
-        return;
-      }
+    const params = new URLSearchParams(window.location.search);
+    const codigo = params.get("codigo");
 
-      // ── Construir link al Apps Script (ficha OG) ──────────────
-      //const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwNMuIV9-mCqqMxUgb4FrJElHGNSmoIy38yYL-BCsmoxkS4Vf709_kEY4rdk1JVEsPt/exec";
-      //const fichaUrl = `${APPS_SCRIPT_URL}?ficha=${encodeURIComponent(codigo)}`;
-      const fichaUrl = `https://teamrealtyhistory.com/fichasws/${encodeURIComponent(codigo)}.html`;
+    if (!codigo) {
+      document.getElementById("fichaLoading").textContent = "Código no encontrado.";
+      return;
+    }
 
-      // ── Abrir WhatsApp con el link listo para enviar ──────────
-      const waUrl = `https://wa.me/?text=${encodeURIComponent(fichaUrl)}`;
+    // Cargar datos desde el endpoint
+    fetch(ENDPOINT)
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        const prop = data.find(function(p) {
+          return p["CÓDIGO"] === codigo;
+        });
 
-      setTimeout(function () {
-        window.location.href = waUrl;
-      }, 800);
+        if (!prop) {
+          document.getElementById("fichaLoading").textContent = "Propiedad no encontrada.";
+          return;
+        }
 
-    })();
+        const titulo    = prop["Título"] || "";
+        const precio    = prop["Precio Venta COP"] || prop["Precio Arriendo COP"] || "";
+        const ciudad    = prop["Ciudad"] || "";
+        const barrio    = prop["Barrio/Sector"] || "";
+        const area      = prop["Área m2"] || "";
+        const hab       = prop["Habitaciones"] || "";
+        const banos     = prop["Baños"] || "";
+        const parq      = prop["Parqueaderos"] || "";
+        const tipo      = prop["Tipo de Negocio"] || "";
+        const foto      = prop["Foto 1"] || "";
+        const desc      = prop["Descripción"] || "";
+        const palabras  = desc.trim().split(/\s+/);
+        const desc43    = palabras.slice(0, 43).join(" ") + (palabras.length > 43 ? "..." : "");
+
+        const fichaUrl  = "https://teamrealtyhistory.com/fichasws/" + codigo + ".html";
+        const mensaje   =
+          titulo + "\n" +
+          "$" + precio + "\n" +
+          "📍 " + ciudad + " - " + barrio + "\n" +
+          "📐 " + area + " m² · 🛏 " + hab + " hab · 🚿 " + banos + " baños · 🚗 " + parq + " parq\n\n" +
+          "¿Quieres saber más de esta historia?\n" + fichaUrl;
+
+        const waUrl = "https://wa.me/" + AGENTE_WA + "?text=" + encodeURIComponent(mensaje);
+
+        const ficha = document.getElementById("ficha");
+        ficha.innerHTML = `
+          <div></div>
+          <div class="ficha-header">
+            <img src="${LOGO_URL}" alt="Team Realty History" class="ficha-logo">
+            <span class="ficha-badge">Ficha de propiedad</span>
+          </div>
+          <img src="${foto}" alt="${titulo}" class="ficha-foto" onerror="this.style.display='none'">
+          <div class="ficha-tipo">${tipo}</div>
+          <h1 class="ficha-titulo">${titulo}</h1>
+          <div class="ficha-precio">$${precio}</div>
+          <hr class="ficha-divider">
+          <div class="ficha-ubicacion">
+            <span class="ficha-ubicacion-dot"></span>
+            ${ciudad} · ${barrio}
+          </div>
+          <div class="ficha-caract">
+            <div class="ficha-caract-item">
+              <span class="ficha-caract-valor">${area}</span>
+              <span class="ficha-caract-label">m²</span>
+            </div>
+            <div class="ficha-caract-item">
+              <span class="ficha-caract-valor">${hab}</span>
+              <span class="ficha-caract-label">Hab.</span>
+            </div>
+            <div class="ficha-caract-item">
+              <span class="ficha-caract-valor">${banos}</span>
+              <span class="ficha-caract-label">Baños</span>
+            </div>
+            <div class="ficha-caract-item">
+              <span class="ficha-caract-valor">${parq}</span>
+              <span class="ficha-caract-label">Parq.</span>
+            </div>
+          </div>
+          <p class="ficha-desc">${desc43} <em>Si quieres saber más de esta historia, visita el link.</em></p>
+          <a href="${waUrl}" class="ficha-btn" target="_blank" rel="noopener">
+            <span class="ficha-btn-wa">📲</span>
+            Contactar a ${AGENTE_NOMBRE}
+          </a>
+          <div class="ficha-footer">
+            <div>
+              <div class="ficha-agente-nombre">${AGENTE_NOMBRE}</div>
+              <div class="ficha-agente-tel">${AGENTE_TEL}</div>
+            </div>
+            <span class="ficha-codigo">${codigo}</span>
+          </div>
+        `;
+
+        // La franja roja superior se recrea con ::before, forzar recarga
+        ficha.style.position = "relative";
+
+        // Redirigir a WhatsApp automáticamente en 1.5s
+        setTimeout(function() {
+          window.location.href = waUrl;
+        }, 1500);
+
+      })
+      .catch(function() {
+        document.getElementById("fichaLoading").textContent = "Error al cargar la ficha.";
+      });
+
+  })();
   </script>
 
 </body>
