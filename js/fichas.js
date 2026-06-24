@@ -136,7 +136,12 @@
           Ficha rápida PNG
         </a>
         <a
-          href="${basePath}ficha-whatsapp.html?codigo=${encodeURIComponent(codigo)}"
+          // href="${basePath}ficha-whatsapp.html?codigo=${encodeURIComponent(codigo)}" 
+
+          href="#"
+             class="btn-ficha btn-ficha-wa"
+                 id="btnFichaWa"
+  
           target="_blank"
           rel="noopener noreferrer"
           class="btn-ficha btn-ficha-wa"
@@ -147,6 +152,58 @@
         </a>
       </div>
     `;
+
+
+
+
+
+
+
+
+
+
+
+    setTimeout(function() {
+  const btn = document.getElementById("btnFichaWa");
+  if (!btn) return;
+  btn.addEventListener("click", function(e) {
+    e.preventDefault();
+    const titulo = document.getElementById("propTitulo")?.textContent || "";
+    const precio = document.getElementById("propPrecioVenta")?.textContent || "";
+    const ubicacion = document.getElementById("propUbicacion")?.textContent || "";
+    const area = document.getElementById("propArea")?.textContent || "";
+    const hab = document.getElementById("propHabitaciones")?.textContent || "";
+    const banos = document.getElementById("propBanos")?.textContent || "";
+    const parq = document.getElementById("propParqueaderos")?.textContent || "";
+    const link = "https://teamrealtyhistory.com/fichasws/" + codigo + ".html";
+
+    const mensaje =
+      titulo + "\n" +
+      precio + "\n" +
+      "📍 " + ubicacion + "\n" +
+      "📐 " + area + " m² · 🛏 " + hab + " hab · 🚿 " + banos + " baños · 🚗 " + parq + " parq\n\n" +
+      "¿Quieres saber más de esta historia?\n" + link;
+
+    window.open("https://wa.me/?text=" + encodeURIComponent(mensaje), "_blank");
+  });
+}, 500);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     return bloque;
   }
