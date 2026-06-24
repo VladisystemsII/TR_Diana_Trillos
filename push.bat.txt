@@ -71,3 +71,20 @@ git push
 git add .
 git commit -m "FI9CHA WHATSAPP II"
 git push
+
+
+
+
+-------------------------------------------------------------
+
+Regla para que no vuelva a pasar (importante)
+
+Antes de cada trabajo:
+
+git pull --rebase
+
+Después:
+
+git add .
+git commit -m "mensaje"
+git push
