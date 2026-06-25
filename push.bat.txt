@@ -88,3 +88,9 @@ Después:
 git add .
 git commit -m "mensaje"
 git push
+
+
+
+git add .
+git commit -m "ficha whatsapp"
+git push

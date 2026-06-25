@@ -64,7 +64,7 @@
 
   function inyectarEstilos() {
     if (document.getElementById("fichas-estilos")) return;
-    const style = document.createElement("style");
+    var style = document.createElement("style");
     style.id = "fichas-estilos";
     style.textContent = ESTILOS;
     document.head.appendChild(style);
@@ -73,24 +73,24 @@
   function construirBloque(codigo) {
     if (!codigo) return null;
 
-    const basePath = window.location.pathname.replace(/\/[^/]*$/, "/");
-    const urlPDF = basePath + "ficha-pdf.html?codigo=" + encodeURIComponent(codigo);
-    const urlPNG = basePath + "ficha-png.html?codigo=" + encodeURIComponent(codigo);
+    var basePath = window.location.pathname.replace(/\/[^/]*$/, "/");
+    var urlPDF = basePath + "ficha-pdf.html?codigo=" + encodeURIComponent(codigo);
+    var urlPNG = basePath + "ficha-png.html?codigo=" + encodeURIComponent(codigo);
 
-    const bloque = document.createElement("div");
+    var bloque = document.createElement("div");
     bloque.className = "fichas-bloque";
     bloque.id = "fichasBloque";
 
     bloque.innerHTML =
       '<span class="fichas-bloque-titulo">Descargar ficha</span>' +
       '<div class="fichas-botones">' +
-        '<a href="' + urlPDF + '" target="_blank" rel="noopener noreferrer" class="btn-ficha btn-ficha-pdf" aria-label="Descargar ficha PDF">' +
+        '<a href="' + urlPDF + '" target="_blank" rel="noopener noreferrer" class="btn-ficha btn-ficha-pdf">' +
           '<span class="btn-ficha-icono">📄</span> Ficha completa PDF' +
         '</a>' +
-        '<a href="' + urlPNG + '" target="_blank" rel="noopener noreferrer" class="btn-ficha btn-ficha-png" aria-label="Descargar ficha PNG">' +
+        '<a href="' + urlPNG + '" target="_blank" rel="noopener noreferrer" class="btn-ficha btn-ficha-png">' +
           '<span class="btn-ficha-icono">🖼️</span> Ficha rapida PNG' +
         '</a>' +
-        '<button class="btn-ficha btn-ficha-wa" id="btnFichaWa" aria-label="Compartir por WhatsApp">' +
+        '<button class="btn-ficha btn-ficha-wa" id="btnFichaWa">' +
           '<span class="btn-ficha-icono">📲</span> Compartir por WhatsApp' +
         '</button>' +
       '</div>';
@@ -99,24 +99,47 @@
       var btn = document.getElementById("btnFichaWa");
       if (!btn) return;
       btn.addEventListener("click", function () {
-        var titulo    = document.getElementById("propTitulo") ? document.getElementById("propTitulo").textContent : "";
-        var precioV   = document.getElementById("propPrecioVenta") ? document.getElementById("propPrecioVenta").textContent.trim() : "";
-        var precioA   = document.getElementById("propPrecioArriendo") ? document.getElementById("propPrecioArriendo").textContent.trim() : "";
-        var precio    = precioV || precioA;
-        var ubicacion = document.getElementById("propUbicacion") ? document.getElementById("propUbicacion").textContent : "";
-        var area      = document.getElementById("propArea") ? document.getElementById("propArea").textContent : "";
-        var hab       = document.getElementById("propHabitaciones") ? document.getElementById("propHabitaciones").textContent : "";
-        var banos     = document.getElementById("propBanos") ? document.getElementById("propBanos").textContent : "";
-        var parq      = document.getElementById("propParqueaderos") ? document.getElementById("propParqueaderos").textContent : "";
-        var link      = "https://teamrealtyhistory.com/fichasws/" + codigo + ".html";
+
+        var titulo    = document.getElementById("propTitulo") ? document.getElementById("propTitulo").textContent.trim() : "";
+        var precioV = document.getElementById("propPrecioVenta") ? document.getElementById("propPrecioVenta").textContent.trim() : "";
+        var precioA = document.getElementById("propPrecioArriendo") ? document.getElementById("propPrecioArriendo").textContent.trim() : "";
+        var estadoVenta = document.getElementById("propEstadoVenta") ? document.getElementById("propEstadoVenta").textContent.trim() : "";
+        if (estadoVenta.toLowerCase().indexOf("arriendo") !== -1 && !precioA) {
+        precioA = precioV;
+        precioV = "";
+        }
+        var precioLinea = "";
+        if (precioV && precioA) {
+        precioLinea = "Precio venta: $" + precioV + "\n" + "Precio arriendo: $" + precioA;
+        } else if (precioV) {
+        precioLinea = "Precio venta: $" + precioV;
+        } else if (precioA) {
+        precioLinea = "Precio arriendo: $" + precioA;
+        }
+        var ciudad    = document.getElementById("propUbicacion") ? document.getElementById("propUbicacion").textContent.trim() : "";
+        var area      = document.getElementById("propArea") ? document.getElementById("propArea").textContent.trim() : "";
+        var hab       = document.getElementById("propHabitaciones") ? document.getElementById("propHabitaciones").textContent.trim() : "";
+        var banos     = document.getElementById("propBanos") ? document.getElementById("propBanos").textContent.trim() : "";
+        var parq      = document.getElementById("propParqueaderos") ? document.getElementById("propParqueaderos").textContent.trim() : "";
+        var descEl    = document.getElementById("propDescripcion");
+        var descFull  = descEl ? descEl.textContent.trim() : "";
+        var palabras  = descFull.split(/\s+/);
+        var desc40    = palabras.slice(0, 40).join(" ") + (palabras.length > 40 ? "..." : "");
+        var link = "https://teamrealtyhistory.com/fichasws/" + codigo + ".html";
 
         var mensaje =
-          titulo + "\n" +
-          precio + "\n" +
-          "Ubicacion: " + ubicacion + "\n" +
-          "Area: " + area + " m2 | " + hab + " hab | " + banos + " banos | " + parq + " parq\n\n" +
-          "Quieres saber mas de esta historia?\n" + link + "\n\n" +
-          "Diana Trillos\n" +
+          "*" + titulo + "*" + "\n" +
+          "\n" +
+          precioLinea + "\n" +
+          "Ubicacion: " + ciudad + "\n" +
+          "Area: " + area + " m2   |   " + hab + " hab   |   " + banos + " banos   |   " + parq + " parq" +
+          "\n\n" +
+          "_" + desc40 + "_" +
+          "\n\n" +
+          "Para descubrir la historia completa de esta propiedad, visita:" + "\n" +
+          link +
+          "\n\n" +
+          "Diana Trillos  |  Team Realty History" + "\n" +
           "+57 316 462 4872";
 
         window.open("https://wa.me/?text=" + encodeURIComponent(mensaje), "_blank");
