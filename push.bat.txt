@@ -94,3 +94,20 @@ git push
 git add .
 git commit -m "ficha whatsapp"
 git push
+
+
+
+Cuando vuelvas a terminar un bloque de trabajo, la secuencia correcta es:
+
+git pull --rebase
+git add .
+git commit -m "mensaje"
+git push
+
+Si el git pull --rebase dice:
+
+Already up to date.
+
+entonces continúas con add, commit y push.
+
+En este momento no falta absolutamente nada del lado de Git. El repositorio quedó sincronizado correctamente.

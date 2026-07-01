@@ -127,6 +127,17 @@
         var desc40    = palabras.slice(0, 40).join(" ") + (palabras.length > 40 ? "..." : "");
         var link = "https://teamrealtyhistory.com/fichasws/" + codigo + ".html";
 
+            // ✅ INTERRUPTOR DEL AGENTE
+  var agente = document.getElementById("propAgente") ? document.getElementById("propAgente").textContent.trim() : "";
+var firma = "";
+if (agente.includes("01") || agente.toLowerCase().includes("diana")) {
+  firma = "Diana Trillos  |  Team Realty History\n+57 316 462 4872";
+} else if (agente.includes("02") || agente.toLowerCase().includes("vladimir")) {
+  firma = "Vladimir Alba  |  Team Realty History\n+57 311 483 1846";
+} else {
+  firma = "Team Realty History\n+57 316 462 4872";
+}
+
         var mensaje =
           "*" + titulo + "*" + "\n" +
           "\n" +
@@ -139,8 +150,7 @@
           "Para descubrir la historia completa de esta propiedad, visita:" + "\n" +
           link +
           "\n\n" +
-          "Diana Trillos  |  Team Realty History" + "\n" +
-          "+57 316 462 4872";
+          firma;
 
         window.open("https://wa.me/?text=" + encodeURIComponent(mensaje), "_blank");
       });

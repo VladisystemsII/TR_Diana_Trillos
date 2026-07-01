@@ -137,6 +137,8 @@ function getFormData() {
     precioArriendo: g('f-precio-arriendo'),
     administracion: g('f-admin'),
     descripcion:    g('f-descripcion'),
+    informacion:    g('f-informacion'),
+    agente:         g('f-agente'),
     foto1:          fotoUrls[1],
     foto2:          fotoUrls[2],
     foto3:          fotoUrls[3],
@@ -187,6 +189,8 @@ async function crearPropiedad() {
   params.append(E.PRECIO_ARRIENDO, data.precioArriendo);
   params.append(E.ADMINISTRACION,  data.administracion);
   params.append(E.DESCRIPCION,     data.descripcion);
+  params.append(E.INFORMACION,     data.informacion);
+  params.append(E.AGENTE,          data.agente);
   params.append(E.FOTO1,           data.foto1);
   params.append(E.FOTO2,           data.foto2);
   params.append(E.FOTO3,           data.foto3);
@@ -218,7 +222,8 @@ async function crearPropiedad() {
 function limpiarFormCrear() {
   [
     'f-titulo','f-direccion','f-ciudad','f-barrio','f-area','f-res-com',
-    'f-hab','f-ban','f-park','f-precio-venta','f-precio-arriendo','f-admin','f-descripcion'
+    'f-hab','f-ban','f-park','f-precio-venta','f-precio-arriendo','f-admin','f-descripcion','f-informacion',
+'f-agente'
   ].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.value = '';

@@ -498,8 +498,8 @@
         </div>
       </div>
       <div class="footer-contacto">
-        <span class="fc-nombre">Diana Trillos</span>
-        <span class="fc-tel">+57 316 462 4872</span>
+        <span class="fc-nombre" id="fAgenteNombre">—</span>
+        <span class="fc-tel" id="fAgenteTel">—</span>
         <span class="fc-codigo" id="fCodigo">PROP-0000</span>
       </div>
     </footer>
@@ -624,6 +624,13 @@
       set("fEstrato", estrato || "—");
       set("fClasificacion", clasif || "—");
       set("fDescripcion", desc || "Sin descripción disponible.");
+
+      // ✅ AGENTE DINÁMICO
+      const agenteRaw = val(prop["Agente"]) || "01";
+      const agNombre  = agenteRaw === "02" ? "Vladimir Alba"    : "Diana Trillos";
+      const agTel     = agenteRaw === "02" ? "+57 311 483 1846" : "+57 316 462 4872";
+      set("fAgenteNombre", agNombre);
+      set("fAgenteTel",    agTel);
 
       if (foto1) document.getElementById("fFoto").src = foto1;
 

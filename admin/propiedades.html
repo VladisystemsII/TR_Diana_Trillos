@@ -158,9 +158,34 @@
     <div class="form-section">
       <h3 class="section-label">Descripción</h3>
       <div class="field-group full">
-        <textarea id="f-descripcion" rows="5" placeholder="Describe la propiedad: características, estado, ubicación, amenidades…"></textarea>
+        <textarea id="f-descripcion" rows="5" placeholder="Historia de la propiedad"></textarea>
       </div>
     </div>
+
+
+    <!-- INFORMACIÓN ADICIONAL -->
+<div class="form-section">
+  <h3 class="section-label">Información adicional</h3>
+  <div class="field-group full">
+    <textarea id="f-informacion" rows="4" placeholder="Información que no este disponible en los campos anteriores (jardines, áreas extras, particularidades únicas)"></textarea>
+  </div>
+</div>
+
+<!-- AGENTE -->
+<div class="form-section">
+  <h3 class="section-label">Agente</h3>
+  <div class="field-group full">
+    <label>Agente <span class="req">*</span></label>
+    <select id="f-agente">
+      <option value="">Seleccionar</option>
+      <option value="01">01 - Diana Trillos</option>
+      <option value="02">02 - Vladimir Alba</option>
+    </select>
+  </div>
+</div>
+
+
+
 
     <!-- DIRECCIÓN EXACTA (solo admin) -->
     <div class="form-section admin-only">
@@ -169,6 +194,8 @@
         <input type="text" id="f-direccion" placeholder="Calle 123 # 45-67, Apto 301">
       </div>
     </div>
+
+
 
     <!-- FOTOS (Cloudinary: selecciona → comprime → sube → guarda URL) -->
     <div class="form-section">
@@ -405,21 +432,6 @@
   </div>
 
 
-  <!-- DESPUÉS
-<div class="leer-search-inner">
-  <span class="leer-search-icon">⌕</span>
-  <input type="text" id="act-search"
-         placeholder="Buscar por código…"
-         oninput="filtrarActualizar()"
-         onkeydown="if(event.key==='Enter') filtrarActualizar()">
-</div> -->
-
-
-
-
-
-
-
   <!-- SKELETON -->
   <div id="act-skeleton" class="leer-spinner" style="display:none">
     <div class="leer-spin"></div><span>Cargando propiedades…</span>
@@ -579,6 +591,26 @@
           <textarea id="act-descripcion" rows="5"></textarea>
         </div>
       </div>
+
+      <!-- INFORMACIÓN ADICIONAL -->
+<div class="form-section">
+  <h3 class="section-label">Información adicional</h3>
+  <div class="field-group full">
+    <textarea id="act-informacion" rows="4"></textarea>
+  </div>
+</div>
+
+<!-- AGENTE -->
+<div class="form-section">
+  <h3 class="section-label">Agente</h3>
+  <div class="field-group full">
+    <select id="act-agente">
+      <option value="" selected>Elegir agente...</option>
+      <option value="01">01 - Diana Trillos</option>
+      <option value="02">02 - Vladimir Alba</option>
+    </select>
+  </div>
+</div>
 
       <!-- DIRECCIÓN -->
       <div class="form-section admin-only">

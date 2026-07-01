@@ -134,6 +134,14 @@ function verPropiedadLeer(idxEnFiltrado) {
   const ficha = document.getElementById('leer-ficha');
   if (!ficha) return;
 
+  const nombreAgente = codigo => {
+  switch (codigo) {
+    case '01': return 'Diana Trillos';
+    case '02': return 'Vladimir Alba';
+    default:   return '—';
+  }
+};
+
   ficha.innerHTML = `
     <div class="ficha-section">
       <h3 class="section-label">Información Principal</h3>
@@ -173,6 +181,20 @@ function verPropiedadLeer(idxEnFiltrado) {
       <h3 class="section-label">Descripción</h3>
       <p class="ficha-desc">${v('Descripción')}</p>
     </div>
+    <div class="ficha-section">
+  <h3 class="section-label">Información adicional</h3>
+  <p class="ficha-desc">${v('Info')}</p>
+</div>
+
+<div class="ficha-section">
+  <h3 class="section-label">Agente</h3>
+  <div class="ficha-grid">
+    <div class="ficha-row full">
+      <span class="dc-label">Agente</span>
+      <span class="dc-val">${nombreAgente(v('Agente'))}</span>
+    </div>
+  </div>
+</div>
     <div class="ficha-section">
       <h3 class="section-label">Dirección Exacta</h3>
       <div class="ficha-grid">

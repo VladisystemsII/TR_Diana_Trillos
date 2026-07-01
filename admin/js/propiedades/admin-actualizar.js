@@ -37,6 +37,8 @@ const E2 = {
   PRECIO_ARRIENDO: "entry.618220164",
   ADMINISTRACION:  "entry.1791769337",
   DESCRIPCION:     "entry.247912537",
+  INFORMACION:     "entry.220950822",
+  AGENTE:          "entry.358256629",
   FOTO1:           "entry.961793523",
   FOTO2:           "entry.1529417314",
   FOTO3:           "entry.1448316317",
@@ -201,6 +203,8 @@ const sel = (id, val) => {
   s('act-precio-arriendo',  r['Precio Arriendo COP']);
   s('act-admin',            r['Administración']);
   s('act-descripcion',      r['Descripción']);
+  s('act-informacion',      r['Información adicional']);
+  sel('act-agente',         r['Agente']);
 
   const activo = (r['Activo (si/no)'] || 'no').toLowerCase() === 'si';
   const chk    = document.getElementById('act-activo');
@@ -342,6 +346,8 @@ async function guardarActualizacion() {
     'entry.618220164':  g('act-precio-arriendo'),
     'entry.1791769337': g('act-admin'),
     'entry.247912537':  g('act-descripcion'),
+    'entry.220950822':  g('act-informacion'),
+    'entry.358256629':  g('act-agente'),
     'entry.961793523':  _actFotos[1] || '',
     'entry.1529417314': _actFotos[2] || '',
     'entry.1448316317': _actFotos[3] || '',

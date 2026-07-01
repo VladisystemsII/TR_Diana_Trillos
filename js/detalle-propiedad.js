@@ -198,6 +198,8 @@ if (tipoNegocio.includes("Venta") && pVenta) {
 
   // NUEVO
   document.getElementById('propClasificacion').textContent = val(prop["Uso del suelo"]) || "-";
+  var elAgente = document.getElementById('propAgente');
+  if (elAgente) elAgente.textContent = val(prop["Agente"]) || "";
 
 
   cargarGaleria(prop);

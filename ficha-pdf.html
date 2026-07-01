@@ -689,14 +689,14 @@
 
         <!-- AGENTE -->
         <div class="ficha-agente">
-          <p class="ficha-agente-nombre">Diana Trillos</p>
-          <span class="ficha-agente-cargo">Asesora Inmobiliaria</span>
+          <p class="ficha-agente-nombre" id="fAgenteNombre">—</p>
+          <span class="ficha-agente-cargo" id="fAgenteCargo">Asesor Inmobiliario</span>
 
           <div class="ficha-contacto-item">
             <span class="c-icon">📱</span>
             <span class="c-text">
               <strong>WhatsApp</strong><br>
-              +57 316 462 4872
+              <span id="fAgenteTel">—</span>
             </span>
           </div>
           <div class="ficha-contacto-item">
@@ -865,6 +865,15 @@
       set("fCodigoDetalle", codigo);
       set("fPrecio", precioTexto);
       set("fPrecioLabel", precioLabel);
+
+      // ✅ AGENTE DINÁMICO
+      const agenteRaw = val(prop["Agente"]) || "01";
+      const agNombre  = agenteRaw === "02" ? "Vladimir Alba"      : "Diana Trillos";
+      const agTel     = agenteRaw === "02" ? "+57 311 483 1846"   : "+57 316 462 4872";
+      const agCargo   = agenteRaw === "02" ? "Asesor Inmobiliario" : "Asesora Inmobiliaria";
+      set("fAgenteNombre", agNombre);
+      set("fAgenteTel",    agTel);
+      set("fAgenteCargo",  agCargo);
 
       // URL online
       const urlBase = window.location.origin + "/detalle-propiedad.html?codigo=" + codigo;

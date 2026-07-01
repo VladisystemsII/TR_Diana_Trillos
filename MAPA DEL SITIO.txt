@@ -8,6 +8,9 @@ Team Realty Group
 ├── notificaciones.html       ✅
 ├── detalle-propiedad.html    ✅
 ├── privacidad.html           ✅ <---Ley
+├── ficha-pdf.html            ✅
+├── ficha-png.html            ✅ 
+├── ficha-whatsapp.html       ✅
 │
 ├── modules/
 │   ├── header.html           ✅
@@ -23,6 +26,7 @@ Team Realty Group
 │   ├── detalle-propiedad.js  ✅
 │   ├── notificaciones.js     ✅
 │   ├── propiedades.js        ✅
+│   ├── fichas.js             ✅
 │   └── articulo.js           ✅
 │
 ├── css/

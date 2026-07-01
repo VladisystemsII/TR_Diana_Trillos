@@ -50,6 +50,8 @@ const ADMIN_CONFIG = {
     PRECIO_ARRIENDO: "entry.964941654",
     ADMINISTRACION:  "entry.1194298416",
     DESCRIPCION:     "entry.1752731594",
+    INFORMACION:     "entry.973400018",
+    AGENTE:          "entry.1673344531",
     FOTO1:           "entry.87654233",
     FOTO2:           "entry.459158562",
     FOTO3:           "entry.998849546",

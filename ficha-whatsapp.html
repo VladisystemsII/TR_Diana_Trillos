@@ -339,11 +339,8 @@
 
   <script>
   (function () {
-    var ENDPOINT    = "https://script.google.com/macros/s/AKfycbw8yOkwg9vFSfqbOvyAmHKAK4IvLVRRb90uRUldZp-N6T6Q_oRdZjlhmlfmjcvkx77F/exec";
-    var LOGO_URL    = "https://res.cloudinary.com/diifewvvs/image/upload/Logo_TR_1_ihwkcs";
-    var AGENTE      = "Diana Trillos";
-    var AGENTE_TEL  = "+57 316 462 4872";
-    var AGENTE_WA   = "573164624872";
+    var ENDPOINT = "https://script.google.com/macros/s/AKfycbw8yOkwg9vFSfqbOvyAmHKAK4IvLVRRb90uRUldZp-N6T6Q_oRdZjlhmlfmjcvkx77F/exec";
+    var LOGO_URL = "https://res.cloudinary.com/diifewvvs/image/upload/Logo_TR_1_ihwkcs";
 
     var params = new URLSearchParams(window.location.search);
     var codigo = params.get("codigo");
@@ -358,10 +355,9 @@
       .then(function(data) {
         var prop = null;
         for (var i = 0; i < data.length; i++) {
-          if (data[i]["CODIGO"] === codigo || data[i]["\u00C3\u0093DIGO"] === codigo || data[i]["C\u00d3DIGO"] === codigo || data[i]["C\u00d3DIGO"] === codigo) {
+          if (data[i]["CODIGO"] === codigo || data[i]["\u00C3\u0093DIGO"] === codigo || data[i]["C\u00d3DIGO"] === codigo) {
             prop = data[i]; break;
           }
-          // buscar por cualquier clave que contenga DIGO
           var keys = Object.keys(data[i]);
           for (var k = 0; k < keys.length; k++) {
             if (keys[k].indexOf("DIGO") !== -1 && data[i][keys[k]] === codigo) {
@@ -376,24 +372,30 @@
           return;
         }
 
-        var titulo  = prop["T\u00EDtulo"] || prop["Titulo"] || "";
-        var precioV = prop["Precio Venta COP"] || "";
-        var precioA = prop["Precio Arriendo COP"] || "";
-        var precio  = precioV || precioA;
-        var tipoNeg = prop["Tipo de Negocio"] || "";
-        var ciudad  = prop["Ciudad"] || "";
-        var barrio  = prop["Barrio/Sector"] || "";
-        var area    = prop["\u00C1rea m2"] || prop["Area m2"] || prop["\u00c1rea m2"] || "";
-        var hab     = prop["Habitaciones"] || "";
-        var banos   = prop["Ba\u00F1os"] || prop["Banos"] || "";
-        var parq    = prop["Parqueaderos"] || "";
-        var tipo    = prop["Tipo"] || "";
-        var estrato = prop["Estrato"] || "";
-        var uso     = prop["Uso del suelo"] || "";
-        var foto    = prop["Foto 1"] || "";
-        var desc    = prop["Descripci\u00F3n"] || prop["Descripcion"] || "";
+        var titulo   = prop["T\u00EDtulo"] || prop["Titulo"] || "";
+        var precioV  = prop["Precio Venta COP"] || "";
+        var precioA  = prop["Precio Arriendo COP"] || "";
+        var precio   = precioV || precioA;
+        var tipoNeg  = prop["Tipo de Negocio"] || "";
+        var ciudad   = prop["Ciudad"] || "";
+        var barrio   = prop["Barrio/Sector"] || "";
+        var area     = prop["\u00C1rea m2"] || prop["Area m2"] || prop["\u00c1rea m2"] || "";
+        var hab      = prop["Habitaciones"] || "";
+        var banos    = prop["Ba\u00F1os"] || prop["Banos"] || "";
+        var parq     = prop["Parqueaderos"] || "";
+        var tipo     = prop["Tipo"] || "";
+        var estrato  = prop["Estrato"] || "";
+        var uso      = prop["Uso del suelo"] || "";
+        var foto     = prop["Foto 1"] || "";
+        var desc     = prop["Descripci\u00F3n"] || prop["Descripcion"] || "";
         var palabras = desc.trim().split(/\s+/);
-        var desc60  = palabras.slice(0, 60).join(" ") + (palabras.length > 60 ? "..." : "");
+        var desc60   = palabras.slice(0, 60).join(" ") + (palabras.length > 60 ? "..." : "");
+
+        // ✅ AGENTE DINÁMICO — va aquí, después de desc60
+        var agenteRaw  = prop["Agente"] || "01";
+        var AGENTE     = agenteRaw === "02" ? "Vladimir Alba"    : "Diana Trillos";
+        var AGENTE_TEL = agenteRaw === "02" ? "+57 311 483 1846" : "+57 316 462 4872";
+        var AGENTE_WA  = agenteRaw === "02" ? "573114831846"     : "573164624872";
 
         var precioLabel = precioV ? "PRECIO DE VENTA" : "PRECIO DE ARRIENDO";
         var link = "https://teamrealtyhistory.com/fichasws/" + codigo + ".html";
@@ -480,6 +482,3 @@
 
   })();
   </script>
-
-</body>
-</html>
