@@ -179,11 +179,11 @@ function verPropiedadLeer(idxEnFiltrado) {
       </div>
     </div>
     <div class="ficha-section">
-      <h3 class="section-label">Descripción</h3>
+      <h3 class="section-label">Donde Comenzó Su Historia</h3>
       <p class="ficha-desc">${v('Descripción')}</p>
     </div>
     <div class="ficha-section">
-  <h3 class="section-label">Información adicional</h3>
+  <h3 class="section-label">Un Recorrido por Cada Espacio</h3>
   <p class="ficha-desc">${v('Info')}</p>
 </div>
 
