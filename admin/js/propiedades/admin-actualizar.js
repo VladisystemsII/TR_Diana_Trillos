@@ -203,7 +203,7 @@ const sel = (id, val) => {
   s('act-precio-arriendo',  r['Precio Arriendo COP']);
   s('act-admin',            r['Administración']);
   s('act-descripcion',      r['Descripción']);
-  s('act-informacion',      r['Información adicional']);
+  s('act-informacion',      r['Info']);
   sel('act-agente',         r['Agente']);
 
   const activo = (r['Activo (si/no)'] || 'no').toLowerCase() === 'si';

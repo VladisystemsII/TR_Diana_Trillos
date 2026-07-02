@@ -122,7 +122,7 @@ Como aprendizaje de este caso, la secuencia correcta es:
 
 git pull
 git add .
-git commit -m "Descripción del cambio"
+git commit -m "campo recorrido por cada espacio"
 git push
 
 Y para comprobar el estado en cualquier momento:
