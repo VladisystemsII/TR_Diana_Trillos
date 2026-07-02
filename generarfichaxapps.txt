@@ -1,0 +1,5 @@
+
+function generarFichasPendientes() {
+  crearFichaWhatsApp("PROP-0012");
+  crearFichaWhatsApp("PROP-0013");
+}
