@@ -123,7 +123,7 @@ function activarVista(viewId, section, viewName, btn) {
   
   const TITULOS = {
     'crear'          : 'Nueva Propiedad',
-    'leer'           : 'Consultar Propiedades',
+    'leer'           : 'Generar fichas',
     'actualizar'     : 'Actualizar Propiedad',
     'activar'        : 'Activar / Desactivar Propiedades',
     'blog-crear'     : 'Nuevo Artículo',

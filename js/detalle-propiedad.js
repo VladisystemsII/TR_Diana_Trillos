@@ -193,8 +193,15 @@ if (tipoNegocio.includes("Venta") && pVenta) {
 
 
   document.getElementById('propEstrato').textContent = val(prop["Estrato"]) || "-";
-  document.getElementById('propAdministracion').textContent = val(prop["Administración"]) || "-";
+  //document.getElementById('propAdministracion').textContent = val(prop["Administración"]) || "-";
   //document.getElementById('propClasificacion').textContent = val(prop["Residencial / Comercial"]) || "-";
+
+  document.getElementById('propAdministracion').textContent = val(prop["Administración"]) || "-";
+
+
+
+
+
 
   // NUEVO
   document.getElementById('propClasificacion').textContent = val(prop["Uso del suelo"]) || "-";

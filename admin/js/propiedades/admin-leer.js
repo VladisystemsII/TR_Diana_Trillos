@@ -116,7 +116,8 @@ function verPropiedadLeer(idxEnFiltrado) {
   };
   const fmtPrecio = val => {
     if (!val || val === '—') return '—';
-    const num = parseFloat(String(val).replace(/[^0-9.]/g, ''));
+    //const num = parseFloat(String(val).replace(/[^0-9.]/g, ''));
+    const num = parseFloat(String(val).replace(/\./g, '').replace(/[^0-9]/g, ''));
     if (isNaN(num)) return val;
     return '$ ' + num.toLocaleString('es-CO');
   };
@@ -216,6 +217,8 @@ function verPropiedadLeer(idxEnFiltrado) {
         ${activo ? '● Activo' : '● Inactivo'}
       </span>
     </div>
+
+    ${compartirFichaHTML(v('CÓDIGO'))}
   `;
 
   document.getElementById('leer-vista-tabla').style.display = 'none';

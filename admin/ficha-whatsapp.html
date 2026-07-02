@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ficha de Propiedad - Team Realty History</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:     #0a0a0a;
+      --ink-mid: #2d2d2d;
+      --gray:    #5a5a5a;
+      --ivory:   #fcfaf7;
+      --white:   #ffffff;
+      --red:     #D10000;
+      --border:  #e2ded5;
+      --muted:   #9e9488;
+      --font-d:  'Cormorant Garamond', Georgia, serif;
+      --font-b:  'DM Sans', Arial, sans-serif;
+    }
+
+    body {
+      background: var(--ivory);
+      font-family: var(--font-b);
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .ficha {
+      width: 100%;
+      max-width: 680px;
+      background: var(--white);
+      box-shadow: 0 20px 60px rgba(10,10,10,0.12);
+      overflow: hidden;
+    }
+
+    /* ── BARRA ROJA TOP ── */
+    .ficha-top-bar {
+      height: 4px;
+      background: var(--red);
+      width: 100%;
+    }
+
+    /* ── HERO ── */
+    .ficha-hero {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      background: #111;
+    }
+
+    .ficha-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: 0.82;
+    }
+
+    .ficha-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,10,0.75) 0%, rgba(10,10,10,0.1) 50%, transparent 100%);
+    }
+
+    .ficha-tipo-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--red);
+      color: var(--white);
+      font-family: var(--font-b);
+      font-size: 0.58rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 7px 14px;
+    }
+
+    .ficha-hero-texto {
+      position: absolute;
+      bottom: 24px;
+      left: 28px;
+      right: 28px;
+      color: var(--white);
+    }
+
+    .ficha-titulo {
+      font-family: var(--font-d);
+      font-size: 1.9rem;
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.15;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .ficha-ubicacion {
+      font-family: var(--font-b);
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+    }
+
+    /* ── GRID CARACTERÍSTICAS ── */
+    .ficha-caract {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: var(--ink);
+    }
+
+    .ficha-caract-item {
+      padding: 18px 12px;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .ficha-caract-item:last-child { border-right: none; }
+
+    .ficha-caract-label {
+      display: block;
+      font-family: var(--font-b);
+      font-size: 0.5rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 6px;
+    }
+
+    .ficha-caract-valor {
+      display: block;
+      font-family: var(--font-d);
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1;
+    }
+
+    .ficha-caract-unit {
+      display: block;
+      font-family: var(--font-b);
+      font-size: 0.5rem;
+      color: rgba(255,255,255,0.35);
+      margin-top: 3px;
+    }
+
+    /* ── CUERPO ── */
+    .ficha-body {
+      padding: 28px 28px 0;
+    }
+
+    .ficha-precio-bloque {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ficha-precio {
+      font-family: var(--font-d);
+      font-size: 2.2rem;
+      font-weight: 600;
+      font-style: italic;
+      color: var(--red);
+      line-height: 1;
+    }
+
+    .ficha-precio-label {
+      font-family: var(--font-b);
+      font-size: 0.55rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── DATOS EXTRA ── */
+    .ficha-datos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 32px;
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ficha-dato-label {
+      font-family: var(--font-b);
+      font-size: 0.52rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 3px;
+    }
+
+    .ficha-dato-valor {
+      font-family: var(--font-d);
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--ink);
+    }
+
+    /* ── LÍNEA ROJA ── */
+    .ficha-red-line {
+      width: 32px;
+      height: 2px;
+      background: var(--red);
+      margin-bottom: 20px;
+    }
+
+    /* ── DESCRIPCIÓN ── */
+    .ficha-desc {
+      font-family: var(--font-b);
+      font-size: 0.8rem;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--gray);
+      margin-bottom: 28px;
+      text-align: justify;
+    }
+
+    /* ── FOOTER ── */
+    .ficha-footer {
+      background: var(--ink);
+      padding: 20px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .ficha-footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .ficha-footer-logo img {
+      height: 36px;
+      width: auto;
+      filter: brightness(0) invert(1);
+    }
+
+    .ficha-footer-brand {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ficha-footer-brand-name {
+      font-family: var(--font-b);
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 0.05em;
+    }
+
+    .ficha-footer-brand-sub {
+      font-family: var(--font-b);
+      font-size: 0.52rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-top: 2px;
+    }
+
+    .ficha-footer-agente {
+      text-align: right;
+    }
+
+    .ficha-footer-agente-nombre {
+      font-family: var(--font-d);
+      font-size: 1.05rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--white);
+    }
+
+    .ficha-footer-agente-tel {
+      font-family: var(--font-b);
+      font-size: 0.65rem;
+      font-weight: 500;
+      color: var(--red);
+      margin-top: 2px;
+    }
+
+    .ficha-footer-agente-cod {
+      font-family: var(--font-b);
+      font-size: 0.5rem;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-top: 3px;
+    }
+
+    /* ── BARRA ROJA BOTTOM ── */
+    .ficha-bottom-bar {
+      height: 4px;
+      background: var(--red);
+      width: 100%;
+    }
+
+    /* ── LOADING ── */
+    .ficha-loading {
+      padding: 80px 40px;
+      text-align: center;
+      font-family: var(--font-d);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 480px) {
+      .ficha-titulo { font-size: 1.4rem; }
+      .ficha-precio { font-size: 1.7rem; }
+      .ficha-caract-valor { font-size: 1.3rem; }
+      .ficha-body { padding: 20px 20px 0; }
+      .ficha-footer { padding: 16px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ficha" id="ficha">
+    <div class="ficha-loading" id="fichaLoading">Cargando ficha...</div>
+  </div>
+
+  <script>
+  (function () {
+    var ENDPOINT = "https://script.google.com/macros/s/AKfycbw8yOkwg9vFSfqbOvyAmHKAK4IvLVRRb90uRUldZp-N6T6Q_oRdZjlhmlfmjcvkx77F/exec";
+    var LOGO_URL = "https://res.cloudinary.com/diifewvvs/image/upload/Logo_TR_1_ihwkcs";
+
+    var params = new URLSearchParams(window.location.search);
+    var codigo = params.get("codigo");
+
+    if (!codigo) {
+      document.getElementById("fichaLoading").textContent = "Codigo no encontrado.";
+      return;
+    }
+
+    fetch(ENDPOINT)
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var prop = null;
+        for (var i = 0; i < data.length; i++) {
+          if (data[i]["CODIGO"] === codigo || data[i]["\u00C3\u0093DIGO"] === codigo || data[i]["C\u00d3DIGO"] === codigo) {
+            prop = data[i]; break;
+          }
+          var keys = Object.keys(data[i]);
+          for (var k = 0; k < keys.length; k++) {
+            if (keys[k].indexOf("DIGO") !== -1 && data[i][keys[k]] === codigo) {
+              prop = data[i]; break;
+            }
+          }
+          if (prop) break;
+        }
+
+        if (!prop) {
+          document.getElementById("fichaLoading").textContent = "Propiedad no encontrada.";
+          return;
+        }
+
+        var titulo   = prop["T\u00EDtulo"] || prop["Titulo"] || "";
+        var precioV  = prop["Precio Venta COP"] || "";
+        var precioA  = prop["Precio Arriendo COP"] || "";
+        var precio   = precioV || precioA;
+        var tipoNeg  = prop["Tipo de Negocio"] || "";
+        var ciudad   = prop["Ciudad"] || "";
+        var barrio   = prop["Barrio/Sector"] || "";
+        var area     = prop["\u00C1rea m2"] || prop["Area m2"] || prop["\u00c1rea m2"] || "";
+        var hab      = prop["Habitaciones"] || "";
+        var banos    = prop["Ba\u00F1os"] || prop["Banos"] || "";
+        var parq     = prop["Parqueaderos"] || "";
+        var tipo     = prop["Tipo"] || "";
+        var estrato  = prop["Estrato"] || "";
+        var uso      = prop["Uso del suelo"] || "";
+        var foto     = prop["Foto 1"] || "";
+        var desc     = prop["Descripci\u00F3n"] || prop["Descripcion"] || "";
+        var palabras = desc.trim().split(/\s+/);
+        var desc60   = palabras.slice(0, 60).join(" ") + (palabras.length > 60 ? "..." : "");
+
+        // ✅ AGENTE DINÁMICO — solo de la URL
+        var agenteRaw  = new URLSearchParams(window.location.search).get("agente") || "01";
+        var AGENTE     = agenteRaw === "02" ? "Vladimir Alba"    : "Diana Trillos";
+        var AGENTE_TEL = agenteRaw === "02" ? "+57 311 483 1846" : "+57 316 462 4872";
+
+        var precioLabel = precioV ? "PRECIO DE VENTA" : "PRECIO DE ARRIENDO";
+        var link = "https://teamrealtyhistory.com/fichasws/" + codigo + ".html";
+
+        var mensaje =
+          titulo + "\n" +
+          precio + "\n" +
+          "Ubicacion: " + ciudad + " - " + barrio + "\n" +
+          "Area: " + area + " m2 | " + hab + " hab | " + banos + " banos | " + parq + " parq\n\n" +
+          "Quieres saber mas de esta historia?\n" + link + "\n\n" +
+          AGENTE + "\n" + AGENTE_TEL;
+
+        var waUrl = "https://wa.me/?text=" + encodeURIComponent(mensaje);
+
+        var ficha = document.getElementById("ficha");
+        ficha.innerHTML =
+          '<div class="ficha-top-bar"></div>' +
+          '<div class="ficha-hero">' +
+            '<img src="' + foto + '" alt="' + titulo + '" onerror="this.style.display=\'none\'">' +
+            '<div class="ficha-hero-overlay"></div>' +
+            (tipoNeg ? '<div class="ficha-tipo-badge">' + tipoNeg + '</div>' : '') +
+            '<div class="ficha-hero-texto">' +
+              '<h1 class="ficha-titulo">' + titulo + '</h1>' +
+              '<div class="ficha-ubicacion">' + ciudad.toUpperCase() + ' &middot; ' + barrio.toUpperCase() + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="ficha-caract">' +
+            '<div class="ficha-caract-item">' +
+              '<span class="ficha-caract-label">Area</span>' +
+              '<span class="ficha-caract-valor">' + area + '</span>' +
+              '<span class="ficha-caract-unit">m&sup2;</span>' +
+            '</div>' +
+            '<div class="ficha-caract-item">' +
+              '<span class="ficha-caract-label">Hab.</span>' +
+              '<span class="ficha-caract-valor">' + hab + '</span>' +
+            '</div>' +
+            '<div class="ficha-caract-item">' +
+              '<span class="ficha-caract-label">Ba&ntilde;os</span>' +
+              '<span class="ficha-caract-valor">' + banos + '</span>' +
+            '</div>' +
+            '<div class="ficha-caract-item">' +
+              '<span class="ficha-caract-label">Parq.</span>' +
+              '<span class="ficha-caract-valor">' + parq + '</span>' +
+            '</div>' +
+          '</div>' +
+          '<div class="ficha-body">' +
+            '<div class="ficha-precio-bloque">' +
+              '<div class="ficha-precio">$' + precio + '</div>' +
+              '<div class="ficha-precio-label">' + precioLabel + '</div>' +
+            '</div>' +
+            '<div class="ficha-datos">' +
+              (tipo    ? '<div><div class="ficha-dato-label">Tipo</div><div class="ficha-dato-valor">' + tipo + '</div></div>' : '') +
+              (ciudad  ? '<div><div class="ficha-dato-label">Ciudad</div><div class="ficha-dato-valor">' + ciudad + '</div></div>' : '') +
+              (estrato ? '<div><div class="ficha-dato-label">Estrato</div><div class="ficha-dato-valor">' + estrato + '</div></div>' : '') +
+              (uso     ? '<div><div class="ficha-dato-label">Uso del suelo</div><div class="ficha-dato-valor">' + uso + '</div></div>' : '') +
+            '</div>' +
+            '<div class="ficha-red-line"></div>' +
+            '<p class="ficha-desc">' + desc60 + '</p>' +
+          '</div>' +
+          '<div class="ficha-footer">' +
+            '<div class="ficha-footer-logo">' +
+              '<img src="' + LOGO_URL + '" alt="Team Realty History">' +
+              '<div class="ficha-footer-brand">' +
+                '<span class="ficha-footer-brand-name">Team Realty History</span>' +
+                '<span class="ficha-footer-brand-sub">Inmobiliaria</span>' +
+              '</div>' +
+            '</div>' +
+            '<div class="ficha-footer-agente">' +
+              '<div class="ficha-footer-agente-nombre">' + AGENTE + '</div>' +
+              '<div class="ficha-footer-agente-tel">' + AGENTE_TEL + '</div>' +
+              '<div class="ficha-footer-agente-cod">' + codigo + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="ficha-bottom-bar"></div>';
+
+        window.open(waUrl, "_blank");
+
+      })
+      .catch(function() {
+        document.getElementById("fichaLoading").textContent = "Error al cargar la ficha.";
+      });
+
+  })();
+  </script>

@@ -111,3 +111,7 @@ Already up to date.
 entonces continúas con add, commit y push.
 
 En este momento no falta absolutamente nada del lado de Git. El repositorio quedó sincronizado correctamente.
+
+
+git add .
+git commit -m "agente 01 o 02 en admin eindex"
