@@ -358,6 +358,22 @@ input,select,textarea,button{font-family:var(--font-body)}
   opacity:0;width:0;pointer-events:none;overflow:hidden;
 }
 
+.footer-credit {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #8a8a8a;
+}
+
+.footer-credit a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.footer-credit a:hover {
+    text-decoration: underline;
+}
+
 /* ══════════════════════════════════════
    ESTRUCTURACIÓN DEL FORMULARIO Y MÓDULOS (ORGANIZADO)
    ══════════════════════════════════════ */

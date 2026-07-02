@@ -115,3 +115,19 @@ En este momento no falta absolutamente nada del lado de Git. El repositorio qued
 
 git add .
 git commit -m "agente 01 o 02 en admin eindex"
+
+
+
+Como aprendizaje de este caso, la secuencia correcta es:
+
+git pull
+git add .
+git commit -m "Descripción del cambio"
+git push
+
+Y para comprobar el estado en cualquier momento:
+
+git status
+git log --oneline -5
+
+Esas dos verificaciones te dicen si tienes cambios pendientes y cuál fue el último commit enviado.
