@@ -148,7 +148,14 @@ function renderizarPropiedad(prop) {
 
   const descripcion = val(prop["Descripción"] || prop["Descripcion"]);
   document.getElementById('propDescripcion').innerHTML =
-    descripcion ? marked.parse(descripcion) : "<p>Sin descripción disponible.</p>";
+   descripcion ? marked.parse(descripcion) : "<p>Sin descripción disponible.</p>";
+
+
+const informacion = val(prop["Info"]);
+document.getElementById('propInfo').innerHTML =
+  informacion ? marked.parse(informacion) : "";
+
+
 
   //const estado = val(prop["Estado"]);
   //const pVenta = val(prop["Precio Venta COP"]);
