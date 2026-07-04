@@ -9,19 +9,17 @@
 
 
 
-  // ── Cloudinary ─────────────────────────────────────────
+const ADMIN_CONFIG = {
   CLOUDINARY: {
-    CLOUD_NAME:    "dq2osuxac",
+    CLOUD_NAME: "dq2osuxac",
     UPLOAD_PRESET: "diadmiclou",
-    MAX_SIZE_MB:   1.5,
-    QUALITY:       0.78,
-    MAX_W:         1600,
-    MAX_H:         1200
+    MAX_SIZE_MB: 1.5,
+    QUALITY: 0.78,
+    MAX_W: 1600,
+    MAX_H: 1200
   },
 
-  // ── Web App URL (doGet — JSON) ─────────────────────────
   ENDPOINT: "https://script.google.com/macros/s/AKfycbw8yOkwg9vFSfqbOvyAmHKAK4IvLVRRb90uRUldZp-N6T6Q_oRdZjlhmlfmjcvkx77F/exec",
-  
 
   // ── Form 1 — Crear propiedad ───────────────────────────
   FORM_CREAR_URL: "https://docs.google.com/forms/d/e/1FAIpQLSfYVZChBT5xAXfNIDre9AKVLVGjfT7GR-VMMR1jus_wxQ5Buw/formResponse",
@@ -69,6 +67,7 @@
     "entry.124825591",
     "entry.1295948975"
   ]
+
 };
 
 
