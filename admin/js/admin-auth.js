@@ -88,6 +88,8 @@ const res = await fetch(ADMIN_CONFIG.ENDPOINT, {
   })
 });
 
+
+
   const json = await res.json();
 
   if (json.ok) {
