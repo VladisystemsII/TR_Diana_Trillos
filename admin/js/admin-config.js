@@ -7,13 +7,7 @@
 //  DEPENDE DE: nada — es la base de todo
 // ════════════════════════════════════════════════════════
 
-const ADMIN_CONFIG = {
 
-  // ── Credenciales de acceso ─────────────────────────────
-  CREDENTIALS: {
-    "trh2026$.": "Trhgenio2026$.",
-    "admin": "teamrealty33"
-  },
 
   // ── Cloudinary ─────────────────────────────────────────
   CLOUDINARY: {
@@ -27,6 +21,7 @@ const ADMIN_CONFIG = {
 
   // ── Web App URL (doGet — JSON) ─────────────────────────
   ENDPOINT: "https://script.google.com/macros/s/AKfycbw8yOkwg9vFSfqbOvyAmHKAK4IvLVRRb90uRUldZp-N6T6Q_oRdZjlhmlfmjcvkx77F/exec",
+  
 
   // ── Form 1 — Crear propiedad ───────────────────────────
   FORM_CREAR_URL: "https://docs.google.com/forms/d/e/1FAIpQLSfYVZChBT5xAXfNIDre9AKVLVGjfT7GR-VMMR1jus_wxQ5Buw/formResponse",
