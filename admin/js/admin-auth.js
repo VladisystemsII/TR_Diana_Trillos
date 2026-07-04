@@ -79,18 +79,8 @@ async function checkLogin() {
 
   try {
 
-const res = await fetch(ADMIN_CONFIG.ENDPOINT, {
-  method: "POST",
-  body: new URLSearchParams({
-    accion: "login",
-    usuario: user,
-    clave: pass
-  })
-});
-
-
-
-  const json = await res.json();
+const res = await fetch(`${ADMIN_CONFIG.ENDPOINT}?accion=login&usuario=${encodeURIComponent(user)}&clave=${encodeURIComponent(pass)}`);
+const json = await res.json();
 
   if (json.ok) {
 
