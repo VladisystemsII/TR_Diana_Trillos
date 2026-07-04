@@ -56,23 +56,74 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ── AUTENTICACIÓN ─────────────────────────────────────────
-function checkLogin() {
+//function checkLogin() {
+async function checkLogin() {
   const user = document.getElementById('login-user').value.trim().toLowerCase();
   const pass = document.getElementById('login-pass').value;
   const err  = document.getElementById('login-error');
 
-  if (ADMIN_CONFIG.CREDENTIALS[user] && ADMIN_CONFIG.CREDENTIALS[user] === pass) {
+  //if (ADMIN_CONFIG.CREDENTIALS[user] && ADMIN_CONFIG.CREDENTIALS[user] === pass) {
+    //sessionStorage.setItem('admin_auth', 'true');
+    //sessionStorage.setItem('admin_user', user);
+    //sessionStorage.setItem('admin_login_time', new Date().toLocaleString('es-CO', {
+      //hour: '2-digit', minute: '2-digit', day: '2-digit', month: 'short'
+    //}));
+    //mostrarPanel();
+  //} else {
+    //err.style.display = 'block';
+    //document.getElementById('login-pass').value = '';
+    //setTimeout(() => { err.style.display = 'none'; }, 3000);
+  //}
+
+
+
+  try {
+
+  const res = await fetch(ADMIN_CONFIG.ENDPOINT, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      accion: "login",
+      usuario: user,
+      clave: pass
+    })
+  });
+
+  const json = await res.json();
+
+  if (json.ok) {
+
     sessionStorage.setItem('admin_auth', 'true');
     sessionStorage.setItem('admin_user', user);
-    sessionStorage.setItem('admin_login_time', new Date().toLocaleString('es-CO', {
-      hour: '2-digit', minute: '2-digit', day: '2-digit', month: 'short'
-    }));
+    sessionStorage.setItem('admin_login_time',
+      new Date().toLocaleString('es-CO', {
+        hour: '2-digit',
+        minute: '2-digit',
+        day: '2-digit',
+        month: 'short'
+      })
+    );
+
     mostrarPanel();
+
   } else {
+
     err.style.display = 'block';
     document.getElementById('login-pass').value = '';
-    setTimeout(() => { err.style.display = 'none'; }, 3000);
+
+    setTimeout(() => {
+      err.style.display = 'none';
+    }, 3000);
   }
+
+} catch (e) {
+
+  toast("Error de conexión", "error");
+
+}
+
 }
 
 function mostrarPanel() {

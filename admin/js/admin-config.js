@@ -11,7 +11,7 @@ const ADMIN_CONFIG = {
 
   // ── Credenciales de acceso ─────────────────────────────
   CREDENTIALS: {
-    "diana": "Genio",
+    "trh2026$.": "Trhgenio2026$.",
     "admin": "teamrealty33"
   },
 
