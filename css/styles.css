@@ -1777,20 +1777,34 @@ button:focus-visible {
 .thumb-footer {
   padding: 10px 12px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
 }
 
 .thumb-titulo {
   font-size: 0.72rem;
   font-weight: 500;
   color: var(--color-ink-mid);
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+
+.thumb-barrio {
+  font-size: 0.62rem;
+  color: var(--color-ink-mid);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   flex: 1;
 }
+
+
+
 
 /* Badge de estado */
 .thumb-badge {

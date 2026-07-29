@@ -93,6 +93,7 @@ function renderizarMiniaturas(propiedades) {
   propiedades.forEach((prop, index) => {
     const codigo  = prop["CÓDIGO"] || "";
     const titulo  = prop["Título"] || prop["Titulo"] || "Sin título";
+    const barrio  = prop["Barrio/Sector"] || "";
     const negocio = clasificarNegocio(prop);
     const foto    = obtenerFoto(prop);
 
@@ -115,6 +116,7 @@ function renderizarMiniaturas(propiedades) {
       </div>
       <div class="thumb-footer">
         <span class="thumb-titulo">${sanitize(titulo)}</span>
+        ${barrio ? `<span class="thumb-barrio">📍 ${sanitize(barrio)}</span>` : ''}
         <span class="thumb-badge ${negocio.clase}">${sanitize(negocio.badge)}</span>
       </div>
     `;
