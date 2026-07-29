@@ -62,6 +62,7 @@ function _renderTabla(registros) {
   tbody.innerHTML = registros.map((r, idx) => {
     const codigo    = r['CÓDIGO']              || '—';
     const tipo      = r['Tipo']                || '—';
+    const negocio   = r['Tipo de Negocio'] || '—';   // <-- AQUÍ
     const barrio    = r['Barrio/Sector']        || '—';
     const direccion = r['Dirección exacta only admin'] || '—';
     const activo    = (r['Activo (si/no)'] || 'no').toLowerCase();
@@ -72,6 +73,7 @@ function _renderTabla(registros) {
       <tr>
         <td class="col-codigo">${codigo}</td>
         <td>${tipo}</td>
+        <td>${negocio}</td>
         <td>${barrio}</td>
         <td class="col-dir">${direccion}</td>
         <td>${badgeActivo}</td>
