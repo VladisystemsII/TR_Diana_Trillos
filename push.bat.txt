@@ -24,7 +24,9 @@ git pushg
 
 
 
-git add .
+it add .
+git commit -m "ficha whatsapp"
+git pushgit add .
 git commit -m "CORRECCION ENTRIES vi"
 git push
 
@@ -91,9 +93,7 @@ git push
 
 
 
-git add .
-git commit -m "ficha whatsapp"
-git push
+g
 
 
 
@@ -130,4 +130,11 @@ Y para comprobar el estado en cualquier momento:
 git status
 git log --oneline -5
 
-Esas dos verificaciones te dicen si tienes cambios pendientes y cuál fue el último commit enviado.
+Esas dos verificaciones te dicen si tienes cambios pendientes y cuál fue el último commit enviado
+
+
+
+
+git add .
+git commit -m "inclusion modulo admin.txt"
+git push

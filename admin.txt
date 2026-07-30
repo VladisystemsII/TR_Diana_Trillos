@@ -1,0 +1,32 @@
+
+Team Realty Group ADMINISTRACIÓN
+├── admin.html                ✅
+├── blog.html                 ✅
+├── propiedades.html          ✅ 
+├── ficha-pdf.html            ✅
+├── ficha-png.html            ✅ 
+├── ficha-whatsapp.html       ✅
+│
+├── js/
+│   ├── admin-auth.js         ✅
+│   ├── admin-config.js       ✅
+|   │
+│   ├── blog/
+|   │   ├── blog-actualizar.js            ✅
+|   │   ├── blog-crear.js                 ✅
+|   │   ├── blog-leer.js                  ✅
+|   │
+│   ├── propiedades/
+|   │   ├── admin-activar.js              ✅
+|   │   ├── admin-actualizar.js           ✅
+|   │   ├── admin-compartir-ficha.js      ✅
+|   │   ├── admin-crear.js                ✅
+|   │   ├── admin-leer.js                 ✅
+|   │
+├── css/
+│   ├── activar.css            ✅
+│   ├── admin-leer.css         ✅
+│   ├── admin.css              ✅
+│   └── ------------------     ✅ 
+└──end
+
