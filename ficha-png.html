@@ -128,7 +128,7 @@
     .ficha-hero-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(10,10,10,0.75) 0%, transparent 55%);
+      background: linear-gradient(to top, rgba(10,10,10,0.88) 0%, rgba(10,10,10,0.55) 38%, rgba(10,10,10,0.15) 65%, transparent 85%);
     }
 
     /* BADGE TIPO NEGOCIO */
@@ -138,11 +138,11 @@
       right: 14px;
       background: var(--color-gold);
       color: var(--color-white);
-      font-size: 8px;
+      font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      padding: 5px 12px;
+      padding: 6px 14px;
     }
 
     /* TITULO SOBRE FOTO */
@@ -156,19 +156,21 @@
 
     .hero-titulo h2 {
       font-family: var(--font-display);
-      font-size: 20px;
+      font-size: 27px;
       font-weight: 500;
       color: var(--color-white);
       line-height: 1.15;
-      margin-bottom: 4px;
+      margin-bottom: 5px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.55);
     }
 
     .hero-titulo .ubicacion-txt {
-      font-size: 9px;
+      font-size: 12px;
       font-weight: 400;
       color: rgba(255,255,255,0.65);
       letter-spacing: 0.15em;
       text-transform: uppercase;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.55);
     }
 
     /* ===== STATS HORIZONTALES ===== */
@@ -179,7 +181,7 @@
     }
 
     .stat-cell {
-      padding: 12px 10px;
+      padding: 17px 8px;
       text-align: center;
       border-right: 1px solid rgba(255,255,255,0.07);
     }
@@ -187,18 +189,18 @@
     .stat-cell:last-child { border-right: none; }
 
     .stat-cell .s-label {
-      font-size: 7px;
+      font-size: 9.5px;
       font-weight: 600;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: rgba(255,255,255,0.4);
       display: block;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
 
     .stat-cell .s-valor {
       font-family: var(--font-display);
-      font-size: 18px;
+      font-size: 32px;
       font-weight: 500;
       color: var(--color-white);
       display: block;
@@ -206,13 +208,13 @@
     }
 
     .stat-cell .s-unit {
-      font-size: 7px;
+      font-size: 9.5px;
       color: rgba(255,255,255,0.3);
     }
 
     /* ===== CUERPO ===== */
     .ficha-body {
-      padding: 18px 22px 16px;
+      padding: 22px 22px 18px;
     }
 
     /* PRECIO */
@@ -220,21 +222,21 @@
       display: flex;
       align-items: baseline;
       justify-content: space-between;
-      padding-bottom: 12px;
+      padding-bottom: 14px;
       border-bottom: 1px solid var(--color-border);
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
 
     .precio-valor {
       font-family: var(--font-display);
-      font-size: 24px;
+      font-size: 42.5px;
       font-weight: 600;
       color: var(--color-gold);
       line-height: 1;
     }
 
     .precio-label {
-      font-size: 8px;
+      font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -245,18 +247,18 @@
     .ficha-detalles {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 8px 20px;
-      margin-bottom: 14px;
+      gap: 11px 20px;
+      margin-bottom: 16px;
     }
 
     .det-item {
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 3px;
     }
 
     .det-item .det-label {
-      font-size: 7.5px;
+      font-size: 10px;
       font-weight: 600;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -265,7 +267,7 @@
 
     .det-item .det-valor {
       font-family: var(--font-display);
-      font-size: 13px;
+      font-size: 23px;
       font-weight: 500;
       color: var(--color-ink);
       line-height: 1.2;
@@ -275,7 +277,7 @@
     .ficha-divider {
       height: 1px;
       background: var(--color-border);
-      margin: 12px 0;
+      margin: 14px 0;
       position: relative;
     }
 
@@ -291,11 +293,11 @@
 
     /* DESCRIPCION CORTA */
     .ficha-desc {
-      font-size: 10px;
+      font-size: 13.5px;
       font-weight: 300;
       color: var(--color-gray);
-      line-height: 1.6;
-      margin-bottom: 14px;
+      line-height: 1.55;
+      margin-bottom: 16px;
       text-align: justify;
       display: -webkit-box;
       -webkit-line-clamp: 3;
@@ -306,7 +308,7 @@
     /* ===== FOOTER ===== */
     .ficha-footer {
       background: var(--color-ink);
-      padding: 12px 22px;
+      padding: 15px 22px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -333,19 +335,19 @@
 
     .footer-brand-name {
       font-family: var(--font-display);
-      font-size: 11px;
+      font-size: 15px;
       font-weight: 500;
       color: rgba(255,255,255,0.85);
       line-height: 1.1;
     }
 
     .footer-brand-sub {
-      font-size: 7.5px;
+      font-size: 10px;
       font-weight: 400;
       color: rgba(255,255,255,0.35);
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      margin-top: 2px;
+      margin-top: 3px;
     }
 
     .footer-contacto {
@@ -354,29 +356,29 @@
 
     .footer-contacto .fc-nombre {
       font-family: var(--font-display);
-      font-size: 12px;
+      font-size: 16px;
       font-weight: 500;
       color: rgba(255,255,255,0.85);
       display: block;
     }
 
     .footer-contacto .fc-tel {
-      font-size: 9px;
-      font-weight: 400;
+      font-size: 14px;
+      font-weight: 500;
       color: var(--color-gold-light);
       letter-spacing: 0.05em;
       display: block;
-      margin-top: 2px;
+      margin-top: 3px;
     }
 
     .footer-contacto .fc-codigo {
-      font-size: 7.5px;
+      font-size: 10px;
       font-weight: 600;
       color: rgba(255,255,255,0.25);
       letter-spacing: 0.18em;
       text-transform: uppercase;
       display: block;
-      margin-top: 3px;
+      margin-top: 4px;
     }
 
     /* BOTTOM STRIPE */
@@ -509,7 +511,7 @@
   </div><!-- / fichaPropiedad -->
 
   <!-- ===== SCRIPTS ===== -->
-  <script src="js/config.js"></script>
+  <script src="js/admin-config.js"></script>
   <script>
     function val(v) {
       if (v === null || v === undefined) return "";
@@ -542,6 +544,12 @@
     }
 
     async function cargarFicha() {
+      // Iniciar la carga de fuentes desde ya, en paralelo, para que estén
+      // listas mucho antes de que se presione "Descargar PNG".
+      document.fonts.load("500 27px 'Cormorant Garamond'");
+      document.fonts.load("600 37px 'Cormorant Garamond'");
+      document.fonts.load("400 14px 'DM Sans'");
+
       const params = new URLSearchParams(window.location.search);
       const codigo = params.get("codigo");
 
@@ -552,7 +560,7 @@
       }
 
       try {
-        const response = await fetch(TEAM_REALTY_HISTORY_CONFIG.PROPIEDADES_ENDPOINT, {
+        const response = await fetch(ADMIN_CONFIG.ENDPOINT, {
           redirect: "follow"
         });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -625,8 +633,8 @@
       set("fClasificacion", clasif || "—");
       set("fDescripcion", desc || "Sin descripción disponible.");
 
-      // ✅ AGENTE DINÁMICO
-      const agenteRaw = val(prop["Agente"]) || "01";
+      // ✅ AGENTE DINÁMICO — solo de la URL, no del JSON
+      const agenteRaw = new URLSearchParams(window.location.search).get("agente") || "01";
       const agNombre  = agenteRaw === "02" ? "Vladimir Alba"    : "Diana Trillos";
       const agTel     = agenteRaw === "02" ? "+57 311 483 1846" : "+57 316 462 4872";
       set("fAgenteNombre", agNombre);
@@ -640,7 +648,7 @@
     }
 
     // ===== EXPORTAR PNG =====
-    function exportarPNG() {
+    async function exportarPNG() {
       const btn      = document.getElementById("btnDescargarPNG");
       const controls = document.getElementById("uiControles");
       const ficha    = document.getElementById("fichaPropiedad");
@@ -650,27 +658,35 @@
       btn.textContent = "Generando…";
       controls.style.display = "none";
 
-      html2canvas(ficha, {
-        scale: 3,
-        useCORS: true,
-        allowTaint: true,
-        logging: false,
-        backgroundColor: "#ffffff"
-      }).then(canvas => {
+      try {
+        // Esperar a que la fuente Cormorant Garamond esté 100% cargada
+        // para que html2canvas nunca use una fuente de reemplazo del sistema.
+        await document.fonts.ready;
+        await Promise.all([
+          document.fonts.load("500 27px 'Cormorant Garamond'"),
+          document.fonts.load("600 37px 'Cormorant Garamond'"),
+          document.fonts.load("400 14px 'DM Sans'")
+        ]);
+
+        const canvas = await html2canvas(ficha, {
+          scale: 3,
+          useCORS: true,
+          allowTaint: true,
+          logging: false,
+          backgroundColor: "#ffffff"
+        });
+
         const link    = document.createElement("a");
         link.download = `TRH_Ficha_${codigo}.png`;
         link.href     = canvas.toDataURL("image/png");
         link.click();
-
-        btn.disabled = false;
-        btn.textContent = "Descargar PNG";
-        controls.style.display = "flex";
-      }).catch(err => {
+      } catch (err) {
         console.error("Error generando PNG:", err);
+      } finally {
         btn.disabled = false;
         btn.textContent = "Descargar PNG";
         controls.style.display = "flex";
-      });
+      }
     }
 
     document.addEventListener("DOMContentLoaded", cargarFicha);
