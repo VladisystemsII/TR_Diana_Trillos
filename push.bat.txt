@@ -138,3 +138,8 @@ Esas dos verificaciones te dicen si tienes cambios pendientes y cuál fue el úl
 git add .
 git commit -m "inclusion modulo admin.txt"
 git push
+
+
+git add .
+git commit -m "inclusion modulo admin.txt"
+git push
